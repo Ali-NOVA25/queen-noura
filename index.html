@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>ليلة الملكة نورة 👑🎂</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&family=Tajawal:wght@500;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =====================================================================
+       DESIGN TOKENS & MOBILE-FIRST RTL STYLING
+       ===================================================================== */
+    :root {
+      --bg-night: #080d1e;
+      --royal-navy: rgba(12, 18, 42, 0.92);
+      --gold: #f6d365;
+      --pink: #ff8fb8;
+      --pink-deep: #e84e93;
+      --cream: #fff7fb;
+      --font-main: 'Tajawal', 'Cairo', system-ui, -apple-system, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: var(--bg-night);
+      font-family: var(--font-main);
+      color: var(--cream);
+      touch-action: none;
+    }
+
+    #game-container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
+      background: radial-gradient(circle at 50% 30%, #16234d 0%, #070b18 100%);
+    }
+
+    canvas#gameCanvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      touch-action: none;
+    }
+
+    #fallback-status {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(12, 18, 42, 0.94);
+      border: 1.5px solid var(--gold);
+      border-radius: 18px;
+      padding: 14px 18px;
+      color: #fff4c2;
+      font-size: 0.9rem;
+      font-weight: 800;
+      z-index: 60;
+      display: none;
+      text-align: center;
+    }
+
+    /* =====================================================================
+       TOP HUD & CAT STATE TOGGLE
+       ===================================================================== */
+    #top-hud {
+      position: absolute;
+      top: max(10px, env(safe-area-inset-top));
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(96%, 540px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      padding: 7px 10px;
+      background: var(--royal-navy);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1.5px solid rgba(246, 211, 101, 0.6);
+      border-radius: 20px;
+      box-shadow: 0 8px 26px rgba(0, 0, 0, 0.45);
+      z-index: 20;
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+
+    #top-hud.hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-50%, -18px);
+    }
+
+    .hud-badge {
+      background: linear-gradient(135deg, rgba(255, 117, 165, 0.28), rgba(246, 211, 101, 0.2));
+      border: 1px solid rgba(255, 162, 196, 0.55);
+      padding: 5px 9px;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 0.78rem;
+      white-space: nowrap;
+      color: #ffe6f0;
+    }
+
+    #cat-state-btn {
+      font-family: var(--font-main);
+      background: linear-gradient(135deg, rgba(255, 143, 184, 0.26), rgba(140, 120, 255, 0.26));
+      border: 1.5px solid rgba(255, 186, 214, 0.72);
+      color: #fff5fa;
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 0.76rem;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: transform 0.14s ease;
+    }
+
+    #cat-state-btn:active {
+      transform: scale(0.93);
+    }
+
+    .hud-hint {
+      flex: 1;
+      font-size: 0.72rem;
+      line-height: 1.25;
+      color: #f7e9c8;
+      text-align: center;
+      font-weight: 700;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    #sound-btn {
+      width: 34px;
+      height: 34px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      border: 1.5px solid rgba(246, 211, 101, 0.65);
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--gold);
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    /* =====================================================================
+       TOAST BANNER
+       ===================================================================== */
+    #toast-banner {
+      position: absolute;
+      top: calc(max(10px, env(safe-area-inset-top)) + 56px);
+      left: 50%;
+      transform: translateX(-50%) translateY(-10px);
+      background: linear-gradient(135deg, rgba(255, 118, 170, 0.95), rgba(185, 110, 235, 0.95));
+      color: #fff;
+      padding: 7px 16px;
+      border-radius: 999px;
+      font-size: 0.84rem;
+      font-weight: 800;
+      border: 1.5px solid #fff3c4;
+      box-shadow: 0 8px 22px rgba(255, 105, 165, 0.45);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 25;
+      white-space: nowrap;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    #toast-banner.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* =====================================================================
+       MOBILE TOUCH CONTROLS (Joystick + Action + Dance/Lift/Hug Buttons)
+       ===================================================================== */
+    #controls-layer {
+      position: absolute;
+      bottom: max(18px, env(safe-area-inset-bottom));
+      left: 0;
+      right: 0;
+      padding: 0 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      pointer-events: none;
+      z-index: 20;
+      direction: ltr;
+      transition: opacity 0.25s ease;
+    }
+
+    #controls-layer.hidden {
+      opacity: 0;
+      pointer-events: none !important;
+    }
+
+    #controls-layer.hidden * {
+      pointer-events: none !important;
+    }
+
+    #joystick-zone {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(12, 18, 42, 0.6) 100%);
+      border: 2px solid rgba(246, 211, 101, 0.5);
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(6px);
+      pointer-events: auto;
+      touch-action: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .joy-arrow {
+      position: absolute;
+      font-size: 10px;
+      color: rgba(246, 211, 101, 0.58);
+      pointer-events: none;
+    }
+    .joy-arrow.up { top: 8px; left: 50%; transform: translateX(-50%); }
+    .joy-arrow.down { bottom: 8px; left: 50%; transform: translateX(-50%); }
+    .joy-arrow.left { left: 10px; top: 50%; transform: translateY(-50%); }
+    .joy-arrow.right { right: 10px; top: 50%; transform: translateY(-50%); }
+
+    #joystick-knob {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #ffb6d3, #ff7eb0);
+      border: 2.5px solid #fff3c4;
+      box-shadow: 0 4px 16px rgba(255, 126, 176, 0.65);
+      transform: translate(0px, 0px);
+      pointer-events: none;
+    }
+
+    .right-buttons-col {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 9px;
+    }
+
+    #party-actions-row {
+      display: none;
+      gap: 7px;
+      direction: rtl;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    #party-actions-row.visible {
+      display: flex;
+    }
+
+    .party-mini-btn {
+      font-family: var(--font-main);
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: #fff8dc;
+      background: linear-gradient(135deg, rgba(135, 65, 185, 0.92), rgba(225, 78, 147, 0.92));
+      border: 1.5px solid var(--gold);
+      border-radius: 999px;
+      padding: 7px 12px;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+      pointer-events: auto;
+      transition: transform 0.14s ease;
+    }
+
+    .party-mini-btn.active-mode {
+      background: linear-gradient(135deg, #f6c343, #ff7eb3);
+      color: #1b0f26;
+      box-shadow: 0 0 18px rgba(246, 211, 101, 0.85);
+    }
+
+    .party-mini-btn:active {
+      transform: scale(0.93);
+    }
+
+    #action-btn {
+      width: 82px;
+      height: 82px;
+      border-radius: 50%;
+      border: 2.5px solid rgba(246, 211, 101, 0.75);
+      background: linear-gradient(145deg, rgba(35, 42, 85, 0.9), rgba(16, 22, 52, 0.94));
+      color: #ffe8c2;
+      font-family: var(--font-main);
+      font-size: 0.9rem;
+      font-weight: 800;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+      pointer-events: auto;
+      cursor: pointer;
+      transition: transform 0.14s ease, background 0.25s ease;
+      direction: rtl;
+    }
+
+    #action-btn .act-icon {
+      font-size: 1.28rem;
+      line-height: 1;
+    }
+
+    #action-btn.ready {
+      background: linear-gradient(145deg, #ff85b5, #e84e93);
+      border-color: #fff2b2;
+      color: #ffffff;
+      box-shadow: 0 0 24px rgba(255, 133, 181, 0.9);
+      animation: actionPulse 1.25s infinite ease-in-out;
+    }
+
+    #action-btn:active {
+      transform: scale(0.91) !important;
+    }
+
+    @keyframes actionPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+
+    /* =====================================================================
+       RPG DIALOGUE BOX
+       ===================================================================== */
+    #dialogue-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 35;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 14px 12px max(22px, env(safe-area-inset-bottom));
+      background: linear-gradient(to top, rgba(4, 7, 18, 0.65) 0%, rgba(4, 7, 18, 0) 48%);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    #dialogue-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #dialogue-box {
+      width: min(96%, 520px);
+      background: linear-gradient(160deg, rgba(16, 24, 58, 0.97), rgba(9, 14, 36, 0.99));
+      border: 2px solid var(--gold);
+      border-radius: 22px;
+      padding: 14px 16px;
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.75);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      cursor: pointer;
+    }
+
+    #dialogue-portrait {
+      width: 72px;
+      height: 72px;
+      flex-shrink: 0;
+      border-radius: 18px;
+      border: 2px solid rgba(246, 211, 101, 0.85);
+      background: radial-gradient(circle at 50% 35%, #2a346e, #121735);
+      overflow: hidden;
+    }
+
+    #dialogue-portrait svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .dialogue-content {
+      flex: 1;
+      min-height: 76px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    #dialogue-name {
+      display: inline-block;
+      align-self: flex-start;
+      background: linear-gradient(90deg, rgba(246, 211, 101, 0.26), rgba(255, 143, 184, 0.24));
+      border: 1px solid rgba(246, 211, 101, 0.65);
+      color: var(--gold);
+      font-weight: 800;
+      font-size: 0.84rem;
+      padding: 2px 12px;
+      border-radius: 999px;
+    }
+
+    #dialogue-text {
+      font-size: 0.94rem;
+      line-height: 1.58;
+      color: #fff7fb;
+      font-weight: 600;
+      min-height: 42px;
+    }
+
+    #dialogue-next {
+      align-self: flex-end;
+      font-size: 0.78rem;
+      color: var(--gold);
+      font-weight: 800;
+    }
+
+    #dialogue-choices {
+      display: none;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    #dialogue-choices.visible {
+      display: flex;
+    }
+
+    .choice-pill {
+      font-family: var(--font-main);
+      font-size: 0.78rem;
+      font-weight: 800;
+      padding: 5px 11px;
+      border-radius: 999px;
+      border: 1.5px solid var(--gold);
+      background: linear-gradient(135deg, rgba(255, 133, 181, 0.28), rgba(246, 211, 101, 0.2));
+      color: #fff8dc;
+      cursor: pointer;
+      transition: transform 0.14s ease, background 0.2s ease;
+    }
+
+    .choice-pill:hover {
+      background: linear-gradient(135deg, #ff85b5, #e84e93);
+      color: #ffffff;
+    }
+
+    .choice-pill:active {
+      transform: scale(0.94);
+    }
+
+    /* =====================================================================
+       MODAL DIALOGS (Cinema Screening & Art / Sketchbook Studio)
+       ===================================================================== */
+    .studio-modal {
+      position: absolute;
+      inset: 0;
+      z-index: 42;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      background: rgba(4, 7, 20, 0.78);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .studio-modal.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .studio-card {
+      width: min(96%, 440px);
+      max-height: 90dvh;
+      overflow-y: auto;
+      background: linear-gradient(165deg, rgba(22, 28, 66, 0.98), rgba(10, 14, 34, 0.99));
+      border: 2px solid var(--gold);
+      border-radius: 26px;
+      padding: 18px 16px;
+      box-shadow: 0 20px 55px rgba(0, 0, 0, 0.8), 0 0 28px rgba(255, 133, 181, 0.25);
+      text-align: center;
+    }
+
+    .studio-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .studio-title {
+      font-family: 'Cairo', var(--font-main);
+      font-size: 1.15rem;
+      font-weight: 900;
+      color: var(--gold);
+    }
+
+    .close-modal-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255, 162, 198, 0.6);
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .tab-switcher {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .tab-btn {
+      font-family: var(--font-main);
+      font-size: 0.82rem;
+      font-weight: 800;
+      padding: 7px 13px;
+      border-radius: 999px;
+      border: 1.5px solid rgba(246, 211, 101, 0.45);
+      background: rgba(255, 255, 255, 0.06);
+      color: #f3e8ff;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn.active {
+      background: linear-gradient(135deg, #ff85b5, #f6c343);
+      color: #180d24;
+      border-color: #fff5cc;
+      box-shadow: 0 4px 14px rgba(255, 133, 181, 0.5);
+    }
+
+    canvas#cinemaCanvas {
+      width: 100%;
+      height: 205px;
+      border-radius: 18px;
+      border: 2px solid rgba(255, 143, 184, 0.55);
+      background: #090e26;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .cinema-caption {
+      font-size: 0.88rem;
+      line-height: 1.55;
+      color: #ffe8f2;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 14px;
+      padding: 10px 12px;
+    }
+
+    canvas#drawCanvas {
+      width: 100%;
+      height: 215px;
+      border-radius: 18px;
+      border: 2px solid rgba(246, 211, 101, 0.65);
+      background: #fff9fc;
+      display: block;
+      touch-action: none;
+      margin-bottom: 10px;
+    }
+
+    .draw-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .color-swatches {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .swatch-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      cursor: pointer;
+      transition: transform 0.14s ease;
+    }
+
+    .swatch-btn.active {
+      transform: scale(1.22);
+      box-shadow: 0 0 10px #fff;
+    }
+
+    .clear-draw-btn {
+      font-family: var(--font-main);
+      font-size: 0.8rem;
+      font-weight: 800;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 143, 184, 0.6);
+      background: rgba(255, 92, 156, 0.22);
+      color: #ffd8e8;
+      cursor: pointer;
+    }
+
+    .couple-sketch-frame {
+      background: linear-gradient(145deg, #fffdf9, #fff0f6);
+      color: #241838;
+      border: 2px solid var(--gold);
+      border-radius: 18px;
+      padding: 12px;
+      margin-bottom: 10px;
+    }
+
+    .couple-names-banner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 8px;
+      font-family: 'Cairo', var(--font-main);
+      font-size: 1.05rem;
+      font-weight: 900;
+      color: #b52b65;
+    }
+
+    /* =====================================================================
+       BLOW CANDLES OVERLAY & KEEPSAKE CARD
+       ===================================================================== */
+    #blow-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 40;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding-bottom: max(95px, 14vh);
+      background: radial-gradient(circle at 50% 42%, rgba(255, 175, 204, 0.08), rgba(6, 10, 26, 0.55));
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+
+    #blow-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .wish-hint {
+      font-size: 0.98rem;
+      font-weight: 800;
+      color: #fff1c9;
+      background: rgba(12, 18, 42, 0.85);
+      padding: 8px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(246, 211, 101, 0.55);
+      margin-bottom: 14px;
+    }
+
+    #blow-btn {
+      font-family: var(--font-main);
+      font-size: 1.18rem;
+      font-weight: 900;
+      color: #ffffff;
+      background: linear-gradient(135deg, #ff7eb3 0%, #ff4f93 52%, #f6b93b 100%);
+      border: 2.5px solid #fff4c2;
+      border-radius: 999px;
+      padding: 14px 30px;
+      cursor: pointer;
+      box-shadow: 0 10px 34px rgba(255, 92, 158, 0.75);
+      animation: blowPulse 1.4s infinite ease-in-out;
+    }
+
+    @keyframes blowPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.07); }
+    }
+
+    #finale-modal {
+      position: absolute;
+      inset: 0;
+      z-index: 45;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(5, 8, 22, 0.65);
+      backdrop-filter: blur(5px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+
+    #finale-modal.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .keepsake-card {
+      width: min(94%, 410px);
+      background: linear-gradient(160deg, rgba(28, 22, 62, 0.97), rgba(12, 16, 42, 0.99));
+      border: 2.5px solid var(--gold);
+      border-radius: 28px;
+      padding: 22px 18px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.75), 0 0 40px rgba(255, 133, 181, 0.4);
+    }
+
+    .keepsake-crown {
+      font-size: 2.3rem;
+      margin-bottom: 4px;
+    }
+
+    .keepsake-title {
+      font-family: 'Cairo', var(--font-main);
+      font-size: 1.38rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #fff6d1, #f6d365, #ffa3c7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 6px;
+    }
+
+    .keepsake-sub {
+      font-size: 0.94rem;
+      font-weight: 800;
+      color: #ffd3e6;
+      margin-bottom: 10px;
+    }
+
+    .keepsake-poem {
+      font-size: 0.87rem;
+      line-height: 1.68;
+      color: #f6eef9;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(246, 211, 101, 0.35);
