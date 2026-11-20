@@ -1,319 +1,3752 @@
+```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"/>
-<title>ليلة الملكة نورة 👑🎂</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;900&family=Tajawal:wght@500;700;800&display=swap" rel="stylesheet"/>
-<style>
-:root{--g:#f6d365;--p:#ff8fb8;--pd:#e84e93;--f:'Tajawal','Cairo',sans-serif}
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
-html,body{width:100%;height:100%;overflow:hidden;background:#080d1e;font-family:var(--f);color:#fff7fb;touch-action:none}
-#app{position:relative;width:100vw;height:100dvh;overflow:hidden;background:radial-gradient(circle at 50% 30%,#16234d,#070b18)}
-#gc{display:block;width:100%;height:100%;touch-action:none}
-.ov{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(5,8,22,.78);backdrop-filter:blur(7px);opacity:0;pointer-events:none;transition:opacity .3s;z-index:42}
-.ov.on{opacity:1;pointer-events:auto}
-#wO{z-index:55;background:radial-gradient(circle at 50% 35%,rgba(28,22,68,.9),rgba(6,10,26,.96))}
-.card{width:min(95%,410px);max-height:90dvh;overflow-y:auto;text-align:center;padding:20px 16px;border-radius:26px;background:linear-gradient(160deg,rgba(24,24,62,.97),rgba(10,14,36,.99));border:2px solid var(--g);box-shadow:0 20px 55px rgba(0,0,0,.78)}
-.gt{font-family:'Cairo',var(--f);font-weight:900;background:linear-gradient(135deg,#fff6d1,#f6d365,#ffa3c7);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.btn{font-family:var(--f);font-weight:900;color:#fff;background:linear-gradient(135deg,#ff7eb3,#e84e93,#f6b93b);border:2px solid #fff3c4;border-radius:999px;padding:12px 26px;font-size:1.05rem;cursor:pointer;box-shadow:0 8px 26px rgba(255,92,158,.65)}
-.pulse{animation:pl 1.4s infinite ease-in-out}@keyframes pl{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
-#hud{position:absolute;top:max(10px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);width:min(96%,520px);display:flex;align-items:center;justify-content:space-between;gap:6px;padding:7px 10px;background:rgba(12,18,42,.92);border:1.5px solid rgba(246,211,101,.6);border-radius:20px;z-index:20;transition:.3s}
-#hud.off,#ctrl.off{opacity:0;pointer-events:none!important}#ctrl.off *{pointer-events:none!important}
-.pill{background:rgba(255,143,184,.24);border:1px solid rgba(255,186,214,.65);color:#fff5fa;padding:5px 9px;border-radius:999px;font-weight:800;font-size:.75rem;white-space:nowrap;font-family:var(--f);cursor:pointer}
-#hH{flex:1;font-size:.72rem;color:#f7e9c8;text-align:center;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-#sndB{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--g);background:rgba(255,255,255,.08);color:var(--g);font-size:.95rem;cursor:pointer}
-#tst{position:absolute;top:calc(max(10px,env(safe-area-inset-top)) + 54px);left:50%;transform:translateX(-50%) translateY(-10px);background:linear-gradient(135deg,#ff76aa,#b96eeb);color:#fff;padding:7px 15px;border-radius:999px;font-size:.82rem;font-weight:800;border:1.5px solid #fff3c4;opacity:0;pointer-events:none;z-index:25;white-space:nowrap;transition:.3s}
-#tst.on{opacity:1;transform:translateX(-50%) translateY(0)}
-#ctrl{position:absolute;bottom:max(16px,env(safe-area-inset-bottom));left:0;right:0;padding:0 16px;display:flex;justify-content:space-between;align-items:flex-end;pointer-events:none;z-index:20;direction:ltr}
-#jZ{position:relative;width:116px;height:116px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.1),rgba(12,18,42,.65));border:2px solid rgba(246,211,101,.55);pointer-events:auto;touch-action:none;display:flex;align-items:center;justify-content:center}
-#jK{width:46px;height:46px;border-radius:50%;background:linear-gradient(145deg,#ffb6d3,#ff7eb0);border:2.5px solid #fff3c4;pointer-events:none}
-.rcol{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
-.prow{display:flex;gap:6px;direction:rtl;flex-wrap:wrap;justify-content:flex-end}
-.mb{font-family:var(--f);font-size:.76rem;font-weight:800;color:#fff8dc;background:linear-gradient(135deg,#8741b9,#e14e93);border:1.5px solid var(--g);border-radius:999px;padding:6px 10px;cursor:pointer;pointer-events:auto}
-.mb.on{background:linear-gradient(135deg,#f6c343,#ff7eb3);color:#1b0f26}
-#aB{width:80px;height:80px;border-radius:50%;border:2.5px solid rgba(246,211,101,.75);background:rgba(20,26,58,.94);color:#ffe8c2;font-family:var(--f);font-size:.82rem;font-weight:800;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:auto;cursor:pointer;direction:rtl}
-#aB.rdy{background:linear-gradient(145deg,#ff85b5,#e84e93);border-color:#fff2b2;color:#fff;box-shadow:0 0 22px rgba(255,133,181,.9);animation:pl 1.2s infinite}
-#dO{align-items:flex-end;padding:14px 12px max(20px,env(safe-area-inset-bottom));background:linear-gradient(to top,rgba(4,7,18,.7),transparent 50%);z-index:35}
-#dBox{width:min(96%,500px);background:rgba(13,20,48,.98);border:2px solid var(--g);border-radius:22px;padding:13px 15px;display:flex;align-items:center;gap:12px;cursor:pointer}
-#dP{width:62px;height:62px;flex-shrink:0;border-radius:16px;border:2px solid var(--g);background:#1b2350;display:flex;align-items:center;justify-content:center;font-size:2rem}
-.sh{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-.xb{width:32px;height:32px;border-radius:50%;border:1.5px solid var(--p);background:rgba(255,255,255,.08);color:#fff;font-weight:800;cursor:pointer}
-.tabs{display:flex;gap:6px;margin-bottom:10px;justify-content:center;flex-wrap:wrap}
-.tb{font-family:var(--f);font-size:.78rem;font-weight:800;padding:6px 11px;border-radius:999px;border:1.5px solid rgba(246,211,101,.5);background:rgba(255,255,255,.06);color:#f3e8ff;cursor:pointer}
-.tb.on{background:linear-gradient(135deg,#ff85b5,#f6c343);color:#180d24}
-#cC{width:100%;height:185px;border-radius:16px;border:2px solid var(--p);background:#090e26;display:block;margin-bottom:9px}
-#dCv{width:100%;height:195px;border-radius:16px;border:2px solid var(--g);background:#fff9fc;display:block;touch-action:none;margin-bottom:9px}
-.sw{width:26px;height:26px;border-radius:50%;border:2px solid #fff;cursor:pointer}.sw.on{transform:scale(1.2)}
-#bO{flex-direction:column;justify-content:flex-end;padding-bottom:max(90px,13vh);background:rgba(6,10,26,.55);z-index:40}
-.poem{font-size:.88rem;line-height:1.75;background:rgba(255,255,255,.07);border:1px solid rgba(246,211,101,.4);border-radius:16px;padding:12px;margin:10px 0 14px}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>ليلة الملكة نورة 👑🎂</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&family=Tajawal:wght@500;700;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =====================================================================
+       DESIGN TOKENS & MOBILE-FIRST RTL NIGHT GARDEN THEME
+       ===================================================================== */
+    :root {
+      --bg-garden: #0f2d23;
+      --navy-card: rgba(14, 19, 46, 0.96);
+      --navy-solid: #111633;
+      --gold: #f6d365;
+      --gold-dim: rgba(246, 211, 101, 0.55);
+      --pink: #ff6da8;
+      --pink-soft: #ff9ec7;
+      --primary-grad: linear-gradient(135deg, #ff6da8 0%, #f6b93b 100%);
+      --cream: #fff8fc;
+      --font-main: 'Tajawal', 'Cairo', system-ui, -apple-system, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: var(--bg-garden);
+      font-family: var(--font-main);
+      color: var(--cream);
+      touch-action: none;
+    }
+
+    #game-root {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
+      background: #0d271e;
+    }
+
+    canvas#gameCanvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      touch-action: none;
+      cursor: pointer;
+    }
+
+    /* =====================================================================
+       WELCOME OVERLAY
+       ===================================================================== */
+    #welcome-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 60;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      background: radial-gradient(circle at 50% 35%, rgba(22, 26, 62, 0.88), rgba(8, 12, 30, 0.97));
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: opacity 0.45s ease, transform 0.45s ease;
+    }
+
+    #welcome-overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(1.03);
+    }
+
+    .welcome-card {
+      width: min(94%, 400px);
+      background: var(--navy-card);
+      border: 2px solid var(--gold);
+      border-radius: 28px;
+      padding: 24px 20px 26px;
+      text-align: center;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.78), 0 0 36px rgba(246, 211, 101, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .welcome-avatars {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .avatar-ring {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      border: 2.5px solid var(--gold);
+      background: radial-gradient(circle at 50% 35%, #28336e, #121736);
+      overflow: hidden;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+    }
+
+    .avatar-ring svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .welcome-center-icons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      font-size: 1.5rem;
+      animation: floatSoft 2.4s ease-in-out infinite;
+    }
+
+    @keyframes floatSoft {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    .welcome-title {
+      font-family: 'Cairo', var(--font-main);
+      font-size: 1.85rem;
+      font-weight: 900;
+      line-height: 1.25;
+      background: linear-gradient(135deg, #fff6c9 0%, #f6d365 55%, #ffb3d1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+    }
+
+    .crown-circle {
+      width: 54px;
+      height: 54px;
+      margin: 0 auto 10px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(246, 211, 101, 0.24), rgba(17, 22, 51, 0.9));
+      border: 2px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.65rem;
+      box-shadow: 0 0 20px rgba(246, 211, 101, 0.35);
+    }
+
+    .welcome-subtitle {
+      font-size: 1.04rem;
+      font-weight: 800;
+      color: #fff2d6;
+      margin-bottom: 14px;
+    }
+
+    .welcome-desc-box {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1.5px solid rgba(246, 211, 101, 0.34);
+      border-radius: 18px;
+      padding: 12px 14px;
+      font-size: 0.9rem;
+      line-height: 1.68;
+      color: #f3e8f8;
+      margin-bottom: 20px;
+    }
+
+    .primary-grad-btn {
+      font-family: 'Cairo', var(--font-main);
+      font-size: 1.08rem;
+      font-weight: 900;
+      color: #181028;
+      background: var(--primary-grad);
+      border: 2px solid #fff4c8;
+      border-radius: 999px;
+      padding: 13px 28px;
+      cursor: pointer;
+      box-shadow: 0 10px 28px rgba(255, 109, 168, 0.55), 0 0 22px rgba(246, 185, 59, 0.35);
+      transition: transform 0.15s ease, box-shadow 0.2s ease;
+    }
+
+    .primary-grad-btn.pulse {
+      animation: btnPulse 1.55s ease-in-out infinite;
+    }
+
+    .primary-grad-btn:active {
+      transform: scale(0.95) !important;
+    }
+
+    @keyframes btnPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.045); }
+    }
+
+    /* =====================================================================
+       TOP HUD BAR
+       ===================================================================== */
+    #top-hud {
+      position: absolute;
+      top: max(10px, env(safe-area-inset-top));
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(96%, 500px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 7px;
+      padding: 7px 10px;
+      background: var(--navy-card);
+      border: 2px solid var(--gold);
+      border-radius: 999px;
+      box-shadow: 0 8px 26px rgba(0, 0, 0, 0.55);
+      z-index: 25;
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+
+    #top-hud.hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-50%, -18px);
+    }
+
+    .hud-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      padding: 6px 11px;
+      border-radius: 999px;
+      font-family: var(--font-main);
+      font-size: 0.8rem;
+      font-weight: 800;
+      white-space: nowrap;
+      border: 1.5px solid rgba(246, 211, 101, 0.52);
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff6fa;
+    }
+
+    #memories-pill {
+      background: linear-gradient(135deg, rgba(255, 109, 168, 0.25), rgba(246, 211, 101, 0.16));
+      border-color: rgba(255, 158, 199, 0.72);
+    }
+
+    #cat-hud-btn {
+      flex: 1;
+      cursor: pointer;
+      background: linear-gradient(135deg, rgba(130, 96, 224, 0.3), rgba(255, 109, 168, 0.22));
+      border-color: rgba(246, 211, 101, 0.6);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      transition: transform 0.14s ease;
+    }
+
+    #cat-hud-btn:active {
+      transform: scale(0.95);
+    }
+
+    #sound-toggle-btn {
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      border: 1.5px solid var(--gold);
+      background: rgba(255, 255, 255, 0.09);
+      color: var(--gold);
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.14s ease;
+    }
+
+    #sound-toggle-btn:active {
+      transform: scale(0.9);
+    }
+
+    /* =====================================================================
+       TOAST NOTIFICATION BANNER
+       ===================================================================== */
+    #toast-banner {
+      position: absolute;
+      top: calc(max(10px, env(safe-area-inset-top)) + 60px);
+      left: 50%;
+      transform: translateX(-50%) translateY(-10px);
+      max-width: 92vw;
+      padding: 8px 18px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(232, 78, 147, 0.96), rgba(138, 72, 206, 0.96));
+      border: 1.5px solid var(--gold);
+      color: #ffffff;
+      font-size: 0.86rem;
+      font-weight: 800;
+      text-align: center;
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.48);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 32;
+      transition: opacity 0.28s ease, transform 0.28s ease;
+    }
+
+    #toast-banner.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* =====================================================================
+       SPECIAL POST-FINALE CELEBRATION BUTTONS
+       ===================================================================== */
+    #celebration-actions {
+      position: absolute;
+      bottom: calc(max(18px, env(safe-area-inset-bottom)) + 16px);
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 7px;
+      z-index: 24;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+
+    #celebration-actions.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .celeb-pill-btn {
+      font-family: 'Cairo', var(--font-main);
+      font-size: 0.78rem;
+      font-weight: 800;
+      white-space: nowrap;
+      color: #fff9fd;
+      background: linear-gradient(135deg, rgba(132, 62, 186, 0.94), rgba(224, 72, 146, 0.94));
+      border: 1.8px solid var(--gold);
+      border-radius: 999px;
+      padding: 6px 14px;
+      min-width: 138px;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45), 0 0 12px rgba(255, 109, 168, 0.3);
+      transition: transform 0.15s ease, background 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .celeb-pill-btn.active-mode {
+      background: linear-gradient(135deg, #f6d365, #ff6da8);
+      color: #1a0f2b;
+      border-color: #ffffff;
+      box-shadow: 0 0 22px rgba(246, 211, 101, 0.92);
+    }
+
+    .celeb-pill-btn:active {
+      transform: scale(0.94);
+    }
+
+    /* =====================================================================
+       MOBILE TOUCH CONTROLS (JOYSTICK + INTERACT BUTTON)
+       ===================================================================== */
+    #controls-layer {
+      position: absolute;
+      bottom: max(18px, env(safe-area-inset-bottom));
+      left: 0;
+      right: 0;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      pointer-events: none;
+      z-index: 22;
+      direction: ltr;
+      transition: opacity 0.25s ease;
+    }
+
+    #controls-layer.hidden {
+      opacity: 0;
+      pointer-events: none !important;
+    }
+
+    #controls-layer.hidden * {
+      pointer-events: none !important;
+    }
+
+    #joystick-zone {
+      position: relative;
+      width: 122px;
+      height: 122px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(14, 19, 46, 0.68) 100%);
+      border: 2px solid rgba(246, 211, 101, 0.62);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.52), inset 0 0 18px rgba(255, 109, 168, 0.14);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      pointer-events: auto;
+      touch-action: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .joy-arrow {
+      position: absolute;
+      font-size: 10px;
+      color: rgba(246, 211, 101, 0.68);
+      pointer-events: none;
+    }
+    .joy-arrow.up { top: 8px; left: 50%; transform: translateX(-50%); }
+    .joy-arrow.down { bottom: 8px; left: 50%; transform: translateX(-50%); }
+    .joy-arrow.left { left: 10px; top: 50%; transform: translateY(-50%); }
+    .joy-arrow.right { right: 10px; top: 50%; transform: translateY(-50%); }
+
+    #joystick-knob {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--primary-grad);
+      border: 2.5px solid #fff4c8;
+      box-shadow: 0 4px 18px rgba(255, 109, 168, 0.72);
+      transform: translate(0px, 0px);
+      pointer-events: none;
+    }
+
+    #interact-btn {
+      width: 86px;
+      height: 86px;
+      border-radius: 50%;
+      border: 2.5px solid var(--gold);
+      background: radial-gradient(circle at 35% 30%, #242d5e, #111633);
+      color: #fff2cc;
+      font-family: 'Cairo', var(--font-main);
+      font-size: 0.92rem;
+      font-weight: 800;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      box-shadow: 0 8px 26px rgba(0, 0, 0, 0.55);
+      pointer-events: auto;
+      cursor: pointer;
+      direction: rtl;
+      transition: transform 0.14s ease, background 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    #interact-btn .btn-spark {
+      font-size: 1.35rem;
+      line-height: 1;
+    }
+
+    #interact-btn.ready {
+      background: linear-gradient(145deg, #ff7eb5 0%, #e83e8c 65%, #f6b93b 100%);
+      border-color: #fff6c9;
+      color: #ffffff;
+      box-shadow: 0 0 28px rgba(255, 109, 168, 0.95), 0 8px 24px rgba(0, 0, 0, 0.48);
+      animation: btnPulse 1.15s ease-in-out infinite;
+    }
+
+    #interact-btn:active {
+      transform: scale(0.91) !important;
+    }
+
+    /* =====================================================================
+       RPG DIALOGUE OVERLAY (BOTTOM-ANCHORED)
+       ===================================================================== */
+    #dialogue-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 40;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 14px 12px max(22px, env(safe-area-inset-bottom));
+      background: linear-gradient(to top, rgba(6, 10, 26, 0.72) 0%, rgba(6, 10, 26, 0.12) 55%, rgba(6, 10, 26, 0) 100%);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    #dialogue-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #dialogue-box {
+      width: min(96%, 510px);
+      background: var(--navy-card);
+      border: 2px solid var(--gold);
+      border-radius: 24px;
+      padding: 16px;
+      box-shadow: 0 18px 46px rgba(0, 0, 0, 0.8), 0 0 24px rgba(246, 211, 101, 0.18);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    #dialogue-portrait {
+      width: 74px;
+      height: 74px;
+      flex-shrink: 0;
+      border-radius: 18px;
+      border: 2px solid var(--gold);
+      background: radial-gradient(circle at 50% 35%, #28326b, #121735);
+      overflow: hidden;
+      box-shadow: 0 5px 16px rgba(0, 0, 0, 0.45);
+    }
+
+    #dialogue-portrait svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .dialogue-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    #dialogue-speaker {
+      align-self: flex-start;
+      background: linear-gradient(90deg, rgba(246, 211, 101, 0.24), rgba(255, 109, 168, 0.22));
+      border: 1.5px solid rgba(246, 211, 101, 0.7);
+      color: var(--gold);
+      font-family: 'Cairo', var(--font-main);
+      font-weight: 800;
+      font-size: 0.85rem;
+      padding: 2px 13px;
+      border-radius: 999px;
+    }
+
+    #dialogue-text {
+      font-size: 0.96rem;
+      line-height: 1.66;
+      color: #fff8fc;
+      font-weight: 700;
+      min-height: 46px;
+      cursor: pointer;
+    }
+
+    #dialogue-choices {
+      display: none;
+      flex-direction: column;
+      gap: 7px;
+      margin-top: 2px;
+    }
+
+    #dialogue-choices.visible {
+      display: flex;
+    }
+
+    .dlg-choice-btn {
+      font-family: var(--font-main);
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #fff7dc;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1.5px solid rgba(246, 211, 101, 0.65);
+      border-radius: 14px;
+      padding: 8px 14px;
+      text-align: center;
+      cursor: pointer;
+      transition: background 0.18s ease, transform 0.14s ease;
+    }
+
+    .dlg-choice-btn:hover,
+    .dlg-choice-btn.selected {
+      background: linear-gradient(135deg, rgba(255, 109, 168, 0.42), rgba(246, 211, 101, 0.26));
+      border-color: var(--gold);
+    }
+
+    .dlg-choice-btn:active {
+      transform: scale(0.97);
+    }
+
+    .dialogue-footer {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 2px;
+    }
+
+    #dialogue-action-btn {
+      font-family: 'Cairo', var(--font-main);
+      font-size: 0.84rem;
+      font-weight: 800;
+      color: var(--gold);
+      background: rgba(246, 211, 101, 0.12);
+      border: 1.5px solid rgba(246, 211, 101, 0.65);
+      border-radius: 999px;
+      padding: 5px 15px;
+      cursor: pointer;
+      transition: transform 0.14s ease, background 0.2s ease;
+    }
+
+    #dialogue-action-btn:active {
+      transform: scale(0.94);
+    }
+
+    /* =====================================================================
+       MODAL OVERLAYS (ART STUDIO, RAVE CINEMA, GRAND FINALE)
+       ===================================================================== */
+    .royal-modal {
+      position: absolute;
+      inset: 0;
+      z-index: 48;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      background: rgba(6, 10, 28, 0.82);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .royal-modal.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-card {
+      width: min(96%, 430px);
+      max-height: 90dvh;
+      overflow-y: auto;
+      background: var(--navy-card);
+      border: 2px solid var(--gold);
+      border-radius: 26px;
+      padding: 18px 16px 20px;
+      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.84), 0 0 32px rgba(255, 109, 168, 0.24);
+      text-align: center;
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .modal-title {
+      font-family: 'Cairo', var(--font-main);
+      font-size: 1.15rem;
+      font-weight: 900;
+      color: var(--gold);
+    }
+
+    .modal-close-x {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255, 158, 199, 0.72);
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+      font-size: 1rem;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .modal-tabs {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .modal-tab-btn {
+      font-family: 'Cairo', var(--font-main);
+      font-size: 0.9rem;
+      font-weight: 800;
+      padding: 9px 14px;
+      border-radius: 999px;
+      border: 1.5px solid rgba(246, 211, 101, 0.48);
+      background: rgba(255, 255, 255, 0.06);
+      color: #f4e9ff;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .modal-tab-btn.active {
+      background: var(--primary-grad);
+      color: #181028;
+      border-color: #fff5cc;
+      box-shadow: 0 5px 16px rgba(255, 109, 168, 0.45);
+    }
+
+    /* Art Studio Specifics */
+    .art-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .swatch-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .color-swatch {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 2.5px solid #ffffff;
+      cursor: pointer;
+      transition: transform 0.14s ease, box-shadow 0.18s ease;
+    }
+
+    .color-swatch.active {
+      transform: scale(1.22);
+      box-shadow: 0 0 12px #ffffff;
+    }
+
+    .clear-canvas-btn {
+      font-family: var(--font-main);
+      font-size: 0.82rem;
+      font-weight: 800;
+      padding: 7px 13px;
+      border-radius: 999px;
+      border: 1.5px solid rgba(255, 158, 199, 0.7);
+      background: rgba(255, 109, 168, 0.22);
+      color: #ffe2ef;
+      cursor: pointer;
+    }
+
+    canvas#drawCanvas {
+      width: 100%;
+      height: 220px;
+      border-radius: 18px;
+      border: 3px solid #ff9ec7;
+      background: #ffffff;
+      display: block;
+      touch-action: none;
+      cursor: crosshair;
+    }
+
+    .couple-art-card {
+      background: linear-gradient(160deg, #fffdf8, #fff1f7);
+      border: 2.5px solid var(--gold);
+      border-radius: 20px;
+      padding: 12px 10px 10px;
+      color: #241738;
+      margin-bottom: 12px;
+      box-shadow: inset 0 0 18px rgba(255, 109, 168, 0.16);
+    }
+
+    .couple-art-header {
+      font-family: 'Cairo', var(--font-main);
+      font-size: 0.86rem;
+      font-weight: 900;
+      color: #b8326a;
+      margin-bottom: 6px;
+    }
+
+    .couple-art-sub {
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: #8c2d57;
+      margin-top: 4px;
+    }
+
+    .couple-big-names {
+      font-family: 'Cairo', var(--font-main);
+      font-size: 1.38rem;
+      font-weight: 900;
+      color: #ffdce9;
+      margin-bottom: 10px;
+    }
+
+    .modal-caption-box {
+      background: rgba(255, 255, 255, 0.07);
+      border: 1.5px solid rgba(246, 211, 101, 0.34);
+      border-radius: 16px;
+      padding: 11px 13px;
+      font-size: 0.88rem;
+      line-height: 1.64;
+      color: #f8ecf9;
+      font-weight: 700;
+    }
+
+    /* Cinema Specifics */
+    canvas#cinemaCanvas {
+      width: 100%;
+      height: 205px;
+      border-radius: 18px;
+      border: 2px solid rgba(246, 211, 101, 0.65);
+      background: #0b102c;
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    /* =====================================================================
+       BLOW CANDLES OVERLAY
+       ===================================================================== */
+    #blow-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 44;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 16px 16px max(48px, 8vh);
+      background: linear-gradient(to top, rgba(6, 10, 26, 0.78) 0%, rgba(6, 10, 26, 0.16) 52%, rgba(6, 10, 26, 0) 100%);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+
+    #blow-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .blow-pill-msg {
+      max-width: min(94%, 430px);
+      background: var(--navy-card);
+      border: 2px solid var(--gold);
+      border-radius: 999px;
+      padding: 10px 18px;
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: #fff3c7;
+      text-align: center;
+      margin-bottom: 14px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.6);
+    }
+
+    #blow-candles-btn {
+      width: min(90%, 340px);
+      font-size: 1.15rem;
+      padding: 14px 24px;
+    }
+
+    /* =====================================================================
+       GRAND FINALE MODAL CARD
+       ===================================================================== */
+    .finale-icons {
+      font-size: 2.3rem;
+      margin-bottom: 8px;
+      letter-spacing: 4px;
+    }
+
+    .finale-title {
+      font-family: 'Cairo', var(--font-main);
+      font-size: 1.62rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #fff7cc, #f6d365, #ffa3c9);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 6px;
+    }
+
+    .finale-sub {
+      font-size: 0.96rem;
+      font-weight: 800;
+      color: #ffd5e8;
+      margin-bottom: 14px;
+    }
+
+    .finale-message {
+      background: rgba(255, 255, 255, 0.07);
+      border: 1.5px solid rgba(246, 211, 101, 0.42);
+      border-radius: 18px;
+      padding: 14px 15px;
+      font-size: 0.95rem;
+      line-height: 1.78;
+      color: #fff6fb;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+  </style>
 </head>
 <body>
-<div id="app">
-<canvas id="gc"></canvas>
+  <div id="game-root">
+    <!-- Main 2D Top-Down Garden World Canvas -->
+    <canvas id="gameCanvas"></canvas>
 
-<div id="wO" class="ov on">
-  <div class="card">
-    <div style="font-size:2.5rem">👑🎂✨</div>
-    <h1 class="gt" style="font-size:1.6rem;margin:6px 0">ليلة الملكة نورة</h1>
-    <p style="font-size:.93rem;line-height:1.65;color:#f6e7f2;margin-bottom:16px">هدية خاصة لعيد ميلادكِ السادس عشر 🌸<br/>تجولي بالحديقة الملكية، افتحي السينما والمرسم، تحدّثي مع علي، وانفخي الـ 16 شمعة!</p>
-    <button id="sBtn" class="btn pulse">✨ ابدئي الاحتفال يا ملكة 👑</button>
-  </div>
-</div>
-
-<div id="hud" class="off">
-  <span class="pill" id="pB">✨ 0 / 4</span>
-  <button class="pill" id="catB">🐱 القطة: تتبعني</button>
-  <span id="hH">اقتربي من الأركان</span>
-  <button id="sndB">🔊</button>
-</div>
-<div id="tst">✨ أهلاً بالملكة نورة!</div>
-
-<div id="ctrl" class="off">
-  <div id="jZ"><div id="jK"></div></div>
-  <div class="rcol">
-    <div class="prow">
-      <button class="mb" id="bDn">💃 رقص</button>
-      <button class="mb" id="bHg">🤗 عناق</button>
-      <button class="mb" id="bFw">🎆 ألعاب نارية</button>
-    </div>
-    <button id="aB"><span id="aI" style="font-size:1.2rem">✨</span><span id="aL">تفاعل</span></button>
-  </div>
-</div>
-
-<div id="dO" class="ov">
-  <div id="dBox">
-    <div id="dP">🤴</div>
-    <div style="flex:1;display:flex;flex-direction:column;gap:5px">
-      <span id="dN" style="color:var(--g);font-weight:800;font-size:.84rem">علي 👑</span>
-      <div id="dT" style="font-size:.92rem;line-height:1.55"></div>
-      <div id="dC" style="display:none;flex-wrap:wrap;gap:6px;margin-top:4px"></div>
-      <div id="dNx" style="align-self:flex-end;font-size:.76rem;color:var(--g);font-weight:800">اضغطي للمتابعة ◀</div>
-    </div>
-  </div>
-</div>
-
-<div id="cM" class="ov">
-  <div class="card">
-    <div class="sh"><span style="color:var(--g);font-weight:900">🎬 سينما الملكة نورة</span><button class="xb" id="cCl">✕</button></div>
-    <div class="tabs">
-      <button class="tb ct on" data-s="0">🌙 ليلة النجوم</button>
-      <button class="tb ct" data-s="1">🎂 الـ 16 شمعة</button>
-      <button class="tb ct" data-s="2">💖 لحظتنا</button>
-    </div>
-    <canvas id="cC" width="360" height="185"></canvas>
-    <div id="cCap" style="font-size:.86rem;line-height:1.5;background:rgba(255,255,255,.06);padding:9px;border-radius:12px">تحت سماء النجوم.. كل نجمة تتمنى لنورة عاماً سعيداً ✨</div>
-  </div>
-</div>
-
-<div id="aM" class="ov">
-  <div class="card">
-    <div class="sh"><span style="color:var(--g);font-weight:900">🎨 مرسم الذكريات</span><button class="xb" id="aCl">✕</button></div>
-    <div class="tabs">
-      <button class="tb on" id="tDr">🖌️ ارسمي أمنيتك</button>
-      <button class="tb" id="tCp">💌 لوحة علي ونورة</button>
-    </div>
-    <div id="pDr">
-      <canvas id="dCv" width="360" height="195"></canvas>
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <div style="display:flex;gap:7px">
-          <button class="sw on" data-c="#e84e93" style="background:#e84e93"></button>
-          <button class="sw" data-c="#f6b93b" style="background:#f6b93b"></button>
-          <button class="sw" data-c="#6c5ce7" style="background:#6c5ce7"></button>
-          <button class="sw" data-c="#00b894" style="background:#00b894"></button>
-          <button class="sw" data-c="#222f3e" style="background:#222f3e"></button>
+    <!-- ===================================================================
+         1. WELCOME OVERLAY
+         =================================================================== -->
+    <div id="welcome-overlay">
+      <div class="welcome-card">
+        <div class="welcome-avatars">
+          <div class="avatar-ring" id="welcome-ali-svg"></div>
+          <div class="welcome-center-icons">
+            <span>🎂</span>
+            <span>❤️</span>
+          </div>
+          <div class="avatar-ring" id="welcome-noura-svg"></div>
         </div>
-        <button class="pill" id="clDr">مسح اللوحة</button>
+        <h1 class="welcome-title">ليلة الملكة نورة</h1>
+        <div class="crown-circle">👑</div>
+        <div class="welcome-subtitle">احتفال عيد ميلاد العمر 16 سنة</div>
+        <div class="welcome-desc-box">
+          تحرّكي بعصا التحكم أو بالضغط على الشاشة، وتفاعلي مع ركن الرسم وسينما الـ Rave والبزونة وعلي ❤️
+        </div>
+        <button id="enter-garden-btn" class="primary-grad-btn pulse">ادخلي الحديقة السحرية</button>
       </div>
     </div>
-    <div id="pCp" style="display:none;background:#fff5fa;color:#b52b65;border:2px solid var(--g);border-radius:18px;padding:12px">
-      <svg viewBox="0 0 300 165" width="100%" height="155">
-        <rect width="300" height="165" rx="14" fill="#fff5fa"/>
-        <text x="150" y="48" text-anchor="middle" font-size="28">💖</text>
-        <g transform="translate(86,48)"><rect x="8" y="46" width="28" height="42" rx="10" fill="#1e2a5e"/><circle cx="22" cy="26" r="17" fill="#ffd9c4"/><path d="M5,22 Q22,2 39,22 Q33,11 22,11 Q11,11 5,22Z" fill="#1a1d2e"/><circle cx="16" cy="26" r="2" fill="#1a1d2e"/><circle cx="28" cy="26" r="2" fill="#1a1d2e"/><path d="M17,34 Q22,38 27,34" stroke="#b5446e" stroke-width="2" fill="none"/></g>
-        <g transform="translate(170,60)"><path d="M4,22 Q22,-4 40,22 L42,50 Q22,44 2,50Z" fill="#ff8fb8"/><rect x="8" y="40" width="28" height="36" rx="12" fill="#e84e93"/><circle cx="22" cy="25" r="16" fill="#ffe0d0"/><path d="M6,21 Q22,6 38,21 Q30,13 22,14 Q14,13 6,21Z" fill="#ff73ab"/><polygon points="12,9 16,1 22,7 28,1 32,9" fill="#f6d365"/><circle cx="16" cy="26" r="2" fill="#1a1d2e"/><circle cx="28" cy="26" r="2" fill="#1a1d2e"/><path d="M17,33 Q22,37 27,33" stroke="#b5446e" stroke-width="2" fill="none"/></g>
-        <text x="150" y="152" text-anchor="middle" font-size="13" fill="#8b3a62" font-weight="bold">كل عام وأنتِ أجمل حكاية ✨</text>
-      </svg>
-      <div style="font-weight:900;font-size:1.05rem;margin-top:6px">علي ❤️ نورة — Sweet 16 👑</div>
+
+    <!-- ===================================================================
+         2. TOP HUD BAR
+         =================================================================== -->
+    <div id="top-hud" class="hidden">
+      <div class="hud-pill" id="memories-pill">الذكريات: 0/3 ❤️</div>
+      <button class="hud-pill" id="cat-hud-btn">البزونة: تتحرك وياج 🐾</button>
+      <button id="sound-toggle-btn" aria-label="الصوت">🔊</button>
+    </div>
+
+    <!-- Floating Toast Banner -->
+    <div id="toast-banner">✨ أهلاً بالملكة نورة!</div>
+
+    <!-- ===================================================================
+         3. POST-FINALE CELEBRATION BUTTONS
+         =================================================================== -->
+    <div id="celebration-actions">
+      <button class="celeb-pill-btn" id="btn-dance-together">💃 نرقص سوة</button>
+      <button class="celeb-pill-btn" id="btn-lift-hug">🤗 يشيلها ويعانقها</button>
+    </div>
+
+    <!-- ===================================================================
+         4. MOBILE TOUCH CONTROLS
+         =================================================================== -->
+    <div id="controls-layer" class="hidden">
+      <div id="joystick-zone" aria-label="عصا التحكم">
+        <span class="joy-arrow up">▲</span>
+        <span class="joy-arrow down">▼</span>
+        <span class="joy-arrow left">◀</span>
+        <span class="joy-arrow right">▶</span>
+        <div id="joystick-knob"></div>
+      </div>
+
+      <button id="interact-btn" aria-label="تفاعل">
+        <span class="btn-spark">✨</span>
+        <span>تفاعل</span>
+      </button>
+    </div>
+
+    <!-- ===================================================================
+         5. RPG DIALOGUE BOX OVERLAY
+         =================================================================== -->
+    <div id="dialogue-overlay">
+      <div id="dialogue-box">
+        <div id="dialogue-portrait"></div>
+        <div class="dialogue-body">
+          <div id="dialogue-speaker">الملكة نورة 👑</div>
+          <div id="dialogue-text"></div>
+          <div id="dialogue-choices"></div>
+          <div class="dialogue-footer">
+            <button id="dialogue-action-btn">إغلاق ✨</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================================================================
+         6. ART STUDIO MODAL (ركن الفن والرسم)
+         =================================================================== -->
+    <div class="royal-modal" id="art-modal">
+      <div class="modal-card">
+        <div class="modal-header">
+          <div class="modal-title">🎨 ركن الفن والرسم</div>
+          <button class="modal-close-x" id="close-art-modal" aria-label="إغلاق">✕</button>
+        </div>
+
+        <div class="modal-tabs">
+          <button class="modal-tab-btn active" id="art-tab-draw">✏️ ارسمي هنا</button>
+          <button class="modal-tab-btn" id="art-tab-couple">💕 رسمة علي ونورة</button>
+        </div>
+
+        <!-- Tab 1: Interactive Drawing Canvas -->
+        <div id="art-pane-draw">
+          <div class="art-toolbar">
+            <button class="clear-canvas-btn" id="clear-draw-btn">مسح اللوحة 🗑️</button>
+            <div class="swatch-row">
+              <button class="color-swatch active" data-color="#ff5ea0" style="background:#ff5ea0;" aria-label="وردي"></button>
+              <button class="color-swatch" data-color="#a29bfe" style="background:#a29bfe;" aria-label="بنفسجي"></button>
+              <button class="color-swatch" data-color="#38bdf8" style="background:#38bdf8;" aria-label="سماوي"></button>
+              <button class="color-swatch" data-color="#f6d365" style="background:#f6d365;" aria-label="ذهبي"></button>
+              <button class="color-swatch" data-color="#2d3436" style="background:#2d3436;" aria-label="أسود"></button>
+            </div>
+          </div>
+          <canvas id="drawCanvas" width="380" height="220"></canvas>
+        </div>
+
+        <!-- Tab 2: Ali & Noura Couple Illustration -->
+        <div id="art-pane-couple" style="display:none;">
+          <div class="couple-art-card">
+            <div class="couple-art-header">✨ خط تخطيط: علي &amp; نورة ✨</div>
+            <svg viewBox="0 0 320 155" width="100%" height="148" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="heartAura" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#ff8fb8" stop-opacity="0.45"/>
+                  <stop offset="100%" stop-color="#ff8fb8" stop-opacity="0"/>
+                </radialGradient>
+              </defs>
+              <rect x="6" y="4" width="308" height="147" rx="14" fill="#fff8fb" stroke="#f6d365" stroke-width="1.5" stroke-dasharray="5 4"/>
+              <circle cx="160" cy="70" r="34" fill="url(#heartAura)"/>
+              <text x="160" y="79" text-anchor="middle" font-size="30">💖</text>
+              <text x="128" y="45" text-anchor="middle" font-size="13">✨</text>
+              <text x="192" y="45" text-anchor="middle" font-size="13">✨</text>
+
+              <!-- Chibi Ali -->
+              <g transform="translate(66, 22)">
+                <path d="M16,68 Q34,62 52,68 L56,118 L12,118 Z" fill="#151828"/>
+                <polygon points="27,67 41,67 34,85" fill="#ffffff"/>
+                <polygon points="32.5,68 35.5,68 36.5,84 34,89 31.5,84" fill="#e84e93"/>
+                <path d="M11,36 L5,25 L16,22 L15,10 L28,15 L36,5 L45,15 L57,11 L54,23 L63,28 L56,39 Z" fill="#131625"/>
+                <circle cx="34" cy="40" r="20" fill="#ffe1ce"/>
+                <ellipse cx="26.5" cy="41" rx="3" ry="3.6" fill="#151828"/>
+                <ellipse cx="41.5" cy="41" rx="3" ry="3.6" fill="#151828"/>
+                <circle cx="27.5" cy="39.6" r="1.2" fill="#ffffff"/>
+                <circle cx="42.5" cy="39.6" r="1.2" fill="#ffffff"/>
+                <ellipse cx="21" cy="47" rx="3.5" ry="1.8" fill="#ff8fb8" opacity="0.5"/>
+                <ellipse cx="47" cy="47" rx="3.5" ry="1.8" fill="#ff8fb8" opacity="0.5"/>
+                <path d="M29,50 Q34,54.5 39,50" stroke="#b54d6f" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <path d="M13,38 Q15,17 34,17 Q53,17 55,38 Q49,27 44,35 Q40,24 34,36 Q28,24 23,35 Q19,27 13,38 Z" fill="#151828"/>
+              </g>
+
+              <!-- Chibi Noura -->
+              <g transform="translate(186, 26)">
+                <path d="M12,34 Q6,72 10,112 Q22,106 34,113 Q46,106 58,112 Q62,72 56,34 Q52,14 34,14 Q16,14 12,34 Z" fill="#ff8fb8"/>
+                <path d="M20,66 L48,66 L58,114 Q34,120 10,114 Z" fill="#ff6da8"/>
+                <rect x="20" y="75" width="28" height="4.5" rx="2" fill="#f6d365"/>
+                <circle cx="34" cy="41" r="19" fill="#ffe5d7"/>
+                <ellipse cx="26.5" cy="42" rx="3.3" ry="4" fill="#291538"/>
+                <ellipse cx="41.5" cy="42" rx="3.3" ry="4" fill="#291538"/>
+                <circle cx="25.5" cy="40.5" r="1.4" fill="#ffffff"/>
+                <circle cx="40.5" cy="40.5" r="1.4" fill="#ffffff"/>
+                <ellipse cx="20.5" cy="48" rx="3.8" ry="2" fill="#ff7eb3" opacity="0.6"/>
+                <ellipse cx="47.5" cy="48" rx="3.8" ry="2" fill="#ff7eb3" opacity="0.6"/>
+                <path d="M30,50 Q34,54 38,50" stroke="#c44574" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <path d="M14,38 Q17,19 34,19 Q51,19 54,38 Q48,29 44,39 Q40,28 34,39 Q28,28 24,39 Q20,29 14,38 Z" fill="#ff73ac"/>
+                <path d="M23,26 Q34,22 45,26" stroke="#ffd8ea" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+                <polygon points="22,20 24,9 30,15 34,6 38,15 44,9 46,20" fill="#f6d365" stroke="#c68a1a" stroke-width="1"/>
+                <circle cx="34" cy="15" r="2" fill="#e84e93"/>
+              </g>
+            </svg>
+            <div class="couple-art-sub">علي ❤️ نورة — ذكرى جميلة للأبد ✨</div>
+          </div>
+
+          <div class="couple-big-names">علي ❤️ نورة</div>
+          <div class="modal-caption-box">
+            خط تخطيط يجمع اسمنا (علي &amp; نورة) بكل حب وجمال، ورسمة تبقى ذكرى حلوة بيناتنا 🎨✨
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================================================================
+         7. RAVE CINEMA MODAL (سينما الـ Rave)
+         =================================================================== -->
+    <div class="royal-modal" id="cinema-modal">
+      <div class="modal-card">
+        <div class="modal-header">
+          <div class="modal-title">🎬 سينما الـ Rave</div>
+          <button class="modal-close-x" id="close-cinema-modal" aria-label="إغلاق">✕</button>
+        </div>
+
+        <div class="modal-tabs">
+          <button class="modal-tab-btn active" id="cinema-tab-short">🎬 فيديو عادي قصير</button>
+          <button class="modal-tab-btn" id="cinema-tab-bday">🎉 مفاجأة عيد الميلاد</button>
+        </div>
+
+        <canvas id="cinemaCanvas" width="380" height="205"></canvas>
+
+        <div class="modal-caption-box" id="cinema-caption">
+          🍿 مقطع قصير عادي: سهرات الأفلام والضحك — والنت مضبوط وما يصير بيه عطل علينا 😂🎬
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================================================================
+         8. BLOW CANDLES OVERLAY
+         =================================================================== -->
+    <div id="blow-overlay">
+      <div class="blow-pill-msg">🎂 كعكة عيد الميلاد (عمر 16 سنة) جاهزة! اطفئي الشموع يا ملكة</div>
+      <button id="blow-candles-btn" class="primary-grad-btn pulse">انفخي الشموع 🌬️🎂</button>
+    </div>
+
+    <!-- ===================================================================
+         9. GRAND FINALE MODAL CARD
+         =================================================================== -->
+    <div class="royal-modal" id="finale-modal">
+      <div class="modal-card">
+        <div class="finale-icons">❤️ 🎂 👑</div>
+        <h2 class="finale-title">كل عام وأنتِ بألف خير يا نورة</h2>
+        <div class="finale-sub">احتفال العمر 16 سنة مع علوشي</div>
+        <div class="finale-message">
+          يا أحلى ملكة نورت حياتي، كل سنة وأنتِ فرحتي وأماني وضحكتي الحلوة. احتفلنا وطفّينا الشموع، وهسة نرقص ونفرح سوة ويا أحلى ليلة تجمعنا 💖✨
+        </div>
+        <button id="continue-celebration-btn" class="primary-grad-btn pulse">نكمّل الرقص والاحتفال 🎉</button>
+      </div>
     </div>
   </div>
-</div>
 
-<div id="bO" class="ov">
-  <div style="background:rgba(12,18,42,.9);border:1px solid var(--g);padding:8px 16px;border-radius:999px;font-weight:800;margin-bottom:12px;color:#fff1c9">تمنّي أمنية لعامكِ الـ 16 ثم انفخي الشموع ✨</div>
-  <button id="bBtn" class="btn pulse">🌬️ انفخي الـ 16 شمعة 🎂</button>
-</div>
+  <script>
+    (function () {
+      'use strict';
 
-<div id="fM" class="ov" style="z-index:45">
-  <div class="card">
-    <div style="font-size:2.3rem">👑🎂💖</div>
-    <div class="gt" style="font-size:1.35rem;margin:4px 0">كل عام وأنتِ بخير يا نورة!</div>
-    <div style="color:#ffd3e6;font-weight:800;font-size:.92rem">عامكِ السادس عشر مليء بالسعادة ✨</div>
-    <div class="poem">كل عام ونويرتي أجمل ملكة في الدنيا 🌸<br/>صرتي 16 سنة، وكبرتِ وكبر معكِ كل شي حلو بحياتي.<br/>يا رب هالسنة كلها ضحك ونجاح وأيام تشبه لطافة قلبك.<br/><strong>— من علوشي، بكل حب 💛👑</strong></div>
-    <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
-      <button class="btn" id="fCl" style="padding:9px 18px;font-size:.88rem">✨ كمّلي الاحتفال</button>
-      <button class="pill" id="fFw" style="padding:9px 16px;font-size:.86rem">🎆 ألعاب نارية</button>
-    </div>
-  </div>
-</div>
-</div>
+      /* =====================================================================
+         1. CHIBI SVG PORTRAITS (WELCOME CARD + DIALOGUE AVATARS)
+         ===================================================================== */
+      const PORTRAITS = {
+        noura: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" fill="#1d2454"/>
+          <path d="M22,42 Q15,75 20,96 L80,96 Q85,75 78,42 Q72,18 50,18 Q28,18 22,42 Z" fill="#ff8fb8"/>
+          <path d="M29,76 L71,76 L78,100 L22,100 Z" fill="#ff6da8"/>
+          <rect x="31" y="83" width="38" height="5" rx="2.5" fill="#f6d365"/>
+          <circle cx="50" cy="51" r="24" fill="#ffe5d7"/>
+          <ellipse cx="40" cy="52" rx="4.2" ry="5" fill="#291538"/>
+          <ellipse cx="60" cy="52" rx="4.2" ry="5" fill="#291538"/>
+          <circle cx="38.5" cy="50" r="1.8" fill="#ffffff"/>
+          <circle cx="58.5" cy="50" r="1.8" fill="#ffffff"/>
+          <ellipse cx="32" cy="60" rx="4.5" ry="2.4" fill="#ff7eb3" opacity="0.65"/>
+          <ellipse cx="68" cy="60" rx="4.5" ry="2.4" fill="#ff7eb3" opacity="0.65"/>
+          <path d="M44,63 Q50,68 56,63" stroke="#c44574" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <path d="M25,47 Q28,23 50,23 Q72,23 75,47 Q67,36 62,48 Q57,34 50,48 Q43,34 38,48 Q33,36 25,47 Z" fill="#ff6fa8"/>
+          <path d="M36,32 Q50,27 64,32" stroke="#ffd8ea" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+          <polygon points="34,25 37,11 45,19 50,7 55,19 63,11 66,25" fill="#f6d365" stroke="#c28818" stroke-width="1.5"/>
+          <circle cx="50" cy="18" r="2.8" fill="#e84e93"/>
+        </svg>`,
+        ali: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" fill="#1b224f"/>
+          <path d="M24,78 Q50,70 76,78 L82,100 L18,100 Z" fill="#151828"/>
+          <polygon points="40,76 60,76 50,96" fill="#ffffff"/>
+          <polygon points="48,78 52,78 53,94 50,99 47,94" fill="#e84e93"/>
+          <path d="M22,46 L14,32 L27,28 L25,13 L42,20 L52,8 L63,20 L78,15 L74,30 L85,36 L77,49 Z" fill="#131625"/>
+          <circle cx="50" cy="51" r="24" fill="#ffe1ce"/>
+          <ellipse cx="40" cy="52" rx="3.8" ry="4.5" fill="#151828"/>
+          <ellipse cx="60" cy="52" rx="3.8" ry="4.5" fill="#151828"/>
+          <circle cx="41.2" cy="50.3" r="1.5" fill="#ffffff"/>
+          <circle cx="61.2" cy="50.3" r="1.5" fill="#ffffff"/>
+          <ellipse cx="33" cy="60" rx="4" ry="2" fill="#ff8fb8" opacity="0.45"/>
+          <ellipse cx="67" cy="60" rx="4" ry="2" fill="#ff8fb8" opacity="0.45"/>
+          <path d="M43,63 Q50,68 57,63" stroke="#b54d6f" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <path d="M25,47 Q28,23 50,23 Q72,23 75,47 Q68,35 61,46 Q56,33 50,47 Q44,33 38,46 Q32,35 25,47 Z" fill="#151828"/>
+        </svg>`,
+        cat: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" fill="#231c4a"/>
+          <ellipse cx="50" cy="86" rx="28" ry="18" fill="#ffffff"/>
+          <polygon points="24,42 29,16 45,32" fill="#ffffff"/>
+          <polygon points="76,42 71,16 55,32" fill="#ffffff"/>
+          <polygon points="28,39 31,22 41,33" fill="#ff9ec7"/>
+          <polygon points="72,39 69,22 59,33" fill="#ff9ec7"/>
+          <circle cx="50" cy="53" r="25" fill="#ffffff"/>
+          <circle cx="40" cy="51" r="4.5" fill="#1e182e"/>
+          <circle cx="60" cy="51" r="4.5" fill="#1e182e"/>
+          <circle cx="38.5" cy="49.5" r="1.6" fill="#ffffff"/>
+          <circle cx="58.5" cy="49.5" r="1.6" fill="#ffffff"/>
+          <polygon points="47,57 53,57 50,61" fill="#ff8fb8"/>
+          <path d="M45,63 Q50,67 55,63" stroke="#b86b8d" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <line x1="16" y1="53" x2="31" y2="55" stroke="#cbb9d8" stroke-width="2"/>
+          <line x1="16" y1="60" x2="31" y2="59" stroke="#cbb9d8" stroke-width="2"/>
+          <line x1="84" y1="53" x2="69" y2="55" stroke="#cbb9d8" stroke-width="2"/>
+          <line x1="84" y1="60" x2="69" y2="59" stroke="#cbb9d8" stroke-width="2"/>
+          <path d="M32,74 Q50,82 68,74" stroke="#ff6da8" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <circle cx="50" cy="79" r="4.5" fill="#f6d365"/>
+        </svg>`,
+        sign: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" fill="#192347"/>
+          <rect x="44" y="64" width="12" height="30" rx="3" fill="#7f4f24"/>
+          <rect x="14" y="20" width="72" height="48" rx="10" fill="#5c3a21" stroke="#f6d365" stroke-width="3.5"/>
+          <circle cx="50" cy="44" r="15" fill="none" stroke="#ff4d6d" stroke-width="5"/>
+          <line x1="39" y1="33" x2="61" y2="55" stroke="#ff4d6d" stroke-width="5" stroke-linecap="round"/>
+        </svg>`,
+        cinema: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" fill="#171d45"/>
+          <rect x="12" y="18" width="76" height="54" rx="10" fill="#0d112b" stroke="#f6d365" stroke-width="3"/>
+          <polygon points="43,34 43,56 63,45" fill="none" stroke="#f6d365" stroke-width="3.5" stroke-linejoin="round"/>
+          <text x="50" y="86" text-anchor="middle" font-size="13" font-weight="bold" fill="#ff9ec7" font-family="sans-serif">RAVE</text>
+        </svg>`
+      };
 
-<script>
-(()=>{
-const $=id=>document.getElementById(id),c=$('gc'),x=c.getContext('2d');
-let W=innerWidth,H=innerHeight,D=Math.min(devicePixelRatio||1,2);
-const rsz=()=>{W=innerWidth;H=innerHeight;c.width=W*D;c.height=H*D;x.setTransform(D,0,0,D,0,0)};
-addEventListener('resize',rsz);rsz();
+      /* =====================================================================
+         2. DOM REFERENCES & IMMEDIATE WELCOME AVATAR RENDERING
+         ===================================================================== */
+      const $ = (id) => document.getElementById(id);
 
-const rr=(ctx,X,Y,w,h,r)=>{ctx.beginPath();ctx.moveTo(X+r,Y);ctx.arcTo(X+w,Y,X+w,Y+h,r);ctx.arcTo(X+w,Y+h,X,Y+h,r);ctx.arcTo(X,Y+h,X,Y,r);ctx.arcTo(X,Y,X+w,Y,r);ctx.closePath()};
+      const canvas = $('gameCanvas');
+      const ctx = canvas.getContext('2d');
 
-let ac=null,snd=true;
-const initA=()=>{if(!ac){const A=window.AudioContext||window.webkitAudioContext;if(A)ac=new A()}if(ac&&ac.state==='suspended')ac.resume()};
-const beep=(f,d=.14,tp='sine',v=.11,dl=0)=>{if(!snd||!ac)return;const n=ac.currentTime+dl,o=ac.createOscillator(),g=ac.createGain();o.type=tp;o.frequency.setValueAtTime(f,n);g.gain.setValueAtTime(.001,n);g.gain.exponentialRampToValueAtTime(v,n+.02);g.gain.exponentialRampToValueAtTime(.001,n+d);o.connect(g);g.connect(ac.destination);o.start(n);o.stop(n+d+.02)};
-const bdaySong=()=>{if(!snd||!ac)return;let t=.05;[[262,.2],[262,.18],[294,.36],[262,.36],[349,.36],[330,.64],[262,.2],[262,.18],[294,.36],[262,.36],[392,.36],[349,.64],[262,.2],[262,.18],[523,.36],[440,.36],[349,.36],[330,.36],[294,.6],[466,.2],[466,.18],[440,.36],[349,.36],[392,.36],[349,.7]].forEach(([f,d])=>{beep(f,d*.88,'triangle',.13,t);t+=d})};
+      const welcomeOverlay = $('welcome-overlay');
+      const enterGardenBtn = $('enter-garden-btn');
+      const topHud = $('top-hud');
+      const memoriesPill = $('memories-pill');
+      const catHudBtn = $('cat-hud-btn');
+      const soundToggleBtn = $('sound-toggle-btn');
+      const toastBanner = $('toast-banner');
 
-const WD={w:920,h:740},pl={x:460,y:520,sp:195,wp:0,dn:false},ali={x:525,y:310,hx:525,hy:310,hg:false,ht:0},cat={x:415,y:535,fl:true};
-const vis={ali:0,cinema:0,art:0,cake:0};
-let lit=true,go=false,mod=false,near=null,tstT=null;
-const sts=[{id:'cake',x:460,y:240,r:78,ic:'🎂',lb:'الكيكة'},{id:'ali',x:525,y:310,r:66,ic:'👑',lb:'علي'},{id:'cinema',x:230,y:340,r:76,ic:'🎬',lb:'السينما'},{id:'art',x:690,y:340,r:76,ic:'🎨',lb:'المرسم'}];
-const stars=Array.from({length:70},()=>({x:Math.random()*WD.w,y:Math.random()*WD.h,r:1+Math.random()*2,tw:Math.random()*6}));
-const lants=[[190,175],[460,130],[730,175],[180,510],[740,510]],pts=[];
+      const controlsLayer = $('controls-layer');
+      const joystickZone = $('joystick-zone');
+      const joystickKnob = $('joystick-knob');
+      const interactBtn = $('interact-btn');
 
-const burst=(X,Y,n=24,cols=['#ff8fb8','#f6d365','#fff','#a29bfe'],ht=false)=>{for(let i=0;i<n;i++){const a=6.28*i/n+Math.random()*.4,s=45+Math.random()*140;pts.push({x:X,y:Y,vx:Math.cos(a)*s,vy:Math.sin(a)*s-(ht?35:20),l:1,dc:.55+Math.random()*.5,sz:ht?14:3+Math.random()*3,c:cols[i%cols.length],ht})}};
-const fw=(k=4)=>{for(let i=0;i<k;i++)setTimeout(()=>{burst(pl.x+(Math.random()-.5)*300,pl.y-60+(Math.random()-.5)*160,30,['#ff7eb3','#f6d365','#74b9ff','#55efc4','#fff']);beep(520+Math.random()*240,.15,'triangle',.08)},i*300)};
-const toast=m=>{$('tst').textContent=m;$('tst').classList.add('on');clearTimeout(tstT);tstT=setTimeout(()=>$('tst').classList.remove('on'),2500)};
-const updP=()=>{const n=Object.values(vis).filter(Boolean).length;$('pB').textContent=`✨ ${n} / 4`;$('hH').textContent=n===4?'🎉 اكتملت كل مفاجآت الليلة!':'اقتربي من الأركان المضيئة'};
+      const dialogueOverlay = $('dialogue-overlay');
+      const dialoguePortrait = $('dialogue-portrait');
+      const dialogueSpeaker = $('dialogue-speaker');
+      const dialogueText = $('dialogue-text');
+      const dialogueChoices = $('dialogue-choices');
+      const dialogueActionBtn = $('dialogue-action-btn');
 
-// Joystick + Keys
-let jA=false,jI=null,jX=0,jY=0;const keys={};
-const jZ=$('jZ'),jK=$('jK');
-const mvJ=(cx,cy)=>{const r=jZ.getBoundingClientRect(),dx=cx-r.left-r.width/2,dy=cy-r.top-r.height/2,m=36,d=Math.hypot(dx,dy),nx=d>m?dx/d*m:dx,ny=d>m?dy/d*m:dy;jK.style.transform=`translate(${nx}px,${ny}px)`;jX=nx/m;jY=ny/m};
-const rsJ=()=>{jA=false;jI=null;jX=0;jY=0;jK.style.transform='translate(0,0)'};
-jZ.onpointerdown=e=>{jA=true;jI=e.pointerId;jZ.setPointerCapture(e.pointerId);mvJ(e.clientX,e.clientY)};
-jZ.onpointermove=e=>{if(jA&&e.pointerId===jI)mvJ(e.clientX,e.clientY)};
-jZ.onpointerup=e=>{if(e.pointerId===jI)rsJ()};jZ.onpointercancel=rsJ;
-addEventListener('keydown',e=>{keys[e.key.toLowerCase()]=1;if((e.key===' '||e.key==='Enter')&&go&&!mod)act()});
-addEventListener('keyup',e=>{keys[e.key.toLowerCase()]=0});
+      const artModal = $('art-modal');
+      const closeArtModalBtn = $('close-art-modal');
+      const artTabDraw = $('art-tab-draw');
+      const artTabCouple = $('art-tab-couple');
+      const artPaneDraw = $('art-pane-draw');
+      const artPaneCouple = $('art-pane-couple');
+      const drawCanvas = $('drawCanvas');
+      const drawCtx = drawCanvas.getContext('2d');
+      const clearDrawBtn = $('clear-draw-btn');
 
-// Dialogue
-let dq=[],di=0;
-const showD=()=>{const it=dq[di];$('dN').textContent=it.n||'علي 👑';$('dP').textContent=it.p||'🤴';$('dT').textContent=it.t;const dc=$('dC');dc.innerHTML='';if(it.ch){dc.style.display='flex';$('dNx').style.display='none';it.ch.forEach(o=>{const b=document.createElement('button');b.className='pill';b.textContent=o.l;b.onclick=ev=>{ev.stopPropagation();beep(660,.1);dq=[o.r];di=0;showD()};dc.appendChild(b)})}else{dc.style.display='none';$('dNx').style.display='block'}};
-const openD=ls=>{mod=true;rsJ();dq=ls;di=0;$('dO').classList.add('on');showD()};
-$('dBox').onclick=()=>{if(dq[di]&&dq[di].ch)return;beep(540,.08);di++;if(di<dq.length)showD();else{$('dO').classList.remove('on');mod=false}};
+      const cinemaModal = $('cinema-modal');
+      const closeCinemaModalBtn = $('close-cinema-modal');
+      const cinemaTabShort = $('cinema-tab-short');
+      const cinemaTabBday = $('cinema-tab-bday');
+      const cinemaCanvas = $('cinemaCanvas');
+      const cinemaCtx = cinemaCanvas.getContext('2d');
+      const cinemaCaption = $('cinema-caption');
 
-// Cinema
-let cSc=0;const ccx=$('cC').getContext('2d'),caps=['تحت سماء النجوم.. كل نجمة تتمنى لنورة عاماً سعيداً ✨','16 شمعة مضيئة.. كل شمعة تحكي عن سنة أحلى يا ملكة 🎂👑','علي ونورة.. أجمل ذكرى وأجمل عيد ميلاد 💖🌙'];
-document.querySelectorAll('.ct').forEach(b=>b.onclick=()=>{document.querySelectorAll('.ct').forEach(z=>z.classList.remove('on'));b.classList.add('on');cSc=+b.dataset.s;$('cCap').textContent=caps[cSc];beep(620,.1,'triangle',.09)});
-$('cCl').onclick=()=>{$('cM').classList.remove('on');mod=false};
-const drawCin=t=>{if(!$('cM').classList.contains('on'))return;const w=360,h=185,g=ccx.createLinearGradient(0,0,0,h);g.addColorStop(0,'#0d1538');g.addColorStop(1,'#261447');ccx.fillStyle=g;ccx.fillRect(0,0,w,h);for(let i=0;i<26;i++){ccx.fillStyle=`rgba(255,245,200,${.35+.5*Math.sin(t*2+i)})`;ccx.beginPath();ccx.arc((i*53)%w,(i*31)%(h*.7),1.6,0,6.28);ccx.fill()}ccx.textAlign='center';if(cSc===0){ccx.font='34px serif';ccx.fillText('🌙',w-55,54);ccx.font='26px serif';ccx.fillText('👑',w/2,68+Math.sin(t*2.5)*4);ccx.font='bold 19px Cairo,sans-serif';ccx.fillStyle='#f6d365';ccx.fillText('✨ سماء الملكة نورة ✨',w/2,108+Math.sin(t*2)*5)}else if(cSc===1){ccx.font='52px serif';ccx.fillText('🎂',w/2,110+Math.sin(t*3)*4);ccx.font='bold 20px Cairo,sans-serif';ccx.fillStyle='#ff9ec7';ccx.fillText('Sweet 16 — نورة 🎉',w/2,154)}else{ccx.font='38px serif';ccx.fillText('💖',w/2,88+Math.sin(t*4)*6);ccx.font='bold 20px Cairo,sans-serif';ccx.fillStyle='#fff3c4';ccx.fillText('علي ❤️ نورة',w/2,140)}};
+      const blowOverlay = $('blow-overlay');
+      const blowCandlesBtn = $('blow-candles-btn');
+      const finaleModal = $('finale-modal');
+      const continueCelebrationBtn = $('continue-celebration-btn');
 
-// Art Studio
-const dCv=$('dCv'),dcx=dCv.getContext('2d');let drw=false,dCol='#e84e93';dcx.lineCap='round';dcx.lineWidth=4;
-const gp=e=>{const r=dCv.getBoundingClientRect();return[(e.clientX-r.left)*(dCv.width/r.width),(e.clientY-r.top)*(dCv.height/r.height)]};
-dCv.onpointerdown=e=>{drw=true;dCv.setPointerCapture(e.pointerId);const[X,Y]=gp(e);dcx.beginPath();dcx.moveTo(X,Y)};
-dCv.onpointermove=e=>{if(!drw)return;const[X,Y]=gp(e);dcx.strokeStyle=dCol;dcx.lineTo(X,Y);dcx.stroke()};
-dCv.onpointerup=dCv.onpointercancel=()=>{drw=false};
-document.querySelectorAll('.sw').forEach(s=>s.onclick=()=>{document.querySelectorAll('.sw').forEach(z=>z.classList.remove('on'));s.classList.add('on');dCol=s.dataset.c});
-$('clDr').onclick=()=>dcx.clearRect(0,0,dCv.width,dCv.height);
-$('tDr').onclick=()=>{$('tDr').classList.add('on');$('tCp').classList.remove('on');$('pDr').style.display='block';$('pCp').style.display='none'};
-$('tCp').onclick=()=>{$('tCp').classList.add('on');$('tDr').classList.remove('on');$('pDr').style.display='none';$('pCp').style.display='block'};
-$('aCl').onclick=()=>{$('aM').classList.remove('on');mod=false};
+      const celebrationActions = $('celebration-actions');
+      const btnDanceTogether = $('btn-dance-together');
+      const btnLiftHug = $('btn-lift-hug');
 
-// Buttons
-$('sBtn').onclick=()=>{initA();beep(523,.13,'triangle',.12,0);beep(659,.13,'triangle',.12,.12);beep(784,.22,'triangle',.13,.24);$('wO').classList.remove('on');$('hud').classList.remove('off');$('ctrl').classList.remove('off');go=true;toast('👑 أهلاً بكِ في ليلتكِ الملكية يا نورة!');fw(2)};
-$('sndB').onclick=()=>{initA();snd=!snd;$('sndB').textContent=snd?'🔊':'🔇';toast(snd?'🔊 تم تشغيل الصوت':'🔇 تم كتم الصوت')};
-$('catB').onclick=()=>{cat.fl=!cat.fl;$('catB').textContent=cat.fl?'🐱 القطة: تتبعني':'🐱 القطة: مسترخية';burst(cat.x,cat.y-10,6,['#ff8fb8','#fff'],true);beep(cat.fl?740:480,.1)};
-$('bDn').onclick=e=>{initA();pl.dn=!pl.dn;e.currentTarget.classList.toggle('on',pl.dn);if(pl.dn){toast('💃 وقت الرقص الملكي!');beep(587,.12,'triangle',.1);beep(784,.18,'triangle',.1,.12)}};
-$('bHg').onclick=()=>{initA();ali.hg=true;ali.ht=2.5;burst((pl.x+ali.x)/2,(pl.y+ali.y)/2-18,14,['#ff7eb3','#ff4f93','#fff'],true);beep(523,.14);beep(659,.2,'sine',.1,.13);toast('🤗 أحلى عناق لعيد ميلادكِ الـ 16 💖')};
-$('bFw').onclick=()=>{initA();fw(4)};
-$('bBtn').onclick=()=>{initA();lit=false;vis.cake=1;updP();$('bO').classList.remove('on');burst(460,235,34,['#fff','#ffd3e6','#f6d365']);bdaySong();fw(6);toast('🎉 كل عام وأنتِ بألف خير يا ملكة نورة! 👑');setTimeout(()=>$('fM').classList.add('on'),1050)};
-$('fCl').onclick=()=>{$('fM').classList.remove('on');mod=false};
-$('fFw').onclick=()=>{$('fM').classList.remove('on');mod=false;fw(5);bdaySong()};
+      // Inject SVG portraits into Welcome Overlay immediately
+      $('welcome-ali-svg').innerHTML = PORTRAITS.ali;
+      $('welcome-noura-svg').innerHTML = PORTRAITS.noura;
 
-const act=()=>{
-  if(!near||mod)return;initA();beep(640,.11,'triangle',.1);
-  if(near.id==='ali'){vis.ali=1;updP();openD([{n:'علي 👑',p:'🤴',t:'كل عام وأنتِ بألف خير يا نويرتي! اليوم صرتي 16 سنة وهالحديقة كلها إلك وحدك 🌸🎂'},{n:'علي 👑',p:'🤴',t:'عجبكِ الاحتفال يا ملكة؟',ch:[{l:'😍 يجنن كلش!',r:{n:'علي 👑',p:'💖',t:'تستاهلين الدنيا وما فيها يا روحي.. روحي انفخي الـ 16 شمعة وتمنّي أحلى أمنية! 🎂✨'}},{l:'🤗 أريد عناق!',r:{n:'علي 👑',p:'🤗',t:'أحلى عناق بالدنيا لنورة! اضغطي زر العناق بأي وقت 💖'}}]}])}
-  else if(near.id==='cinema'){vis.cinema=1;updP();mod=true;rsJ();$('cM').classList.add('on')}
-  else if(near.id==='art'){vis.art=1;updP();mod=true;rsJ();$('aM').classList.add('on')}
-  else if(near.id==='cake'){mod=true;rsJ();$(lit?'bO':'fM').classList.add('on')}
-};
-$('aB').onclick=act;
+      /* =====================================================================
+         3. CANVAS RESPONSIVE RESIZING & HELPER SHAPES
+         ===================================================================== */
+      let viewW = window.innerWidth;
+      let viewH = window.innerHeight;
+      let dpr = Math.min(window.devicePixelRatio || 1, 2);
 
-const drawCh=(X,Y,o,t)=>{
-  const bn=o.dn?Math.abs(Math.sin(t*8))*9:Math.abs(Math.sin(o.wp))*4;
-  x.save();x.translate(X,Y-bn);
-  x.fillStyle='rgba(0,0,0,.35)';x.beginPath();x.ellipse(0,22+bn*.5,16,6,0,0,6.28);x.fill();
-  if(o.pk){x.fillStyle='#ff85b5';rr(x,-16,-24,32,34,12);x.fill()}
-  x.fillStyle=o.cl;rr(x,-12,o.tl?-6:-2,24,o.tl?28:23,9);x.fill();
-  const hy=o.tl?-18:-14;
-  x.fillStyle='#ffe0ce';x.beginPath();x.arc(0,hy,14,0,6.28);x.fill();
-  x.fillStyle=o.pk?'#ff6fa8':'#181c30';x.beginPath();x.arc(0,hy-3,14.5,Math.PI,6.28);x.fill();
-  x.fillStyle='#1a1a2e';x.beginPath();x.arc(-5,hy+1,2,0,6.28);x.arc(5,hy+1,2,0,6.28);x.fill();
-  x.strokeStyle='#b5446e';x.lineWidth=1.6;x.beginPath();x.arc(0,hy+4,4,.4,2.7);x.stroke();
-  if(o.cr){x.fillStyle='#f6d365';x.beginPath();x.moveTo(-9,hy-14);x.lineTo(-7,hy-23);x.lineTo(-2,hy-17);x.lineTo(0,hy-25);x.lineTo(2,hy-17);x.lineTo(7,hy-23);x.lineTo(9,hy-14);x.closePath();x.fill()}
-  x.font='bold 12px Tajawal,sans-serif';x.textAlign='center';x.fillStyle=o.cr?'#ffd6ea':'#ffe8a3';x.fillText(o.nm,0,hy-(o.cr?30:20));
-  x.restore();
-};
+      function resizeCanvas() {
+        viewW = window.innerWidth;
+        viewH = window.innerHeight;
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = Math.floor(viewW * dpr);
+        canvas.height = Math.floor(viewH * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
 
-const drawCat=(X,Y,t)=>{
-  const hp=cat.fl?Math.abs(Math.sin(t*7))*3:0;
-  x.save();x.translate(X,Y-hp);
-  x.fillStyle='#fff5fa';x.beginPath();x.ellipse(0,3,11,8,0,0,6.28);x.fill();x.beginPath();x.arc(0,-6,8,0,6.28);x.fill();
-  x.beginPath();x.moveTo(-7,-10);x.lineTo(-5,-18);x.lineTo(-1,-12);x.moveTo(7,-10);x.lineTo(5,-18);x.lineTo(1,-12);x.fill();
-  x.fillStyle='#222';x.beginPath();x.arc(-3,-6,1.4,0,6.28);x.arc(3,-6,1.4,0,6.28);x.fill();
-  if(!cat.fl){x.font='11px sans-serif';x.fillStyle='#ffd6ea';x.fillText('zZz',10,-14+Math.sin(t*2)*2)}
-  x.restore();
-};
+      function roundRectPath(c, x, y, w, h, r) {
+        const rr = Math.min(r, w / 2, h / 2);
+        c.beginPath();
+        c.moveTo(x + rr, y);
+        c.arcTo(x + w, y, x + w, y + h, rr);
+        c.arcTo(x + w, y + h, x, y + h, rr);
+        c.arcTo(x, y + h, x, y, rr);
+        c.arcTo(x, y, x + w, y, rr);
+        c.closePath();
+      }
 
-const drawCake=(X,Y,t)=>{
-  x.save();x.translate(X,Y);
-  const g=x.createRadialGradient(0,0,10,0,0,70);g.addColorStop(0,'rgba(246,211,101,.32)');g.addColorStop(1,'rgba(246,211,101,0)');
-  x.fillStyle=g;x.beginPath();x.arc(0,0,70,0,6.28);x.fill();
-  x.fillStyle='#232b59';x.strokeStyle='#f6d365';x.lineWidth=2;x.beginPath();x.ellipse(0,16,46,20,0,0,6.28);x.fill();x.stroke();
-  x.fillStyle='#ff9ec7';rr(x,-27,-8,54,23,8);x.fill();
-  x.fillStyle='#fff5fb';rr(x,-19,-23,38,17,7);x.fill();
-  for(let i=0;i<16;i++){const cx=-16+(i%8)*4.5,cy=i<8?-27:-14;x.fillStyle=i%2?'#ff5ea0':'#f6d365';x.fillRect(cx,cy,2.2,8);if(lit){x.fillStyle=`rgba(255,225,110,${.75+.25*Math.sin(t*14+i)})`;x.beginPath();x.arc(cx+1.1,cy-2.5,2.3,0,6.28);x.fill()}}
-  x.font='bold 12px Tajawal,sans-serif';x.textAlign='center';x.fillStyle='#fff2b2';x.fillText(lit?'🎂 كيكة الـ 16 شمعة':'✨ تحققت الأمنية ✨',0,48);
-  x.restore();
-};
+      /* =====================================================================
+         4. WEB AUDIO MUSIC BOX & SOUND EFFECTS ENGINE
+         ===================================================================== */
+      let audioCtx = null;
+      let soundEnabled = true;
+      let bgmTimer = null;
+      let bgmStep = 0;
 
-let lt=performance.now();
-const loop=now=>{
-  const dt=Math.min((now-lt)/1000,.05),t=now/1000;lt=now;
-  if(go&&!mod){
-    let mx=jX,my=jY;
-    if(keys.arrowleft||keys.a)mx--;if(keys.arrowright||keys.d)mx++;if(keys.arrowup||keys.w)my--;if(keys.arrowdown||keys.s)my++;
-    const mg=Math.hypot(mx,my);
-    if(mg>.08){pl.x=Math.max(85,Math.min(WD.w-85,pl.x+mx/Math.max(1,mg)*pl.sp*dt));pl.y=Math.max(115,Math.min(WD.h-85,pl.y+my/Math.max(1,mg)*pl.sp*dt));pl.wp+=dt*11}
-  }
-  if(ali.hg){ali.ht-=dt;ali.x+=(pl.x+24-ali.x)*Math.min(1,dt*6);ali.y+=(pl.y-ali.y)*Math.min(1,dt*6);if(ali.ht<=0)ali.hg=false}
-  else{ali.x+=(ali.hx-ali.x)*Math.min(1,dt*3);ali.y+=(ali.hy-ali.y)*Math.min(1,dt*3)}
-  sts[1].x=ali.x;sts[1].y=ali.y;
-  if(cat.fl){const tx=pl.x-42,ty=pl.y+18;if(Math.hypot(tx-cat.x,ty-cat.y)>8){cat.x+=(tx-cat.x)*Math.min(1,dt*4.5);cat.y+=(ty-cat.y)*Math.min(1,dt*4.5)}}
+      // Gentle music-box notes matching a warm magical night lullaby
+      const BGM_NOTES = [
+        523.25, 659.25, 783.99, 659.25,
+        587.33, 698.46, 880.00, 698.46,
+        523.25, 659.25, 783.99, 1046.50,
+        880.00, 783.99, 659.25, 587.33
+      ];
 
-  near=null;let bd=1e9;
-  sts.forEach(s=>{const d=Math.hypot(pl.x-s.x,pl.y-s.y);if(d<s.r&&d<bd){bd=d;near=s}});
-  $('aB').classList.toggle('rdy',!!near);$('aI').textContent=near?near.ic:'✨';$('aL').textContent=near?near.lb:'تفاعل';
+      function initAudio() {
+        try {
+          if (!audioCtx) {
+            const AC = window.AudioContext || window.webkitAudioContext;
+            if (AC) audioCtx = new AC();
+          }
+          if (audioCtx && audioCtx.state === 'suspended') {
+            audioCtx.resume();
+          }
+        } catch (err) {
+          // Ignore audio initialization restrictions gracefully
+        }
+      }
 
-  x.fillStyle='#080d1e';x.fillRect(0,0,W,H);
-  x.save();x.translate(W/2-pl.x,H/2-pl.y);
-  const fg=x.createRadialGradient(460,350,40,460,350,460);fg.addColorStop(0,'#1c2857');fg.addColorStop(1,'#0a1026');
-  x.fillStyle=fg;rr(x,60,80,WD.w-120,WD.h-140,44);x.fill();x.strokeStyle='rgba(246,211,101,.45)';x.lineWidth=3;x.stroke();
-  x.fillStyle='rgba(232,78,147,.24)';rr(x,415,215,90,360,26);x.fill();
-  stars.forEach(s=>{x.fillStyle=`rgba(255,245,210,${.25+.55*Math.sin(t*2+s.tw)})`;x.beginPath();x.arc(s.x,s.y,s.r,0,6.28);x.fill()});
-  lants.forEach(([lx,ly])=>{const y2=ly+Math.sin(t*2+lx)*5,g=x.createRadialGradient(lx,y2,3,lx,y2,40);g.addColorStop(0,'rgba(246,211,101,.42)');g.addColorStop(1,'rgba(246,211,101,0)');x.fillStyle=g;x.beginPath();x.arc(lx,y2,40,0,6.28);x.fill();x.fillStyle='#f6d365';rr(x,lx-6,y2-9,12,18,5);x.fill()});
+      function playTone(freq, duration, type, volume, delay) {
+        if (!soundEnabled || !audioCtx) return;
+        try {
+          const now = audioCtx.currentTime + (delay || 0);
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = type || 'sine';
+          osc.frequency.setValueAtTime(freq, now);
+          gain.gain.setValueAtTime(0.0001, now);
+          gain.gain.exponentialRampToValueAtTime(volume || 0.08, now + 0.02);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + (duration || 0.2));
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(now);
+          osc.stop(now + (duration || 0.2) + 0.03);
+        } catch (err) {
+          // Ignore transient audio scheduling error
+        }
+      }
 
-  sts.forEach(s=>{if(s.id==='ali'||s.id==='cake')return;x.save();x.translate(s.x,s.y);const p=1+.05*Math.sin(t*3);x.fillStyle='rgba(28,34,78,.88)';x.strokeStyle='rgba(246,211,101,.75)';x.lineWidth=2;rr(x,-46*p,-32*p,92*p,64*p,18);x.fill();x.stroke();x.font='25px serif';x.textAlign='center';x.fillText(s.ic,0,4);x.font='bold 13px Tajawal,sans-serif';x.fillStyle='#fff3c4';x.fillText(s.lb,0,25);x.restore()});
-  drawCake(460,240,t);
+      function startMusicBox() {
+        if (bgmTimer) return;
+        bgmTimer = setInterval(() => {
+          if (!soundEnabled || !audioCtx || audioCtx.state !== 'running') return;
+          const note = BGM_NOTES[bgmStep % BGM_NOTES.length];
+          playTone(note, 0.42, 'sine', 0.042, 0);
+          playTone(note * 0.5, 0.45, 'triangle', 0.018, 0.02);
+          bgmStep++;
+        }, 460);
+      }
 
-  [{y:cat.y,f:()=>drawCat(cat.x,cat.y,t)},{y:ali.y,f:()=>drawCh(ali.x,ali.y,{nm:'علي',cl:'#21326e',tl:1,pk:0,cr:0,wp:0,dn:pl.dn},t)},{y:pl.y,f:()=>drawCh(pl.x,pl.y,{nm:'الملكة نورة 👑',cl:'#e84e93',tl:0,pk:1,cr:1,wp:pl.wp,dn:pl.dn},t)}].sort((a,b)=>a.y-b.y).forEach(e=>e.f());
+      function playChime() {
+        playTone(659.25, 0.14, 'triangle', 0.09, 0);
+        playTone(880.0, 0.18, 'triangle', 0.09, 0.09);
+      }
 
-  for(let i=pts.length-1;i>=0;i--){const p=pts[i];p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=80*dt;p.l-=p.dc*dt;if(p.l<=0){pts.splice(i,1);continue}x.globalAlpha=p.l;if(p.ht){x.font=p.sz+'px serif';x.fillText('💖',p.x,p.y)}else{x.fillStyle=p.c;x.beginPath();x.arc(p.x,p.y,p.sz,0,6.28);x.fill()}x.globalAlpha=1}
-  x.restore();drawCin(t);requestAnimationFrame(loop);
-};
-requestAnimationFrame(loop);
-})();
-</script>
+      function playCatChirp() {
+        playTone(720, 0.09, 'sine', 0.08, 0);
+        playTone(940, 0.12, 'sine', 0.07, 0.07);
+      }
+
+      function playHappyBirthday() {
+        if (!soundEnabled || !audioCtx) return;
+        const melody = [
+          [261.6, 0.22], [261.6, 0.20], [293.7, 0.40], [261.6, 0.40], [349.2, 0.40], [329.6, 0.68],
+          [261.6, 0.22], [261.6, 0.20], [293.7, 0.40], [261.6, 0.40], [392.0, 0.40], [349.2, 0.68],
+          [261.6, 0.22], [261.6, 0.20], [523.3, 0.40], [440.0, 0.40], [349.2, 0.40], [329.6, 0.40], [293.7, 0.65],
+          [466.2, 0.22], [466.2, 0.20], [440.0, 0.40], [349.2, 0.40], [392.0, 0.40], [349.2, 0.78]
+        ];
+        let t = 0.08;
+        for (let i = 0; i < melody.length; i++) {
+          playTone(melody[i][0], melody[i][1] * 0.9, 'triangle', 0.11, t);
+          t += melody[i][1];
+        }
+      }
+
+      /* =====================================================================
+         5. EXPANDED GARDEN WORLD DATA & ENTITIES
+         ===================================================================== */
+      const WORLD = { w: 1680, h: 1460 };
+      const CENTER_X = 840;
+      const CROSS_Y = 820;
+
+      const PLAZA = { x: CENTER_X, y: 365, r: 295 };
+      const ART_ZONE = { x: 290, y: CROSS_Y, w: 330, h: 250 };
+      const CINEMA_ZONE = { x: 1390, y: CROSS_Y, w: 330, h: 250 };
+      const GATE = { x: CENTER_X, y: 1250 };
+
+      const player = {
+        x: CENTER_X,
+        y: 1185,
+        speed: 235,
+        walkPhase: 0,
+        facing: 1,
+        targetX: null,
+        targetY: null
+      };
+
+      const ali = {
+        x: CENTER_X + 108,
+        y: 350,
+        homeX: CENTER_X + 108,
+        homeY: 350,
+        walkPhase: 0
+      };
+
+      const cat = {
+        x: CENTER_X - 46,
+        y: 1215,
+        mode: 'follow', // 'follow' | 'sit' | 'sleep'
+        walkPhase: 0
+      };
+
+      const cake = {
+        x: CENTER_X,
+        y: 318
+      };
+
+      const signPost = {
+        x: CENTER_X - 150,
+        y: 1020
+      };
+
+      // Game progression state
+      const memories = {
+        art: false,
+        cinema: false,
+        cat: false
+      };
+
+      let gameStarted = false;
+      let activeModal = false;
+      let activeDialogue = false;
+      let aliSpokeReady = false;
+      let candlesLit = true;
+      let finaleDone = false;
+      let danceMode = false;
+      let liftHugMode = false;
+      let liftHugTimer = 0;
+      let nearestTarget = null;
+      let toastTimer = null;
+      let artMemoryDialogShown = false;
+
+      // Decorative procedural scenery (deterministic layout so it always looks balanced)
+      const trees = [
+        // Outer perimeter forest
+        { x: 100, y: 120, r: 44 }, { x: 260, y: 95, r: 48 }, { x: 430, y: 110, r: 42 },
+        { x: 1250, y: 110, r: 44 }, { x: 1420, y: 95, r: 48 }, { x: 1580, y: 130, r: 44 },
+        { x: 90, y: 340, r: 46 }, { x: 130, y: 540, r: 42 }, { x: 1585, y: 340, r: 46 },
+        { x: 1545, y: 540, r: 42 }, { x: 95, y: 1080, r: 46 }, { x: 230, y: 1240, r: 48 },
+        { x: 420, y: 1310, r: 45 }, { x: 560, y: 1150, r: 38 }, { x: 1120, y: 1150, r: 38 },
+        { x: 1260, y: 1310, r: 45 }, { x: 1450, y: 1240, r: 48 }, { x: 1585, y: 1080, r: 46 },
+        // Inner cozy park accents
+        { x: 520, y: 650, r: 36 }, { x: 1160, y: 650, r: 36 },
+        { x: 520, y: 990, r: 38 }, { x: 1160, y: 990, r: 38 },
+        { x: 350, y: 460, r: 40 }, { x: 1330, y: 460, r: 40 }
+      ];
+
+      const lampPosts = [
+        // Along vertical avenue
+        { x: CENTER_X - 96, y: 1120 }, { x: CENTER_X + 96, y: 1120 },
+        { x: CENTER_X - 96, y: 940 }, { x: CENTER_X + 96, y: 940 },
+        { x: CENTER_X - 96, y: 710 }, { x: CENTER_X + 96, y: 710 },
+        // Along horizontal path
+        { x: 610, y: CROSS_Y - 78 }, { x: 610, y: CROSS_Y + 78 },
+        { x: 1070, y: CROSS_Y - 78 }, { x: 1070, y: CROSS_Y + 78 },
+        // Around Art & Cinema terraces
+        { x: 115, y: CROSS_Y - 125 }, { x: 465, y: CROSS_Y - 125 },
+        { x: 1215, y: CROSS_Y - 125 }, { x: 1565, y: CROSS_Y - 125 },
+        // Around Royal Party Plaza
+        { x: PLAZA.x - 270, y: PLAZA.y - 120 }, { x: PLAZA.x + 270, y: PLAZA.y - 120 },
+        { x: PLAZA.x - 275, y: PLAZA.y + 120 }, { x: PLAZA.x + 275, y: PLAZA.y + 120 }
+      ];
+
+      // Party balloons around the Grand Party Plaza & entrance
+      const balloons = [
+        { x: PLAZA.x - 210, y: PLAZA.y - 175, color: '#ff6da8', phase: 0.2 },
+        { x: PLAZA.x - 185, y: PLAZA.y - 195, color: '#f6d365', phase: 1.1 },
+        { x: PLAZA.x + 210, y: PLAZA.y - 175, color: '#a29bfe', phase: 2.0 },
+        { x: PLAZA.x + 185, y: PLAZA.y - 195, color: '#ff6da8', phase: 2.8 },
+        { x: PLAZA.x - 240, y: PLAZA.y + 10, color: '#38bdf8', phase: 0.9 },
+        { x: PLAZA.x + 240, y: PLAZA.y + 10, color: '#f6d365', phase: 1.7 },
+        { x: PLAZA.x - 175, y: PLAZA.y + 195, color: '#ff6da8', phase: 0.5 },
+        { x: PLAZA.x + 175, y: PLAZA.y + 195, color: '#55efc4', phase: 2.4 },
+        { x: CENTER_X - 88, y: PLAZA.y + 248, color: '#ff9ec7', phase: 1.4 },
+        { x: CENTER_X + 88, y: PLAZA.y + 248, color: '#f6d365', phase: 3.1 },
+        { x: GATE.x - 102, y: GATE.y - 25, color: '#ff6da8', phase: 0.8 },
+        { x: GATE.x + 102, y: GATE.y - 25, color: '#f6d365', phase: 2.1 }
+      ];
+
+      // 4 Banquet Tables (طبلات) with 3 Cushioned Chairs (كراسي) each inside the Grand Party Plaza
+      const partyTables = [
+        { x: PLAZA.x - 165, y: PLAZA.y - 55, accent: '#ff6da8' },
+        { x: PLAZA.x + 165, y: PLAZA.y - 55, accent: '#f6d365' },
+        { x: PLAZA.x - 155, y: PLAZA.y + 105, accent: '#a29bfe' },
+        { x: PLAZA.x + 155, y: PLAZA.y + 105, accent: '#55efc4' }
+      ];
+
+      // Wrapped Gift Boxes in the plaza
+      const giftBoxes = [
+        { x: PLAZA.x - 75, y: PLAZA.y - 150, w: 28, h: 24, body: '#ff6da8', ribbon: '#f6d365' },
+        { x: PLAZA.x + 75, y: PLAZA.y - 150, w: 26, h: 22, body: '#a29bfe', ribbon: '#fff3c4' },
+        { x: PLAZA.x - 42, y: PLAZA.y - 168, w: 22, h: 20, body: '#38bdf8', ribbon: '#ff9ec7' },
+        { x: PLAZA.x + 42, y: PLAZA.y - 168, w: 24, h: 22, body: '#f6b93b', ribbon: '#e84e93' }
+      ];
+
+      // Wildflowers & grass tufts across the emerald garden
+      const flowers = [];
+      const grassTufts = [];
+      for (let i = 0; i < 65; i++) {
+        const fx = 110 + ((i * 239) % (WORLD.w - 220));
+        const fy = 110 + ((i * 173) % (WORLD.h - 220));
+        // Skip center paths & plaza
+        if (Math.abs(fx - CENTER_X) < 105) continue;
+        if (Math.abs(fy - CROSS_Y) < 95) continue;
+        if (Math.hypot(fx - PLAZA.x, fy - PLAZA.y) < PLAZA.r + 25) continue;
+        if (i % 2 === 0) {
+          flowers.push({
+            x: fx,
+            y: fy,
+            color: ['#ff8fb8', '#f6d365', '#c4b5fd', '#fda4af'][i % 4]
+          });
+        } else {
+          grassTufts.push({ x: fx, y: fy });
+        }
+      }
+
+      // Floating fireflies & petals
+      const fireflies = Array.from({ length: 42 }, (_, i) => ({
+        x: (i * 197) % WORLD.w,
+        y: (i * 131) % WORLD.h,
+        r: 2 + (i % 3) * 0.9,
+        phase: i * 0.85,
+        pink: i % 3 === 0
+      }));
+
+      // Dynamic particles (confetti, hearts, firework sparks, candle smoke)
+      const particles = [];
+
+      function spawnBurst(x, y, count, colors, type) {
+        for (let i = 0; i < count; i++) {
+          const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.5;
+          const speed = 45 + Math.random() * 145;
+          particles.push({
+            x: x,
+            y: y,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed - (type === 'heart' ? 40 : 25),
+            life: 1,
+            decay: 0.45 + Math.random() * 0.45,
+            size: type === 'heart' ? 14 : (type === 'confetti' ? 7 : 4),
+            color: colors[i % colors.length],
+            type: type || 'spark',
+            rot: Math.random() * Math.PI * 2
+          });
+        }
+      }
+
+      function launchFireworks(waves) {
+        const count = waves || 4;
+        for (let w = 0; w < count; w++) {
+          setTimeout(() => {
+            const fx = player.x + (Math.random() - 0.5) * 340;
+            const fy = player.y - 90 + (Math.random() - 0.5) * 190;
+            spawnBurst(fx, fy, 28, ['#ff6da8', '#f6d365', '#38bdf8', '#a29bfe', '#ffffff'], 'spark');
+            spawnBurst(fx, fy - 10, 14, ['#ff8fb8', '#f6d365', '#55efc4', '#fd79a8'], 'confetti');
+            playTone(540 + Math.random() * 240, 0.14, 'triangle', 0.07, 0);
+          }, w * 320);
+        }
+      }
+
+      /* =====================================================================
+         6. UI HELPERS: TOAST, MEMORIES COUNTER, CAT HUD
+         ===================================================================== */
+      function showToast(msg) {
+        toastBanner.textContent = msg;
+        toastBanner.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => {
+          toastBanner.classList.remove('show');
+        }, 2800);
+      }
+
+      function getMemoryCount() {
+        let n = 0;
+        if (memories.art) n++;
+        if (memories.cinema) n++;
+        if (memories.cat) n++;
+        return n;
+      }
+
+      function getMissingMemoryNames() {
+        const list = [];
+        if (!memories.art) list.push('ركن الرسم 🎨');
+        if (!memories.cinema) list.push('سينما الـ Rave 🍿');
+        if (!memories.cat) list.push('البزونة 🐾');
+        return list;
+      }
+
+      function collectMemory(key, label) {
+        if (memories[key]) return;
+        memories[key] = true;
+        const count = getMemoryCount();
+        memoriesPill.textContent = `الذكريات: ${count}/3 ❤️`;
+        playChime();
+        spawnBurst(player.x, player.y - 26, 12, ['#ff6da8', '#f6d365', '#ffffff'], 'heart');
+        if (count === 3) {
+          showToast('🎉 كمّلتي كل الذكريات (3/3)! روحي تكلّمي مع علي 👑❤️');
+        } else {
+          showToast(`✨ انجمعت ذكرى ${label} (${count}/3) ❤️`);
+        }
+      }
+
+      function updateCatHudLabel() {
+        if (cat.mode === 'follow') {
+          catHudBtn.textContent = 'البزونة: تتحرك وياج 🐾';
+        } else if (cat.mode === 'sit') {
+          catHudBtn.textContent = 'البزونة: أجلس هنا 🪑';
+        } else {
+          catHudBtn.textContent = 'البزونة: أنام هسة 😴';
+        }
+      }
+
+      /* =====================================================================
+         7. RPG DIALOGUE SYSTEM (WITH MULTI-PAGE & CHOICE SUPPORT)
+         ===================================================================== */
+      let dialogueQueue = [];
+      let dialogueIndex = 0;
+      let dialogueOnFinish = null;
+      let typewriterTimer = null;
+      let fullCurrentText = '';
+      let isTyping = false;
+
+      function renderDialogueStep() {
+        const step = dialogueQueue[dialogueIndex];
+        if (!step) {
+          closeDialogue();
+          return;
+        }
+
+        dialogueSpeaker.textContent = step.speaker || 'الملكة نورة 👑';
+        dialoguePortrait.innerHTML = PORTRAITS[step.portrait] || PORTRAITS.noura;
+
+        // Choices setup
+        dialogueChoices.innerHTML = '';
+        if (step.choices && step.choices.length > 0) {
+          dialogueChoices.classList.add('visible');
+          step.choices.forEach((choice) => {
+            const btn = document.createElement('button');
+            btn.className = 'dlg-choice-btn' + (choice.selected ? ' selected' : '');
+            btn.textContent = choice.label;
+            btn.addEventListener('click', (e) => {
+              e.stopPropagation();
+              playTone(680, 0.09, 'triangle', 0.08, 0);
+              if (choice.onSelect) choice.onSelect();
+              closeDialogue();
+            });
+            dialogueChoices.appendChild(btn);
+          });
+        } else {
+          dialogueChoices.classList.remove('visible');
+        }
+
+        // Button label
+        const isLast = dialogueIndex >= dialogueQueue.length - 1;
+        dialogueActionBtn.textContent = step.btnLabel || (isLast ? 'إغلاق ✨' : 'التالي ◀');
+
+        // Typewriter effect
+        clearInterval(typewriterTimer);
+        fullCurrentText = step.text || '';
+        dialogueText.textContent = '';
+        isTyping = true;
+        let charIdx = 0;
+
+        typewriterTimer = setInterval(() => {
+          charIdx += 2;
+          if (charIdx >= fullCurrentText.length) {
+            dialogueText.textContent = fullCurrentText;
+            clearInterval(typewriterTimer);
+            isTyping = false;
+          } else {
+            dialogueText.textContent = fullCurrentText.slice(0, charIdx);
+            if (charIdx % 6 === 0) {
+              playTone(540 + (charIdx % 5) * 35, 0.035, 'sine', 0.025, 0);
+            }
+          }
+        }, 22);
+      }
+
+      function openDialogue(steps, onFinish) {
+        activeDialogue = true;
+        resetJoystick();
+        player.targetX = null;
+        player.targetY = null;
+        dialogueQueue = Array.isArray(steps) ? steps : [steps];
+        dialogueIndex = 0;
+        dialogueOnFinish = onFinish || null;
+        dialogueOverlay.classList.add('active');
+        renderDialogueStep();
+      }
+
+      function closeDialogue() {
+        clearInterval(typewriterTimer);
+        isTyping = false;
+        dialogueOverlay.classList.remove('active');
+        activeDialogue = false;
+        const cb = dialogueOnFinish;
+        dialogueOnFinish = null;
+        if (cb) cb();
+      }
+
+      function advanceDialogue() {
+        if (!activeDialogue) return;
+        if (isTyping) {
+          clearInterval(typewriterTimer);
+          dialogueText.textContent = fullCurrentText;
+          isTyping = false;
+          return;
+        }
+        playTone(600, 0.08, 'triangle', 0.07, 0);
+        dialogueIndex++;
+        if (dialogueIndex < dialogueQueue.length) {
+          renderDialogueStep();
+        } else {
+          closeDialogue();
+        }
+      }
+
+      dialogueActionBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        advanceDialogue();
+      });
+
+      dialogueText.addEventListener('click', (e) => {
+        e.stopPropagation();
+        advanceDialogue();
+      });
+
+      /* =====================================================================
+         8. ART STUDIO & RAVE CINEMA MODALS
+         ===================================================================== */
+      // --- Art Studio Drawing Canvas ---
+      let isDrawing = false;
+      let brushColor = '#ff5ea0';
+      drawCtx.lineCap = 'round';
+      drawCtx.lineJoin = 'round';
+      drawCtx.lineWidth = 5;
+
+      function getDrawPos(e) {
+        const rect = drawCanvas.getBoundingClientRect();
+        return {
+          x: (e.clientX - rect.left) * (drawCanvas.width / rect.width),
+          y: (e.clientY - rect.top) * (drawCanvas.height / rect.height)
+        };
+      }
+
+      drawCanvas.addEventListener('pointerdown', (e) => {
+        isDrawing = true;
+        drawCanvas.setPointerCapture(e.pointerId);
+        const pos = getDrawPos(e);
+        drawCtx.beginPath();
+        drawCtx.moveTo(pos.x, pos.y);
+      });
+
+      drawCanvas.addEventListener('pointermove', (e) => {
+        if (!isDrawing) return;
+        const pos = getDrawPos(e);
+        drawCtx.strokeStyle = brushColor;
+        drawCtx.lineTo(pos.x, pos.y);
+        drawCtx.stroke();
+      });
+
+      drawCanvas.addEventListener('pointerup', () => { isDrawing = false; });
+      drawCanvas.addEventListener('pointercancel', () => { isDrawing = false; });
+
+      document.querySelectorAll('.color-swatch').forEach((swatch) => {
+        swatch.addEventListener('click', () => {
+          document.querySelectorAll('.color-swatch').forEach((s) => s.classList.remove('active'));
+          swatch.classList.add('active');
+          brushColor = swatch.dataset.color || '#ff5ea0';
+          playTone(660, 0.07, 'sine', 0.06, 0);
+        });
+      });
+
+      clearDrawBtn.addEventListener('click', () => {
+        drawCtx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
+        playTone(440, 0.09, 'sine', 0.06, 0);
+      });
+
+      artTabDraw.addEventListener('click', () => {
+        artTabDraw.classList.add('active');
+        artTabCouple.classList.remove('active');
+        artPaneDraw.style.display = 'block';
+        artPaneCouple.style.display = 'none';
+        playTone(620, 0.08, 'triangle', 0.06, 0);
+      });
+
+      artTabCouple.addEventListener('click', () => {
+        artTabCouple.classList.add('active');
+        artTabDraw.classList.remove('active');
+        artPaneDraw.style.display = 'none';
+        artPaneCouple.style.display = 'block';
+        playTone(720, 0.08, 'triangle', 0.06, 0);
+      });
+
+      closeArtModalBtn.addEventListener('click', () => {
+        artModal.classList.remove('active');
+        activeModal = false;
+        playTone(520, 0.08, 'sine', 0.06, 0);
+        // Show Ali's sweet Art Corner memory dialogue upon closing
+        if (!artMemoryDialogShown) {
+          artMemoryDialogShown = true;
+          openDialogue({
+            speaker: 'علي ❤️',
+            portrait: 'ali',
+            text: 'هنا المكان اللي يطلع بيه أحلى فن بالدنيا.. كل خط ترسمينه بإيدج يسوى عندي كنوز الدنيا 🎨❤️',
+            btnLabel: 'إغلاق ✨'
+          });
+        }
+      });
+
+      // --- Rave Cinema Modal ---
+      let cinemaScene = 0; // 0: Short Movie, 1: Birthday Surprise
+
+      cinemaTabShort.addEventListener('click', () => {
+        cinemaScene = 0;
+        cinemaTabShort.classList.add('active');
+        cinemaTabBday.classList.remove('active');
+        cinemaCaption.textContent = '🍿 مقطع قصير عادي: سهرات الأفلام والضحك — والنت مضبوط وما يصير بيه عطل علينا 😂🎬';
+        playTone(620, 0.08, 'triangle', 0.07, 0);
+      });
+
+      cinemaTabBday.addEventListener('click', () => {
+        cinemaScene = 1;
+        cinemaTabBday.classList.add('active');
+        cinemaTabShort.classList.remove('active');
+        cinemaCaption.textContent = '🎂 مفاجأة عيد الميلاد: كل عام وأنتِ بخير يا الملكة نورة يا أغلى إنسانة بقلبي ❤️✨';
+        playChime();
+      });
+
+      closeCinemaModalBtn.addEventListener('click', () => {
+        cinemaModal.classList.remove('active');
+        activeModal = false;
+        playTone(520, 0.08, 'sine', 0.06, 0);
+      });
+
+      function drawCinemaScreen(t) {
+        if (!cinemaModal.classList.contains('active')) return;
+        const w = cinemaCanvas.width;
+        const h = cinemaCanvas.height;
+
+        const bg = cinemaCtx.createLinearGradient(0, 0, 0, h);
+        bg.addColorStop(0, '#0d1333');
+        bg.addColorStop(1, '#261345');
+        cinemaCtx.fillStyle = bg;
+        cinemaCtx.fillRect(0, 0, w, h);
+
+        // Twinkling cinema background stars
+        for (let i = 0; i < 28; i++) {
+          const sx = (i * 47 + 15) % w;
+          const sy = (i * 31 + 12) % h;
+          const alpha = 0.25 + 0.55 * Math.sin(t * 2.5 + i);
+          cinemaCtx.fillStyle = `rgba(255, 245, 200, ${alpha})`;
+          cinemaCtx.beginPath();
+          cinemaCtx.arc(sx, sy, 1.7, 0, Math.PI * 2);
+          cinemaCtx.fill();
+        }
+
+        cinemaCtx.textAlign = 'center';
+
+        if (cinemaScene === 0) {
+          // Short Movie Night scene
+          cinemaCtx.font = '32px serif';
+          cinemaCtx.fillText('🍿', w / 2 - 96, 86 + Math.sin(t * 2.8) * 4);
+          cinemaCtx.fillText('🎬', w / 2 + 96, 86 + Math.cos(t * 2.8) * 4);
+
+          cinemaCtx.font = 'bold 21px Cairo, sans-serif';
+          cinemaCtx.fillStyle = '#f6d365';
+          cinemaCtx.fillText('سهرة الفيلم والضحك', w / 2, 86);
+
+          cinemaCtx.font = 'bold 14px Tajawal, sans-serif';
+          cinemaCtx.fillStyle = '#ff9ec7';
+          cinemaCtx.fillText('✨ نورة & علي — النت تمام وماكو عطل ✨', w / 2, 126);
+
+          // Progress bar like a cozy video player
+          cinemaCtx.fillStyle = 'rgba(255,255,255,0.18)';
+          roundRectPath(cinemaCtx, 46, 162, w - 92, 8, 4);
+          cinemaCtx.fill();
+
+          const prog = ((t * 0.14) % 1) * (w - 92);
+          cinemaCtx.fillStyle = '#ff6da8';
+          roundRectPath(cinemaCtx, 46, 162, Math.max(12, prog), 8, 4);
+          cinemaCtx.fill();
+        } else {
+          // Animated Fireworks Birthday Surprise scene
+          const bursts = [
+            { x: 92, y: 62, c: '#ff6da8', p: 0 },
+            { x: 190, y: 50, c: '#f6d365', p: 1.2 },
+            { x: 288, y: 66, c: '#a29bfe', p: 2.4 }
+          ];
+          bursts.forEach((b) => {
+            const rad = 12 + ((t * 24 + b.p * 12) % 24);
+            cinemaCtx.strokeStyle = b.c;
+            cinemaCtx.lineWidth = 2;
+            for (let k = 0; k < 8; k++) {
+              const ang = (Math.PI * 2 * k) / 8 + t * 0.4;
+              cinemaCtx.beginPath();
+              cinemaCtx.moveTo(b.x + Math.cos(ang) * (rad * 0.35), b.y + Math.sin(ang) * (rad * 0.35));
+              cinemaCtx.lineTo(b.x + Math.cos(ang) * rad, b.y + Math.sin(ang) * rad);
+              cinemaCtx.stroke();
+            }
+          });
+
+          cinemaCtx.font = 'bold 19px Cairo, sans-serif';
+          cinemaCtx.fillStyle = '#f6d365';
+          cinemaCtx.fillText('👑 مفاجأة عيد ميلاد الملكة نورة 👑', w / 2, 134);
+
+          cinemaCtx.font = 'bold 14px Tajawal, sans-serif';
+          cinemaCtx.fillStyle = '#ffd5e8';
+          cinemaCtx.fillText('من علوشي: أحلى وأغلى إنسانة بالدنيا ❤️', w / 2, 168);
+        }
+      }
+
+      /* =====================================================================
+         9. JOYSTICK, TAP-TO-WALK, & KEYBOARD INPUTS
+         ===================================================================== */
+      let joyActive = false;
+      let joyPointerId = null;
+      let joyX = 0;
+      let joyY = 0;
+      const keys = {};
+
+      function moveJoystick(clientX, clientY) {
+        const rect = joystickZone.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        const dx = clientX - cx;
+        const dy = clientY - cy;
+        const maxDist = 38;
+        const dist = Math.hypot(dx, dy);
+        const clampedX = dist > maxDist ? (dx / dist) * maxDist : dx;
+        const clampedY = dist > maxDist ? (dy / dist) * maxDist : dy;
+        joystickKnob.style.transform = `translate(${clampedX}px, ${clampedY}px)`;
+        joyX = clampedX / maxDist;
+        joyY = clampedY / maxDist;
+        player.targetX = null;
+        player.targetY = null;
+      }
+
+      function resetJoystick() {
+        joyActive = false;
+        joyPointerId = null;
+        joyX = 0;
+        joyY = 0;
+        joystickKnob.style.transform = 'translate(0px, 0px)';
+      }
+
+      joystickZone.addEventListener('pointerdown', (e) => {
+        joyActive = true;
+        joyPointerId = e.pointerId;
+        joystickZone.setPointerCapture(e.pointerId);
+        moveJoystick(e.clientX, e.clientY);
+      });
+
+      joystickZone.addEventListener('pointermove', (e) => {
+        if (joyActive && e.pointerId === joyPointerId) {
+          moveJoystick(e.clientX, e.clientY);
+        }
+      });
+
+      joystickZone.addEventListener('pointerup', (e) => {
+        if (e.pointerId === joyPointerId) resetJoystick();
+      });
+
+      joystickZone.addEventListener('pointercancel', resetJoystick);
+
+      // Tap-to-walk on the garden canvas
+      canvas.addEventListener('pointerdown', (e) => {
+        if (!gameStarted || activeModal || activeDialogue) return;
+        const rect = canvas.getBoundingClientRect();
+        const sx = e.clientX - rect.left;
+        const sy = e.clientY - rect.top;
+        const wx = sx - viewW / 2 + player.x;
+        const wy = sy - viewH / 2 + player.y;
+        player.targetX = Math.max(80, Math.min(WORLD.w - 80, wx));
+        player.targetY = Math.max(95, Math.min(WORLD.h - 85, wy));
+        spawnBurst(player.targetX, player.targetY, 5, ['#f6d365', '#ff9ec7'], 'spark');
+      });
+
+      window.addEventListener('keydown', (e) => {
+        const k = e.key.toLowerCase();
+        keys[k] = true;
+        if ((k === ' ' || k === 'enter') && gameStarted) {
+          if (activeDialogue) {
+            advanceDialogue();
+          } else if (!activeModal) {
+            triggerInteraction();
+          }
+        }
+      });
+
+      window.addEventListener('keyup', (e) => {
+        keys[e.key.toLowerCase()] = false;
+      });
+
+      /* =====================================================================
+         10. INTERACTION LOGIC (ALI, CAKE LOCK, RAVE CINEMA DIALOGUE, ART, CAT, SIGN)
+         ===================================================================== */
+      function getInteractables() {
+        return [
+          { id: 'ali', x: ali.x, y: ali.y, r: 95, label: 'تحدّثي مع علي ❤️', priority: 1 },
+          { id: 'cake', x: cake.x, y: cake.y, r: 105, label: 'كعكة الـ 16 سنة 🎂', priority: 2 },
+          { id: 'art', x: ART_ZONE.x, y: ART_ZONE.y, r: 155, label: 'ركن الفن والرسم 🎨', priority: 2 },
+          { id: 'cinema', x: CINEMA_ZONE.x, y: CINEMA_ZONE.y, r: 155, label: 'سينما الـ Rave 🍿', priority: 2 },
+          { id: 'sign', x: signPost.x, y: signPost.y, r: 92, label: 'اقرئي اللافتة 😅', priority: 2 },
+          { id: 'cat', x: cat.x, y: cat.y, r: 82, label: 'البزونة الكيوت 🐾', priority: 3 }
+        ];
+      }
+
+      function triggerInteraction() {
+        if (!nearestTarget || activeModal || activeDialogue) return;
+        initAudio();
+        const id = nearestTarget.id;
+
+        if (id === 'sign') {
+          playTone(580, 0.1, 'triangle', 0.08, 0);
+          openDialogue({
+            speaker: 'لافتة الحديقة 😅',
+            portrait: 'sign',
+            text: '⚠️ إعلان رسمي: ممنوع دخول فانزات غوجو نهائياً 🚫😂 والقاعدة الثانية: ممنوع الزعل من الكيكة أم عمر 16 سنة لأنها محجوزة للملكة نورة وبس! 🎂👑',
+            btnLabel: 'إغلاق ✨'
+          });
+          return;
+        }
+
+        if (id === 'cat') {
+          playCatChirp();
+          collectMemory('cat', 'البزونة الكيوت 🐾');
+          openDialogue({
+            speaker: 'البزونة 🐾',
+            portrait: 'cat',
+            text: 'علوشي وصاني أگولج إن ضحكتج هي أحلى شي بهالدنيا كلها! 🐾✨ اختاري شنو أسوي هسة حسب المكان:',
+            btnLabel: 'إغلاق ✨',
+            choices: [
+              {
+                label: '🐾 أتحرك وياج',
+                selected: cat.mode === 'follow',
+                onSelect: () => {
+                  cat.mode = 'follow';
+                  updateCatHudLabel();
+                  showToast('🐾 البزونة صارت تتحرك وياج بكل مكان!');
+                }
+              },
+              {
+                label: '🪑 أجلس هنا',
+                selected: cat.mode === 'sit',
+                onSelect: () => {
+                  cat.mode = 'sit';
+                  updateCatHudLabel();
+                  showToast('🪑 البزونة جلست بأدب وتراقب المكان');
+                }
+              },
+              {
+                label: '😴 أنام هسة',
+                selected: cat.mode === 'sleep',
+                onSelect: () => {
+                  cat.mode = 'sleep';
+                  updateCatHudLabel();
+                  showToast('😴 البزونة نامت نومة حلوة وهادية');
+                }
+              }
+            ]
+          });
+          return;
+        }
+
+        if (id === 'art') {
+          playChime();
+          collectMemory('art', 'ركن الفن والرسم 🎨');
+          activeModal = true;
+          resetJoystick();
+          player.targetX = null;
+          player.targetY = null;
+          artModal.classList.add('active');
+          return;
+        }
+
+        if (id === 'cinema') {
+          playChime();
+          collectMemory('cinema', 'سينما الـ Rave 🍿');
+          // Show Ali's Cinema memory dialogue FIRST, then open Cinema modal
+          openDialogue({
+            speaker: 'علي ❤️',
+            portrait: 'cinema',
+            text: 'تتذكرين سهرتنا والأفلام؟ والأحلى إن النت هالمرة مضبوط وما يصير بيه عطل علينة 😂🎬',
+            btnLabel: 'إغلاق ✨'
+          }, () => {
+            activeModal = true;
+            resetJoystick();
+            player.targetX = null;
+            player.targetY = null;
+            cinemaModal.classList.add('active');
+          });
+          return;
+        }
+
+        if (id === 'ali') {
+          playChime();
+          const count = getMemoryCount();
+          if (count < 3) {
+            const missingText = getMissingMemoryNames().join('، ');
+            openDialogue([
+              {
+                speaker: 'علي ❤️',
+                portrait: 'ali',
+                text: 'أهلاً بأحلى ملكة نورة 👑❤️ الكيكة جاهزة وعمر 16 سنة منوّر الحفلة!',
+                btnLabel: 'التالي ◀'
+              },
+              {
+                speaker: 'علي ❤️',
+                portrait: 'ali',
+                text: `كمّلي جمع الذكريات (${count}/3) من ركن الرسم والسينما والبزونة (باقي لج: ${missingText})، وبعدها تعالي تكلّمي وياي حتى نطفّي الشموع ونرقص ونحتفل سوة! ✨`,
+                btnLabel: 'إغلاق ✨'
+              }
+            ]);
+          } else if (candlesLit) {
+            aliSpokeReady = true;
+            openDialogue([
+              {
+                speaker: 'علي ❤️',
+                portrait: 'ali',
+                text: 'يا سلام كمّلتي كل الذكريات يا ملكتي! 🥹👑',
+                btnLabel: 'التالي ◀'
+              },
+              {
+                speaker: 'علي ❤️',
+                portrait: 'ali',
+                text: 'كل عام وأنتِ بألف خير يا نورة، يا أغلى وأجمل شي بحياتي.. يلا نطفّي الشموع ونبدي الحفلة والرقص والمفاجآت! 🎂✨',
+                btnLabel: 'إغلاق ✨'
+              }
+            ], () => {
+              activeModal = true;
+              resetJoystick();
+              blowOverlay.classList.add('active');
+            });
+          } else {
+            openDialogue({
+              speaker: 'علي ❤️',
+              portrait: 'ali',
+              text: 'كل عام وأنتِ أسعد ملكة بالدنيا يا نويرتي! 💖👑 اضغطي على أزرار «نرقص سوة» أو «يشيلها ويعانقها» خلينا نحتفل طول الليل! 🎉✨',
+              btnLabel: 'إغلاق ✨'
+            });
+          }
+          return;
+        }
+
+        if (id === 'cake') {
+          playTone(620, 0.1, 'triangle', 0.08, 0);
+          const count = getMemoryCount();
+          if (count < 3) {
+            const missingText = getMissingMemoryNames().join('، ');
+            openDialogue({
+              speaker: 'علي ❤️',
+              portrait: 'ali',
+              text: `لحظة يا ملكة! 🎂 قبل لا ننفخ الـ 16 شمعة، كمّلي جمع الذكريات (${count}/3) — باقي لج: ${missingText} — وبعدها تعالي تكلّمي مع علي أولاً! ❤️✨`,
+              btnLabel: 'إغلاق ✨'
+            });
+          } else if (!aliSpokeReady && candlesLit) {
+            openDialogue({
+              speaker: 'علي ❤️',
+              portrait: 'ali',
+              text: 'كمّلتي كل الذكريات (3/3) يا ملكة! 🥹👑 روحي تكلّمي مع علي الواقف يم الكيكة أولاً حتى تسمعين كلامه الحلو وبعدها تطفون الشموع سوة 🎂❤️',
+              btnLabel: 'إغلاق ✨'
+            });
+          } else if (candlesLit) {
+            activeModal = true;
+            resetJoystick();
+            blowOverlay.classList.add('active');
+          } else {
+            activeModal = true;
+            resetJoystick();
+            finaleModal.classList.add('active');
+          }
+        }
+      }
+
+      interactBtn.addEventListener('click', triggerInteraction);
+
+      /* =====================================================================
+         11. BUTTON EVENT HANDLERS (WELCOME, HUD, BLOW CANDLES, CELEBRATION)
+         ===================================================================== */
+      enterGardenBtn.addEventListener('click', () => {
+        initAudio();
+        startMusicBox();
+        playChime();
+        welcomeOverlay.classList.add('hidden');
+        topHud.classList.remove('hidden');
+        controlsLayer.classList.remove('hidden');
+        gameStarted = true;
+
+        // Opening dialogue from Queen Noura
+        setTimeout(() => {
+          openDialogue({
+            speaker: 'الملكة نورة 👑',
+            portrait: 'noura',
+            text: 'يا عيني على هالحديقة والأضواء! 😍✨ خلّي أستكشف ركن الرسم والسينما وأسولف وية البزونة وعلوشي!',
+            btnLabel: 'إغلاق ✨'
+          });
+        }, 380);
+      });
+
+      soundToggleBtn.addEventListener('click', () => {
+        initAudio();
+        soundEnabled = !soundEnabled;
+        soundToggleBtn.textContent = soundEnabled ? '🔊' : '🔇';
+        if (soundEnabled) {
+          startMusicBox();
+          playChime();
+          showToast('🔊 تم تشغيل الموسيقى والأصوات');
+        } else {
+          showToast('🔇 تم كتم الصوت');
+        }
+      });
+
+      catHudBtn.addEventListener('click', () => {
+        initAudio();
+        playCatChirp();
+        collectMemory('cat', 'البزونة الكيوت 🐾');
+        if (cat.mode === 'follow') {
+          cat.mode = 'sit';
+          showToast('🪑 البزونة جلست بأدب وتراقب المكان');
+        } else if (cat.mode === 'sit') {
+          cat.mode = 'sleep';
+          showToast('😴 البزونة نامت نومة حلوة وهادية');
+        } else {
+          cat.mode = 'follow';
+          showToast('🐾 البزونة صارت تتحرك وياج بكل مكان!');
+        }
+        updateCatHudLabel();
+        spawnBurst(cat.x, cat.y - 16, 7, ['#ff8fb8', '#ffffff'], 'heart');
+      });
+
+      blowCandlesBtn.addEventListener('click', () => {
+        initAudio();
+        candlesLit = false;
+        finaleDone = true;
+        blowOverlay.classList.remove('active');
+        // Smoke & sparkle burst from the 16 candles
+        spawnBurst(cake.x, cake.y - 28, 32, ['#ffffff', '#ffd5e8', '#f6d365'], 'spark');
+        spawnBurst(cake.x, cake.y - 40, 26, ['#ff6da8', '#f6d365', '#a29bfe', '#55efc4'], 'confetti');
+        playHappyBirthday();
+        launchFireworks(6);
+
+        setTimeout(() => {
+          finaleModal.classList.add('active');
+        }, 1150);
+      });
+
+      continueCelebrationBtn.addEventListener('click', () => {
+        finaleModal.classList.remove('active');
+        activeModal = false;
+        celebrationActions.classList.add('visible');
+        launchFireworks(3);
+        showToast('🎉 صارت أزرار الرقص والعناق مفتوحة! احتفلوا سوة 💖');
+      });
+
+      btnDanceTogether.addEventListener('click', () => {
+        initAudio();
+        danceMode = !danceMode;
+        if (danceMode) {
+          liftHugMode = false;
+          btnLiftHug.classList.remove('active-mode');
+          btnDanceTogether.classList.add('active-mode');
+          playChime();
+          launchFireworks(2);
+          showToast('💃 علي ونورة يرقصون سوة على أنغام الحفلة! ✨');
+        } else {
+          btnDanceTogether.classList.remove('active-mode');
+          showToast('✨ توقف الرقص مؤقتاً');
+        }
+      });
+
+      btnLiftHug.addEventListener('click', () => {
+        initAudio();
+        liftHugMode = !liftHugMode;
+        if (liftHugMode) {
+          danceMode = false;
+          btnDanceTogether.classList.remove('active-mode');
+          btnLiftHug.classList.add('active-mode');
+          liftHugTimer = 4.5;
+          playTone(523.25, 0.14, 'sine', 0.1, 0);
+          playTone(659.25, 0.18, 'sine', 0.1, 0.12);
+          playTone(783.99, 0.24, 'sine', 0.1, 0.24);
+          spawnBurst(player.x, player.y - 24, 18, ['#ff6da8', '#ff4f93', '#f6d365'], 'heart');
+          showToast('🤗 علوشي شال الملكة نورة وعانقها بكل حب! 💖');
+        } else {
+          btnLiftHug.classList.remove('active-mode');
+        }
+      });
+
+      /* =====================================================================
+         12. WORLD RENDERING HELPERS (GARDEN, PATHS, PLAZA, FURNITURE, CHARS)
+         ===================================================================== */
+      function drawFloatingPill(text, x, y, bg, border, textColor) {
+        ctx.save();
+        ctx.font = 'bold 13px Tajawal, Cairo, sans-serif';
+        const padX = 14;
+        const w = ctx.measureText(text).width + padX * 2;
+        const h = 26;
+        ctx.fillStyle = bg || 'rgba(14, 19, 46, 0.92)';
+        ctx.strokeStyle = border || '#f6d365';
+        ctx.lineWidth = 1.8;
+        roundRectPath(ctx, x - w / 2, y - h / 2, w, h, 13);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.fillStyle = textColor || '#fff8e1';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(text, x, y + 1);
+        ctx.restore();
+      }
+
+      function drawFairyString(x1, y1, x2, y2, sag, count, t) {
+        ctx.save();
+        ctx.strokeStyle = 'rgba(246, 211, 101, 0.48)';
+        ctx.lineWidth = 1.6;
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.quadraticCurveTo((x1 + x2) / 2, (y1 + y2) / 2 + sag, x2, y2);
+        ctx.stroke();
+
+        const bulbColors = ['#f6d365', '#ff8fb8', '#a29bfe', '#74b9ff'];
+        for (let i = 1; i < count; i++) {
+          const u = i / count;
+          const bx = (1 - u) * (1 - u) * x1 + 2 * (1 - u) * u * ((x1 + x2) / 2) + u * u * x2;
+          const by = (1 - u) * (1 - u) * y1 + 2 * (1 - u) * u * ((y1 + y2) / 2 + sag) + u * u * y2;
+          const glow = 0.65 + 0.35 * Math.sin(t * 4 + i * 1.1);
+          ctx.fillStyle = bulbColors[i % bulbColors.length];
+          ctx.globalAlpha = glow;
+          ctx.beginPath();
+          ctx.arc(bx, by, 4.2, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+
+      function drawTree(tr) {
+        ctx.save();
+        ctx.translate(tr.x, tr.y);
+        // Ground shadow
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+        ctx.beginPath();
+        ctx.ellipse(0, tr.r * 0.76, tr.r * 0.88, tr.r * 0.36, 0, 0, Math.PI * 2);
+        ctx.fill();
+        // Trunk
+        ctx.fillStyle = '#4e342e';
+        roundRectPath(ctx, -6, 6, 12, tr.r * 0.62, 5);
+        ctx.fill();
+        // Layered cozy emerald puffs
+        ctx.fillStyle = '#114231';
+        ctx.beginPath();
+        ctx.arc(-tr.r * 0.22, tr.r * 0.08, tr.r * 0.72, 0, Math.PI * 2);
+        ctx.arc(tr.r * 0.22, tr.r * 0.08, tr.r * 0.72, 0, Math.PI * 2);
+        ctx.fill();
+
+        const grad = ctx.createRadialGradient(-tr.r * 0.2, -tr.r * 0.28, 4, 0, -tr.r * 0.05, tr.r * 0.85);
+        grad.addColorStop(0, '#2a7d5e');
+        grad.addColorStop(1, '#144c38');
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(0, -tr.r * 0.06, tr.r * 0.82, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Top light canopy highlight
+        ctx.fillStyle = 'rgba(130, 232, 180, 0.2)';
+        ctx.beginPath();
+        ctx.arc(-tr.r * 0.18, -tr.r * 0.28, tr.r * 0.42, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+
+      function drawLampPost(lp, t) {
+        ctx.save();
+        ctx.translate(lp.x, lp.y);
+        const pulse = 1 + 0.08 * Math.sin(t * 3 + lp.x);
+        // Warm glow aura
+        const glow = ctx.createRadialGradient(0, -24, 4, 0, -24, 54 * pulse);
+        glow.addColorStop(0, 'rgba(255, 234, 148, 0.42)');
+        glow.addColorStop(1, 'rgba(255, 234, 148, 0)');
+        ctx.fillStyle = glow;
+        ctx.beginPath();
+        ctx.arc(0, -24, 54 * pulse, 0, Math.PI * 2);
+        ctx.fill();
+        // Pole
+        ctx.fillStyle = '#252c4a';
+        roundRectPath(ctx, -3.5, -22, 7, 26, 3);
+        ctx.fill();
+        // Lantern head
+        ctx.fillStyle = '#ffe999';
+        ctx.strokeStyle = '#f6d365';
+        ctx.lineWidth = 1.5;
+        roundRectPath(ctx, -7, -36, 14, 16, 4);
+        ctx.fill();
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      function drawBalloon(b, t) {
+        const swayX = Math.sin(t * 2.2 + b.phase) * 6;
+        const bobY = Math.cos(t * 2.6 + b.phase) * 4;
+        ctx.save();
+        ctx.translate(b.x, b.y);
+        // String
+        ctx.strokeStyle = 'rgba(255, 248, 220, 0.55)';
+        ctx.lineWidth = 1.4;
+        ctx.beginPath();
+        ctx.moveTo(0, 12);
+        ctx.quadraticCurveTo(swayX * 0.5, -14, swayX, -36 + bobY);
+        ctx.stroke();
+        // Balloon oval
+        ctx.fillStyle = b.color;
+        ctx.beginPath();
+        ctx.ellipse(swayX, -48 + bobY, 13, 16, swayX * 0.02, 0, Math.PI * 2);
+        ctx.fill();
+        // Shine spot
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.45)';
+        ctx.beginPath();
+        ctx.ellipse(swayX - 4, -54 + bobY, 3.5, 5.5, -0.35, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+
+      function drawPartyTable(tb) {
+        ctx.save();
+        ctx.translate(tb.x, tb.y);
+
+        // 3 Cushioned Party Chairs around the table
+        const chairAngles = [-Math.PI / 2, Math.PI / 6, (5 * Math.PI) / 6];
+        chairAngles.forEach((ang) => {
+          const cx = Math.cos(ang) * 44;
+          const cy = Math.sin(ang) * 44;
+          ctx.save();
+          ctx.translate(cx, cy);
+          ctx.rotate(ang + Math.PI / 2);
+          // Chair shadow
+          ctx.fillStyle = 'rgba(0, 0, 0, 0.28)';
+          ctx.beginPath();
+          ctx.ellipse(0, 4, 14, 11, 0, 0, Math.PI * 2);
+          ctx.fill();
+          // Cushion seat
+          ctx.fillStyle = '#2d2654';
+          ctx.strokeStyle = tb.accent;
+          ctx.lineWidth = 2;
+          roundRectPath(ctx, -12, -10, 24, 20, 8);
+          ctx.fill();
+          ctx.stroke();
+          // Chair backrest
+          ctx.fillStyle = tb.accent;
+          roundRectPath(ctx, -13, -14, 26, 7, 4);
+          ctx.fill();
+          ctx.restore();
+        });
+
+        // Round Banquet Table (طبلة)
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.32)';
+        ctx.beginPath();
+        ctx.arc(0, 5, 29, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = '#242b56';
+        ctx.strokeStyle = '#f6d365';
+        ctx.lineWidth = 2.4;
+        ctx.beginPath();
+        ctx.arc(0, 0, 27, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+
+        // Inner tablecloth doily
+        ctx.fillStyle = 'rgba(255, 248, 252, 0.12)';
+        ctx.beginPath();
+        ctx.arc(0, 0, 19, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Mini cups & cupcake centerpiece
+        ctx.fillStyle = '#fff3c4';
+        ctx.beginPath();
+        ctx.arc(-10, -7, 4.2, 0, Math.PI * 2);
+        ctx.arc(10, -7, 4.2, 0, Math.PI * 2);
+        ctx.arc(0, 11, 4.2, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = tb.accent;
+        ctx.beginPath();
+        ctx.arc(0, 0, 5.5, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+
+      function drawGiftBox(g) {
+        ctx.save();
+        ctx.translate(g.x, g.y);
+        ctx.fillStyle = 'rgba(0,0,0,0.3)';
+        roundRectPath(ctx, -g.w / 2 + 2, -g.h / 2 + 4, g.w, g.h, 5);
+        ctx.fill();
+
+        ctx.fillStyle = g.body;
+        ctx.strokeStyle = 'rgba(255,255,255,0.4)';
+        ctx.lineWidth = 1.2;
+        roundRectPath(ctx, -g.w / 2, -g.h / 2, g.w, g.h, 5);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.fillStyle = g.ribbon;
+        ctx.fillRect(-3, -g.h / 2, 6, g.h);
+        ctx.fillRect(-g.w / 2, -3, g.w, 6);
+        ctx.restore();
+      }
+
+      function drawArtZone(t) {
+        const z = ART_ZONE;
+        ctx.save();
+        ctx.translate(z.x, z.y);
+
+        // Warm royal studio deck (restored cozy gallery style)
+        const deckGrad = ctx.createLinearGradient(0, -z.h / 2, 0, z.h / 2);
+        deckGrad.addColorStop(0, '#281e4a');
+        deckGrad.addColorStop(1, '#1d1638');
+        ctx.fillStyle = deckGrad;
+        ctx.strokeStyle = '#ff8fb8';
+        ctx.lineWidth = 2.8;
+        roundRectPath(ctx, -z.w / 2, -z.h / 2, z.w, z.h, 28);
+        ctx.fill();
+        ctx.stroke();
+
+        // Warm wooden studio carpet with gold stitch border
+        ctx.fillStyle = 'rgba(246, 211, 101, 0.09)';
+        ctx.strokeStyle = 'rgba(246, 211, 101, 0.42)';
+        ctx.lineWidth = 1.8;
+        roundRectPath(ctx, -z.w / 2 + 18, -z.h / 2 + 20, z.w - 36, z.h - 40, 20);
+        ctx.fill();
+        ctx.stroke();
+
+        // Main Classic Wooden Easel (left-center)
+        ctx.save();
+        ctx.translate(-56, -24);
+        ctx.strokeStyle = '#c48f5a';
+        ctx.lineWidth = 4.5;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(-20, 48); ctx.lineTo(0, -40); ctx.lineTo(20, 48);
+        ctx.moveTo(-24, 18); ctx.lineTo(24, 18);
+        ctx.stroke();
+        // White framed canvas
+        ctx.fillStyle = '#fffdf9';
+        ctx.strokeStyle = '#f6d365';
+        ctx.lineWidth = 2.6;
+        roundRectPath(ctx, -32, -36, 64, 52, 8);
+        ctx.fill();
+        ctx.stroke();
+        // Cute mini painting inside easel
+        ctx.fillStyle = '#ffe2ef';
+        roundRectPath(ctx, -26, -30, 52, 40, 5);
+        ctx.fill();
+        ctx.font = '20px serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('💖', 0, -4);
+        ctx.restore();
+
+        // Second Framed Couple Canvas Display (right-center)
+        ctx.save();
+        ctx.translate(68, -32);
+        ctx.fillStyle = '#5c3a21';
+        ctx.strokeStyle = '#f6d365';
+        ctx.lineWidth = 2.2;
+        roundRectPath(ctx, -34, -26, 68, 48, 8);
+        ctx.fill();
+        ctx.stroke();
+        ctx.fillStyle = '#fff5fa';
+        roundRectPath(ctx, -28, -20, 56, 36, 5);
+        ctx.fill();
+        ctx.font = 'bold 11px Cairo, sans-serif';
+        ctx.fillStyle = '#c43a73';
+        ctx.textAlign = 'center';
+        ctx.fillText('علي ❤️ نورة', 0, -4);
+        ctx.font = '13px serif';
+        ctx.fillText('🎨✨', 0, 11);
+        ctx.restore();
+
+        // Cozy Artist Palette & Brushes Desk (center-bottom)
+        ctx.fillStyle = '#5b3924';
+        ctx.strokeStyle = '#f6d365';
+        ctx.lineWidth = 2;
+        roundRectPath(ctx, -44, 24, 88, 38, 14);
+        ctx.fill();
+        ctx.stroke();
+
+        // Wooden palette oval on desk
+        ctx.fillStyle = '#d4a373';
+        ctx.beginPath();
+        ctx.ellipse(-10, 43, 22, 13, -0.1, 0, Math.PI * 2);
+        ctx.fill();
+        // Paint dollops
+        ['#ff5ea0', '#f6d365', '#38bdf8', '#a29bfe'].forEach((col, i) => {
+          ctx.fillStyle = col;
+          ctx.beginPath();
+          ctx.arc(-22 + i * 8, 41 + (i % 2 ? 4 : -2), 3.6, 0, Math.PI * 2);
+          ctx.fill();
+        });
+        // Brush cup on right side of desk
+        ctx.fillStyle = '#ff8fb8';
+        roundRectPath(ctx, 18, 33, 14, 18, 4);
+        ctx.fill();
+        ctx.strokeStyle = '#fff3c4';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(22, 33); ctx.lineTo(19, 24);
+        ctx.moveTo(27, 33); ctx.lineTo(31, 24);
+        ctx.stroke();
+
+        // Two Cozy Studio Cushions / Beanbags
+        [-106, 106].forEach((bx) => {
+          const bGrad = ctx.createRadialGradient(bx - 5, 58, 3, bx, 64, 22);
+          bGrad.addColorStop(0, '#a29bfe');
+          bGrad.addColorStop(1, '#6c5ce7');
+          ctx.fillStyle = bGrad;
+          ctx.strokeStyle = '#ffd5e8';
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.arc(bx, 64, 20, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.stroke();
+        });
+
+        // Overhead fairy lights
+        drawFairyString(-z.w / 2 + 12, -z.h / 2 + 10, z.w / 2 - 12, -z.h / 2 + 10, 18, 9, t);
+
+        // Label
+        drawFloatingPill(
+          memories.art ? 'رسمتنا: علي & نورة 💕🎨' : 'ركن الفن والرسم 🎨',
+          0,
+          z.h / 2 + 22,
+          'rgba(18, 22, 52, 0.94)',
+          memories.art ? '#ff8fb8' : '#f6d365'
+        );
+
+        ctx.restore();
+      }
+
+      function drawCinemaZone(t) {
+        const z = CINEMA_ZONE;
+        ctx.save();
+        ctx.translate(z.x, z.y);
+
+        // Sleek Rave Cinema Deck (matching screenshot 138221.jpg)
+        ctx.fillStyle = '#1b1a46';
+        ctx.strokeStyle = '#ff6da8';
+        ctx.lineWidth = 3;
+        roundRectPath(ctx, -z.w / 2, -z.h / 2, z.w, z.h, 30);
+        ctx.fill();
+        ctx.stroke();
+
+        // Cinema Screen with Gold Frame & Gradient
+        const scrGrad = ctx.createLinearGradient(-105, -96, 105, -18);
+        scrGrad.addColorStop(0, '#272059');
+        scrGrad.addColorStop(0.5, '#3b1e63');
+        scrGrad.addColorStop(1, '#221a4c');
+        ctx.fillStyle = scrGrad;
+        ctx.strokeStyle = '#f6d365';
+        ctx.lineWidth = 2.8;
+        roundRectPath(ctx, -104, -96, 208, 82, 16);
+        ctx.fill();
+        ctx.stroke();
+
+        // Subtle glowing Play Button Circle in screen center
+        const playScale = 1 + 0.06 * Math.sin(t * 3.5);
+        ctx.save();
+        ctx.translate(0, -55);
+        ctx.scale(playScale, playScale);
+        ctx.fillStyle = '#ff6da8';
+        ctx.beginPath();
+        ctx.arc(0, 0, 19, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.moveTo(-5, -8);
+        ctx.lineTo(-5, 8);
+        ctx.lineTo(9, 0);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+
+        // RAVE text & clapperboard inside screen
+        ctx.font = 'bold 16px Cairo, sans-serif';
+        ctx.fillStyle = '#f6d365';
+        ctx.textAlign = 'center';
+        ctx.fillText('RAVE', 62, -50);
+        ctx.font = '18px serif';
+        ctx.fillText('🎬', -64, -49);
+
+        // Sleek Side Speakers
+        [-132, 132].forEach((sx) => {
+          ctx.fillStyle = '#111530';
+          ctx.strokeStyle = '#ff9ec7';
+          ctx.lineWidth = 2;
+          roundRectPath(ctx, sx - 14, -84, 28, 56, 9);
+          ctx.fill();
+          ctx.stroke();
+          ctx.fillStyle = '#f6d365';
+          ctx.beginPath();
+          ctx.arc(sx, -68, 5, 0, Math.PI * 2);
+          ctx.arc(sx, -46, 7.5, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        // Snack Tray Table (Popcorn & Cold Drink)
+        ctx.fillStyle = '#533522';
+        ctx.strokeStyle = '#f6d365';
+        ctx.lineWidth = 2;
+        roundRectPath(ctx, -48, 2, 96, 30, 12);
+        ctx.fill();
+        ctx.stroke();
+        ctx.font = '19px serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('🍿   🥤', 0, 23);
+
+        // Plush Pink-Magenta Sofa (3D depth style)
+        ctx.fillStyle = '#a82260';
+        roundRectPath(ctx, -64, 58, 128, 30, 12);
+        ctx.fill();
+        ctx.fillStyle = '#e84393';
+        ctx.strokeStyle = '#ff9ec7';
+        ctx.lineWidth = 2;
+        roundRectPath(ctx, -64, 46, 128, 34, 13);
+        ctx.fill();
+        ctx.stroke();
+
+        // Cozy Purple Beanbag Chairs on Both Sides (matching screenshot 138221.jpg)
+        [-106, 106].forEach((bx) => {
+          const bGrad = ctx.createRadialGradient(bx - 6, 56, 4, bx, 64, 25);
+          bGrad.addColorStop(0, '#a29bfe');
+          bGrad.addColorStop(1, '#6c5ce7');
+          ctx.fillStyle = bGrad;
+          ctx.strokeStyle = '#dcd6ff';
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.arc(bx, 64, 23, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.stroke();
+        });
+
+        // Fairy lights across top
+        drawFairyString(-z.w / 2 + 12, -z.h / 2 + 10, z.w / 2 - 12, -z.h / 2 + 10, 16, 9, t + 1);
+
+        // Label
+        drawFloatingPill(
+          memories.cinema ? 'سينما المفاجأة 🎬❤️' : 'سينما الـ Rave 🍿',
+          0,
+          z.h / 2 + 22,
+          'rgba(18, 22, 52, 0.94)',
+          memories.cinema ? '#ff8fb8' : '#f6d365'
+        );
+
+        ctx.restore();
+      }
+
+      function drawCake(t) {
+        ctx.save();
+        ctx.translate(cake.x, cake.y);
+
+        // Golden aura
+        const aura = ctx.createRadialGradient(0, 0, 16, 0, 0, 96);
+        aura.addColorStop(0, 'rgba(246, 211, 101, 0.36)');
+        aura.addColorStop(1, 'rgba(246, 211, 101, 0)');
+        ctx.fillStyle = aura;
+        ctx.beginPath();
+        ctx.arc(0, 0, 96, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Round Cake Table
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.35)';
+        ctx.beginPath();
+        ctx.ellipse(0, 24, 68, 30, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = '#fff9f2';
+        ctx.strokeStyle = '#f6d365';
+        ctx.lineWidth = 3.5;
+        ctx.beginPath();
+        ctx.ellipse(0, 14, 64, 28, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+
+        // Bottom Cake Tier
+        ctx.fillStyle = '#ff9ec7';
+        roundRectPath(ctx, -38, -12, 76, 32, 12);
+        ctx.fill();
+        // Icing scallop stripe
+        ctx.fillStyle = '#ffd5e8';
+        roundRectPath(ctx, -38, -12, 76, 10, 8);
+        ctx.fill();
+
+        // Top Cake Tier
+        ctx.fillStyle = '#ff7eb5';
+        roundRectPath(ctx, -26, -32, 52, 23, 10);
+        ctx.fill();
+        ctx.fillStyle = '#ffffff';
+        roundRectPath(ctx, -26, -32, 52, 8, 6);
+        ctx.fill();
+
+        // 16 Birthday Candles (2 neat rows of 8)
+        for (let i = 0; i < 16; i++) {
+          const col = i % 8;
+          const row = i < 8 ? 0 : 1;
+          const cx = -21 + col * 6;
+          const cy = row === 0 ? -42 : -26;
+          ctx.fillStyle = i % 2 === 0 ? '#f6d365' : '#74b9ff';
+          ctx.fillRect(cx - 1.3, cy, 2.6, 10);
+
+          if (candlesLit) {
+            const flicker = 0.72 + 0.28 * Math.sin(t * 16 + i * 1.3);
+            ctx.fillStyle = `rgba(255, 224, 102, ${flicker})`;
+            ctx.beginPath();
+            ctx.ellipse(cx, cy - 3.5, 2.5, 4.2, 0, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        }
+
+        // Cake Label Pill above
+        drawFloatingPill(
+          candlesLit ? 'عمر 16 سنة 🎂' : 'تحققت الأمنية ✨🎂',
+          0,
+          -66,
+          'rgba(18, 22, 52, 0.94)',
+          '#f6d365'
+        );
+
+        ctx.restore();
+      }
+      function drawSignPost() {
+        ctx.save();
+        ctx.translate(signPost.x, signPost.y);
+
+        // Ground shadow
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.32)';
+        ctx.beginPath();
+        ctx.ellipse(0, 26, 20, 8, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Wooden post
+        ctx.fillStyle = '#6f4222';
+        roundRectPath(ctx, -5, -4, 10, 30, 3);
+        ctx.fill();
+
+        // Sign board
+        ctx.fillStyle = '#5c3a21';
+        ctx.strokeStyle = '#f6d365';
+        ctx.lineWidth = 2.4;
+        roundRectPath(ctx, -34, -40, 68, 40, 9);
+        ctx.fill();
+        ctx.stroke();
+
+        // Red prohibition icon
+        ctx.strokeStyle = '#ff4d6d';
+        ctx.lineWidth = 3.5;
+        ctx.beginPath();
+        ctx.arc(0, -20, 11, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(-7.5, -27.5);
+        ctx.lineTo(7.5, -12.5);
+        ctx.stroke();
+
+        // Floating label
+        drawFloatingPill(
+          'ممنوع فانزات غوجو 🚫',
+          0,
+          -56,
+          'rgba(18, 22, 52, 0.92)',
+          '#ff6da8',
+          '#ffd5e8'
+        );
+
+        ctx.restore();
+      }
+
+      function drawGate(t) {
+        ctx.save();
+        ctx.translate(GATE.x, GATE.y);
+
+        // Leafy arch pillars
+        ctx.fillStyle = '#18543d';
+        ctx.strokeStyle = '#2d8a67';
+        ctx.lineWidth = 2.5;
+        roundRectPath(ctx, -92, -32, 24, 64, 10);
+        ctx.fill();
+        ctx.stroke();
+        roundRectPath(ctx, 68, -32, 24, 64, 10);
+        ctx.fill();
+        ctx.stroke();
+
+        // Curved green arch overhead
+        ctx.strokeStyle = '#1d694c';
+        ctx.lineWidth = 20;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.arc(0, -24, 80, Math.PI, 0, false);
+        ctx.stroke();
+
+        ctx.strokeStyle = '#2f946f';
+        ctx.lineWidth = 6;
+        ctx.beginPath();
+        ctx.arc(0, -24, 80, Math.PI, 0, false);
+        ctx.stroke();
+
+        // Fairy lights strung across the gate
+        drawFairyString(-78, -28, 78, -28, 22, 8, t);
+
+        // Welcome gate sign pill
+        drawFloatingPill(
+          'ليلة الملكة نورة 👑🎂',
+          0,
+          -104,
+          'rgba(14, 19, 46, 0.95)',
+          '#f6d365',
+          '#fff4cc'
+        );
+
+        ctx.restore();
+      }
+
+      function drawGardenPathsAndPlaza(t) {
+        // --- Vertical Purple-Slate Avenue (Gate to Party Plaza) ---
+        ctx.save();
+        const vX = CENTER_X - 64;
+        const vY = PLAZA.y + 180;
+        const vW = 128;
+        const vH = WORLD.h - vY - 75;
+
+        ctx.fillStyle = '#2e2948';
+        ctx.strokeStyle = 'rgba(246, 211, 101, 0.28)';
+        ctx.lineWidth = 2.5;
+        roundRectPath(ctx, vX, vY, vW, vH, 24);
+        ctx.fill();
+        ctx.stroke();
+
+        // Paved stepping tiles along vertical avenue
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.045)';
+        for (let ty = vY + 22; ty < vY + vH - 36; ty += 56) {
+          roundRectPath(ctx, CENTER_X - 46, ty, 92, 34, 10);
+          ctx.fill();
+        }
+
+        // --- Horizontal Cross-Path (Art Zone to Cinema Zone) ---
+        const hX = ART_ZONE.x + 135;
+        const hW = (CINEMA_ZONE.x - 135) - hX;
+        const hY = CROSS_Y - 54;
+        const hH = 108;
+
+        ctx.fillStyle = '#2e2948';
+        ctx.strokeStyle = 'rgba(246, 211, 101, 0.28)';
+        ctx.lineWidth = 2.5;
+        roundRectPath(ctx, hX, hY, hW, hH, 22);
+        ctx.fill();
+        ctx.stroke();
+
+        // Paved stepping tiles along horizontal path
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.045)';
+        for (let tx = hX + 26; tx < hX + hW - 50; tx += 64) {
+          if (Math.abs(tx + 20 - CENTER_X) < 55) continue;
+          roundRectPath(ctx, tx, CROSS_Y - 36, 40, 72, 10);
+          ctx.fill();
+        }
+
+        // Soft intersection highlight diamond
+        ctx.fillStyle = 'rgba(246, 211, 101, 0.08)';
+        ctx.strokeStyle = 'rgba(246, 211, 101, 0.35)';
+        ctx.lineWidth = 1.6;
+        ctx.beginPath();
+        ctx.arc(CENTER_X, CROSS_Y, 42, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+
+        // Scattered pink flower petals along paths
+        const petals = [
+          [CENTER_X - 28, 1140], [CENTER_X + 32, 1060], [CENTER_X - 35, 960],
+          [CENTER_X + 22, 890], [CENTER_X - 24, 740], [CENTER_X + 34, 670],
+          [560, CROSS_Y - 18], [670, CROSS_Y + 22], [1010, CROSS_Y - 20], [1135, CROSS_Y + 18]
+        ];
+        ctx.fillStyle = '#ff9ec7';
+        petals.forEach(([px, py], i) => {
+          ctx.beginPath();
+          ctx.ellipse(px, py, 6, 3.2, i * 0.7, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        // --- Grand Royal Party Plaza ---
+        const plazaGrad = ctx.createRadialGradient(PLAZA.x, PLAZA.y, 20, PLAZA.x, PLAZA.y, PLAZA.r);
+        plazaGrad.addColorStop(0, '#322b5e');
+        plazaGrad.addColorStop(0.72, '#242048');
+        plazaGrad.addColorStop(1, '#1a1839');
+        ctx.fillStyle = plazaGrad;
+        ctx.strokeStyle = '#f6d365';
+        ctx.lineWidth = 3.5;
+        ctx.beginPath();
+        ctx.arc(PLAZA.x, PLAZA.y, PLAZA.r, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+
+        // Inner dashed celebratory dance ring
+        ctx.save();
+        ctx.setLineDash([12, 10]);
+        ctx.strokeStyle = 'rgba(255, 158, 199, 0.36)';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(PLAZA.x, PLAZA.y, PLAZA.r - 24, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.restore();
+
+        // Royal Red Carpet leading into the Party Plaza
+        ctx.fillStyle = '#8b1e4b';
+        ctx.strokeStyle = '#f6d365';
+        ctx.lineWidth = 2.6;
+        roundRectPath(ctx, CENTER_X - 44, PLAZA.y + 150, 88, 146, 12);
+        ctx.fill();
+        ctx.stroke();
+
+        // Inner carpet gold trim
+        ctx.strokeStyle = 'rgba(246, 211, 101, 0.45)';
+        ctx.lineWidth = 1.4;
+        roundRectPath(ctx, CENTER_X - 36, PLAZA.y + 158, 72, 130, 8);
+        ctx.stroke();
+
+        // Party Plaza Speakers
+        [-128, 128].forEach((sx) => {
+          ctx.fillStyle = '#141836';
+          ctx.strokeStyle = '#f6d365';
+          ctx.lineWidth = 2;
+          roundRectPath(ctx, PLAZA.x + sx - 16, PLAZA.y - 178, 32, 46, 9);
+          ctx.fill();
+          ctx.stroke();
+
+          ctx.fillStyle = '#ff6da8';
+          ctx.beginPath();
+          ctx.arc(PLAZA.x + sx, PLAZA.y - 164, 5.5, 0, Math.PI * 2);
+          ctx.arc(PLAZA.x + sx, PLAZA.y - 146, 8, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        // Overhead plaza fairy lights
+        drawFairyString(PLAZA.x - 235, PLAZA.y - 140, PLAZA.x + 235, PLAZA.y - 140, 34, 14, t);
+        drawFairyString(PLAZA.x - 250, PLAZA.y + 60, PLAZA.x - 105, PLAZA.y - 215, 22, 8, t + 1.2);
+        drawFairyString(PLAZA.x + 250, PLAZA.y + 60, PLAZA.x + 105, PLAZA.y - 215, 22, 8, t + 2.4);
+
+        // Banquet Tables & Wrapped Gifts
+        partyTables.forEach(drawPartyTable);
+        giftBoxes.forEach(drawGiftBox);
+
+        ctx.restore();
+      }
+
+      function drawNoura(x, y, t, isHappy, isLifted) {
+        const bob = isLifted ? Math.sin(t * 5) * 2.5 : Math.abs(Math.sin(player.walkPhase)) * -3.5;
+        ctx.save();
+        ctx.translate(x, y);
+
+        // Ground shadow
+        if (!isLifted) {
+          ctx.fillStyle = 'rgba(0, 0, 0, 0.34)';
+          ctx.beginPath();
+          ctx.ellipse(0, 22, 17, 7, 0, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        ctx.translate(0, bob);
+
+        // Long Flowing Pink Anime Hair (Back Layer — smooth & elegant)
+        ctx.fillStyle = '#ff8fb8';
+        ctx.beginPath();
+        ctx.moveTo(-19, -16);
+        ctx.quadraticCurveTo(-24, 6, -19, 24);
+        ctx.quadraticCurveTo(-9, 21, 0, 25);
+        ctx.quadraticCurveTo(9, 21, 19, 24);
+        ctx.quadraticCurveTo(24, 6, 19, -16);
+        ctx.quadraticCurveTo(16, -32, 0, -32);
+        ctx.quadraticCurveTo(-16, -32, -19, -16);
+        ctx.closePath();
+        ctx.fill();
+
+        // Pink Royal Dress
+        ctx.fillStyle = '#ff6da8';
+        ctx.beginPath();
+        ctx.moveTo(-11, 2);
+        ctx.lineTo(11, 2);
+        ctx.lineTo(18, 22);
+        ctx.quadraticCurveTo(0, 27, -18, 22);
+        ctx.closePath();
+        ctx.fill();
+
+        // Gold Waist Belt
+        ctx.fillStyle = '#f6d365';
+        roundRectPath(ctx, -12, 8, 24, 4, 2);
+        ctx.fill();
+
+        // Head
+        ctx.fillStyle = '#ffe5d7';
+        ctx.beginPath();
+        ctx.arc(0, -11, 15.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Anime Eyes
+        if (isHappy) {
+          ctx.strokeStyle = '#291538';
+          ctx.lineWidth = 2.2;
+          ctx.lineCap = 'round';
+          ctx.beginPath();
+          ctx.arc(-5.8, -10.5, 3.2, Math.PI, 0, false);
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.arc(5.8, -10.5, 3.2, Math.PI, 0, false);
+          ctx.stroke();
+        } else {
+          ctx.fillStyle = '#291538';
+          ctx.beginPath();
+          ctx.ellipse(-5.8, -10.5, 2.7, 3.3, 0, 0, Math.PI * 2);
+          ctx.ellipse(5.8, -10.5, 2.7, 3.3, 0, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = '#ffffff';
+          ctx.beginPath();
+          ctx.arc(-6.6, -11.7, 1.15, 0, Math.PI * 2);
+          ctx.arc(5.0, -11.7, 1.15, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        // Rosy Cheeks
+        ctx.fillStyle = 'rgba(255, 118, 174, 0.58)';
+        ctx.beginPath();
+        ctx.ellipse(-10.5, -6.2, 3.2, 1.8, 0, 0, Math.PI * 2);
+        ctx.ellipse(10.5, -6.2, 3.2, 1.8, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Smile
+        ctx.strokeStyle = '#c44574';
+        ctx.lineWidth = 1.9;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.arc(0, -6.2, 3.2, 0.15 * Math.PI, 0.85 * Math.PI);
+        ctx.stroke();
+
+        // Pink Anime Front Bangs
+        ctx.fillStyle = '#ff6fa8';
+        ctx.beginPath();
+        ctx.moveTo(-16, -12);
+        ctx.quadraticCurveTo(-14, -29, 0, -29);
+        ctx.quadraticCurveTo(14, -29, 16, -12);
+        ctx.quadraticCurveTo(11, -19, 8, -11);
+        ctx.quadraticCurveTo(4.5, -20, 0, -11);
+        ctx.quadraticCurveTo(-4.5, -20, -8, -11);
+        ctx.quadraticCurveTo(-11, -19, -16, -12);
+        ctx.closePath();
+        ctx.fill();
+
+        // Hair Gloss Highlight
+        ctx.strokeStyle = 'rgba(255, 224, 240, 0.82)';
+        ctx.lineWidth = 2;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(-8, -22);
+        ctx.quadraticCurveTo(0, -25.5, 8, -22);
+        ctx.stroke();
+
+        // Golden Tiara / Crown
+        ctx.fillStyle = '#f6d365';
+        ctx.strokeStyle = '#c28818';
+        ctx.lineWidth = 1.2;
+        ctx.beginPath();
+        ctx.moveTo(-10, -27);
+        ctx.lineTo(-8, -36);
+        ctx.lineTo(-3, -31);
+        ctx.lineTo(0, -39);
+        ctx.lineTo(3, -31);
+        ctx.lineTo(8, -36);
+        ctx.lineTo(10, -27);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.fillStyle = '#e84e93';
+        ctx.beginPath();
+        ctx.arc(0, -30.5, 1.9, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Floating Name Pill
+        if (!isLifted) {
+          drawFloatingPill(
+            'الملكة نورة 👑',
+            0,
+            -55,
+            'rgba(18, 22, 52, 0.92)',
+            '#ff9ec7',
+            '#fff4f9'
+          );
+        }
+
+        ctx.restore();
+      }
+
+      function drawAli(x, y, t, isHappy, isHugging) {
+        const bob = danceMode ? Math.abs(Math.sin(t * 7)) * -5 : Math.abs(Math.sin(ali.walkPhase)) * -3;
+        ctx.save();
+        ctx.translate(x, y);
+
+        // Ground shadow
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.35)';
+        ctx.beginPath();
+        ctx.ellipse(0, 24, 18, 7.5, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.translate(0, bob);
+
+        // Formal Black Suit (slightly taller than Noura)
+        ctx.fillStyle = '#151828';
+        ctx.beginPath();
+        ctx.moveTo(-13, 0);
+        ctx.quadraticCurveTo(0, -4, 13, 0);
+        ctx.lineTo(16, 24);
+        ctx.lineTo(-16, 24);
+        ctx.closePath();
+        ctx.fill();
+
+        // White Dress Shirt V-collar
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.moveTo(-6.5, 0);
+        ctx.lineTo(6.5, 0);
+        ctx.lineTo(0, 12);
+        ctx.closePath();
+        ctx.fill();
+
+        // Pink-Magenta Tie
+        ctx.fillStyle = '#e84e93';
+        ctx.beginPath();
+        ctx.moveTo(-1.8, 1);
+        ctx.lineTo(1.8, 1);
+        ctx.lineTo(2.4, 12);
+        ctx.lineTo(0, 15.5);
+        ctx.lineTo(-2.4, 12);
+        ctx.closePath();
+        ctx.fill();
+
+        // Arms (extended gently when hugging)
+        if (isHugging) {
+          ctx.strokeStyle = '#151828';
+          ctx.lineWidth = 6;
+          ctx.lineCap = 'round';
+          ctx.beginPath();
+          ctx.moveTo(-12, 6);
+          ctx.quadraticCurveTo(-18, 14, -8, 14);
+          ctx.moveTo(12, 6);
+          ctx.quadraticCurveTo(18, 14, 8, 14);
+          ctx.stroke();
+        }
+
+        // Styled Spiky Anime Black Hair (Back Silhouette)
+        ctx.fillStyle = '#111422';
+        ctx.beginPath();
+        ctx.moveTo(-17, -14);
+        ctx.lineTo(-23, -23);
+        ctx.lineTo(-14, -25);
+        ctx.lineTo(-16, -34);
+        ctx.lineTo(-5, -30);
+        ctx.lineTo(1, -39);
+        ctx.lineTo(8, -30);
+        ctx.lineTo(18, -34);
+        ctx.lineTo(15, -24);
+        ctx.lineTo(23, -21);
+        ctx.lineTo(17, -12);
+        ctx.closePath();
+        ctx.fill();
+
+        // Head
+        ctx.fillStyle = '#ffe1ce';
+        ctx.beginPath();
+        ctx.arc(0, -14, 16, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Eyes
+        if (isHappy) {
+          ctx.strokeStyle = '#151828';
+          ctx.lineWidth = 2.2;
+          ctx.lineCap = 'round';
+          ctx.beginPath();
+          ctx.arc(-5.6, -13.5, 3.1, Math.PI, 0, false);
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.arc(5.6, -13.5, 3.1, Math.PI, 0, false);
+          ctx.stroke();
+        } else {
+          ctx.fillStyle = '#151828';
+          ctx.beginPath();
+          ctx.ellipse(-5.6, -13.5, 2.5, 3.1, 0, 0, Math.PI * 2);
+          ctx.ellipse(5.6, -13.5, 2.5, 3.1, 0, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = '#ffffff';
+          ctx.beginPath();
+          ctx.arc(-4.7, -14.6, 1.05, 0, Math.PI * 2);
+          ctx.arc(6.5, -14.6, 1.05, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        // Blush
+        ctx.fillStyle = 'rgba(255, 143, 184, 0.45)';
+        ctx.beginPath();
+        ctx.ellipse(-10, -9, 3, 1.6, 0, 0, Math.PI * 2);
+        ctx.ellipse(10, -9, 3, 1.6, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Warm Smile
+        ctx.strokeStyle = '#b54d6f';
+        ctx.lineWidth = 1.9;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.arc(0, -8.8, 3.6, 0.15 * Math.PI, 0.85 * Math.PI);
+        ctx.stroke();
+
+        // Styled Spiky Anime Front Bangs
+        ctx.fillStyle = '#151828';
+        ctx.beginPath();
+        ctx.moveTo(-16.5, -15);
+        ctx.quadraticCurveTo(-15, -32, 0, -32);
+        ctx.quadraticCurveTo(15, -32, 16.5, -15);
+        ctx.lineTo(12, -21);
+        ctx.lineTo(9, -12.5);
+        ctx.lineTo(4.5, -22);
+        ctx.lineTo(0, -12);
+        ctx.lineTo(-4.5, -22);
+        ctx.lineTo(-9, -12.5);
+        ctx.lineTo(-12, -21);
+        ctx.closePath();
+        ctx.fill();
+
+        // Soft Anime Hair Highlight Sheen
+        ctx.strokeStyle = 'rgba(130, 155, 225, 0.35)';
+        ctx.lineWidth = 1.8;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(-8, -25.5);
+        ctx.quadraticCurveTo(0, -28.5, 8, -25.5);
+        ctx.stroke();
+
+        // Floating Name Pill
+        drawFloatingPill(
+          'علي ❤️',
+          0,
+          -56,
+          'rgba(18, 22, 52, 0.92)',
+          '#f6d365',
+          '#fff6dc'
+        );
+
+        ctx.restore();
+      }
+
+      function drawCat(t) {
+        const isSleep = cat.mode === 'sleep';
+        const bob = cat.mode === 'follow' ? Math.abs(Math.sin(cat.walkPhase)) * -2.8 : 0;
+
+        ctx.save();
+        ctx.translate(cat.x, cat.y);
+
+        // Shadow
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+        ctx.beginPath();
+        ctx.ellipse(0, 11, 14, 5.5, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.translate(0, bob);
+
+        // Swishing tail
+        const tailWag = Math.sin(t * (isSleep ? 1.5 : 5)) * 4;
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 4;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(10, 5);
+        ctx.quadraticCurveTo(18, 2 + tailWag, 16, -6 + tailWag);
+        ctx.stroke();
+
+        // Body
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.ellipse(0, 4, isSleep ? 13 : 11, isSleep ? 8 : 9, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Pink collar + golden bell
+        ctx.strokeStyle = '#ff6da8';
+        ctx.lineWidth = 2.6;
+        ctx.beginPath();
+        ctx.moveTo(-8, -1);
+        ctx.quadraticCurveTo(0, 3, 8, -1);
+        ctx.stroke();
+        ctx.fillStyle = '#f6d365';
+        ctx.beginPath();
+        ctx.arc(0, 2, 2.3, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Head
+        const headY = isSleep ? -3 : -8;
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.arc(0, headY, 10.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Ears
+        ctx.beginPath();
+        ctx.moveTo(-9, headY - 4); ctx.lineTo(-10, headY - 15); ctx.lineTo(-2, headY - 9);
+        ctx.moveTo(9, headY - 4); ctx.lineTo(10, headY - 15); ctx.lineTo(2, headY - 9);
+        ctx.fill();
+
+        ctx.fillStyle = '#ff9ec7';
+        ctx.beginPath();
+        ctx.moveTo(-7.5, headY - 5); ctx.lineTo(-8.2, headY - 12); ctx.lineTo(-3.5, headY - 8.5);
+        ctx.moveTo(7.5, headY - 5); ctx.lineTo(8.2, headY - 12); ctx.lineTo(3.5, headY - 8.5);
+        ctx.fill();
+
+        // Eyes
+        if (isSleep) {
+          ctx.strokeStyle = '#2a223b';
+          ctx.lineWidth = 1.6;
+          ctx.beginPath();
+          ctx.moveTo(-6, headY); ctx.lineTo(-2.5, headY);
+          ctx.moveTo(2.5, headY); ctx.lineTo(6, headY);
+          ctx.stroke();
+
+          // Floating Zzz
+          const zFloat = (t * 14) % 16;
+          ctx.fillStyle = `rgba(246, 211, 101, ${1 - zFloat / 16})`;
+          ctx.font = 'bold 11px sans-serif';
+          ctx.fillText('zZ', 10, headY - 10 - zFloat);
+        } else {
+          ctx.fillStyle = '#1e182e';
+          ctx.beginPath();
+          ctx.arc(-4, headY - 0.5, 2, 0, Math.PI * 2);
+          ctx.arc(4, headY - 0.5, 2, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = '#ffffff';
+          ctx.beginPath();
+          ctx.arc(-4.6, headY - 1.2, 0.7, 0, Math.PI * 2);
+          ctx.arc(3.4, headY - 1.2, 0.7, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        // Tiny pink nose
+        ctx.fillStyle = '#ff8fb8';
+        ctx.beginPath();
+        ctx.arc(0, headY + 2.5, 1.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.restore();
+      }
+
+      function drawParticles() {
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
+          ctx.save();
+          ctx.globalAlpha = Math.max(0, p.life);
+          ctx.translate(p.x, p.y);
+          if (p.type === 'heart') {
+            ctx.font = `${p.size}px serif`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('💖', 0, 0);
+          } else if (p.type === 'confetti') {
+            ctx.rotate(p.rot);
+            ctx.fillStyle = p.color;
+            ctx.fillRect(-p.size / 2, -p.size / 3, p.size, p.size * 0.65);
+          } else {
+            ctx.fillStyle = p.color;
+            ctx.beginPath();
+            ctx.arc(0, 0, p.size * p.life, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          ctx.restore();
+        }
+      }
+
+      /* =====================================================================
+         13. MAIN UPDATE & RENDER LOOP
+         ===================================================================== */
+      let effectSpawnTimer = 0;
+
+      function update(dt, t) {
+        if (!gameStarted) return;
+
+        // Player Movement (Joystick + Keyboard + Tap-to-Walk)
+        let vx = 0;
+        let vy = 0;
+
+        if (!activeModal && !activeDialogue) {
+          if (Math.abs(joyX) > 0.08 || Math.abs(joyY) > 0.08) {
+            vx = joyX;
+            vy = joyY;
+          } else {
+            if (keys['arrowleft'] || keys['a']) vx -= 1;
+            if (keys['arrowright'] || keys['d']) vx += 1;
+            if (keys['arrowup'] || keys['w']) vy -= 1;
+            if (keys['arrowdown'] || keys['s']) vy += 1;
+          }
+
+          if (vx !== 0 || vy !== 0) {
+            const len = Math.hypot(vx, vy);
+            if (len > 1) { vx /= len; vy /= len; }
+            player.x += vx * player.speed * dt;
+            player.y += vy * player.speed * dt;
+            player.walkPhase += dt * 11;
+            player.facing = vx < 0 ? -1 : 1;
+            player.targetX = null;
+            player.targetY = null;
+
+            if (liftHugMode) {
+              liftHugMode = false;
+              btnLiftHug.classList.remove('active-mode');
+            }
+          } else if (player.targetX !== null && player.targetY !== null) {
+            const dx = player.targetX - player.x;
+            const dy = player.targetY - player.y;
+            const dist = Math.hypot(dx, dy);
+            if (dist < 6) {
+              player.targetX = null;
+              player.targetY = null;
+            } else {
+              player.x += (dx / dist) * player.speed * dt;
+              player.y += (dy / dist) * player.speed * dt;
+              player.walkPhase += dt * 11;
+              player.facing = dx < 0 ? -1 : 1;
+            }
+          }
+        }
+
+        // Clamp player inside garden boundaries
+        player.x = Math.max(78, Math.min(WORLD.w - 78, player.x));
+        player.y = Math.max(92, Math.min(WORLD.h - 86, player.y));
+
+        // Ali Movement & Celebration Animations
+        if (liftHugMode) {
+          ali.x += (player.x - ali.x) * Math.min(1, dt * 8);
+          ali.y += (player.y - ali.y) * Math.min(1, dt * 8);
+          liftHugTimer -= dt;
+          effectSpawnTimer += dt;
+          if (effectSpawnTimer > 0.36) {
+            effectSpawnTimer = 0;
+            spawnBurst(player.x, player.y - 36, 2, ['#ff6da8', '#f6d365'], 'heart');
+          }
+          if (liftHugTimer <= 0) {
+            liftHugMode = false;
+            btnLiftHug.classList.remove('active-mode');
+          }
+        } else if (danceMode) {
+          const targetAliX = player.x + 42 + Math.sin(t * 4) * 8;
+          const targetAliY = player.y + Math.cos(t * 4) * 6;
+          ali.x += (targetAliX - ali.x) * Math.min(1, dt * 6);
+          ali.y += (targetAliY - ali.y) * Math.min(1, dt * 6);
+          ali.walkPhase += dt * 10;
+          player.walkPhase += dt * 10;
+          effectSpawnTimer += dt;
+          if (effectSpawnTimer > 0.55) {
+            effectSpawnTimer = 0;
+            spawnBurst((player.x + ali.x) / 2, player.y - 38, 2, ['#ff6da8', '#f6d365', '#a29bfe'], 'heart');
+          }
+        } else {
+          const dxA = ali.homeX - ali.x;
+          const dyA = ali.homeY - ali.y;
+          if (Math.hypot(dxA, dyA) > 2) {
+            ali.x += dxA * Math.min(1, dt * 4);
+            ali.y += dyA * Math.min(1, dt * 4);
+            ali.walkPhase += dt * 8;
+          }
+        }
+
+        // Cat Companion Follow Behavior
+        if (cat.mode === 'follow') {
+          const dxC = player.x - 42 - cat.x;
+          const dyC = player.y + 18 - cat.y;
+          const distC = Math.hypot(dxC, dyC);
+          if (distC > 12) {
+            const speedC = Math.min(200, distC * 3.2);
+            cat.x += (dxC / distC) * speedC * dt;
+            cat.y += (dyC / distC) * speedC * dt;
+            cat.walkPhase += dt * 11;
+          }
+        }
+
+        // Update Particles
+        for (let i = particles.length - 1; i >= 0; i--) {
+          const p = particles[i];
+          p.x += p.vx * dt;
+          p.y += p.vy * dt;
+          p.vy += (p.type === 'confetti' ? 95 : 35) * dt;
+          p.rot += dt * 4;
+          p.life -= p.decay * dt;
+          if (p.life <= 0) particles.splice(i, 1);
+        }
+
+        // Find Highest-Priority Nearest Interactable
+        const list = getInteractables();
+        let best = null;
+        let bestDist = Infinity;
+        for (let i = 0; i < list.length; i++) {
+          const item = list[i];
+          const d = Math.hypot(player.x - item.x, player.y - item.y);
+          if (d <= item.r) {
+            if (!best || item.priority < best.priority || (item.priority === best.priority && d < bestDist)) {
+              best = item;
+              bestDist = d;
+            }
+          }
+        }
+        nearestTarget = best;
+        interactBtn.classList.toggle('ready', !!nearestTarget && !activeModal && !activeDialogue);
+      }
+
+      function render(t) {
+        // Deep emerald night grass backdrop
+        ctx.fillStyle = '#0f2d23';
+        ctx.fillRect(0, 0, viewW, viewH);
+
+        ctx.save();
+        ctx.translate(viewW / 2 - player.x, viewH / 2 - player.y);
+
+        // Soft garden border vignette frame
+        ctx.strokeStyle = 'rgba(246, 211, 101, 0.22)';
+        ctx.lineWidth = 4;
+        roundRectPath(ctx, 24, 24, WORLD.w - 48, WORLD.h - 48, 42);
+        ctx.stroke();
+
+        // Grass tufts
+        ctx.strokeStyle = 'rgba(65, 168, 122, 0.42)';
+        ctx.lineWidth = 2;
+        ctx.lineCap = 'round';
+        for (let i = 0; i < grassTufts.length; i++) {
+          const g = grassTufts[i];
+          ctx.beginPath();
+          ctx.moveTo(g.x - 4, g.y - 4);
+          ctx.lineTo(g.x, g.y + 3);
+          ctx.lineTo(g.x + 4, g.y - 4);
+          ctx.stroke();
+        }
+
+        // Wildflowers
+        for (let i = 0; i < flowers.length; i++) {
+          const f = flowers[i];
+          ctx.fillStyle = f.color;
+          ctx.beginPath();
+          ctx.arc(f.x - 3, f.y, 2.8, 0, Math.PI * 2);
+          ctx.arc(f.x + 3, f.y, 2.8, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = '#fff5cc';
+          ctx.beginPath();
+          ctx.arc(f.x, f.y, 1.6, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        // Paths & Royal Party Plaza
+        drawGardenPathsAndPlaza(t);
+
+        // Landmarks
+        drawArtZone(t);
+        drawCinemaZone(t);
+        drawGate(t);
+        drawSignPost();
+        drawCake(t);
+
+        // Lamp Posts & Perimeter Trees
+        lampPosts.forEach((lp) => drawLampPost(lp, t));
+        trees.forEach(drawTree);
+
+        // Characters (Special Lift & Hug Composition or Depth-Sorted)
+        if (liftHugMode) {
+          // Warm glowing pink aura around hugging couple
+          const hugAura = ctx.createRadialGradient(ali.x, ali.y - 10, 6, ali.x, ali.y - 10, 58);
+          hugAura.addColorStop(0, 'rgba(255, 109, 168, 0.48)');
+          hugAura.addColorStop(1, 'rgba(255, 109, 168, 0)');
+          ctx.fillStyle = hugAura;
+          ctx.beginPath();
+          ctx.arc(ali.x, ali.y - 10, 58, 0, Math.PI * 2);
+          ctx.fill();
+
+          drawCat(t);
+          drawAli(ali.x, ali.y, t, true, true);
+          drawNoura(ali.x - 10, ali.y - 14, t, true, true);
+          drawFloatingPill('علي ❤️ الملكة نورة', ali.x, ali.y - 68, 'rgba(232, 78, 147, 0.94)', '#f6d365', '#ffffff');
+        } else {
+          const actors = [
+            { y: cat.y, draw: () => drawCat(t) },
+            { y: ali.y, draw: () => drawAli(ali.x, ali.y, t, danceMode, false) },
+            { y: player.y, draw: () => drawNoura(player.x, player.y, t, danceMode, false) }
+          ];
+          actors.sort((a, b) => a.y - b.y);
+          actors.forEach((a) => a.draw());
+
+          // Floating music notes while dancing together
+          if (danceMode) {
+            ctx.font = '18px serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('🎵', player.x - 24, player.y - 42 + Math.sin(t * 5) * 6);
+            ctx.fillText('🎶', ali.x + 24, ali.y - 44 + Math.cos(t * 5) * 6);
+          }
+        }
+
+        // Floating Balloons around the Party Plaza
+        balloons.forEach((b) => drawBalloon(b, t));
+
+        // Ambient Magical Fireflies & Petals
+        for (let i = 0; i < fireflies.length; i++) {
+          const ff = fireflies[i];
+          const fx = ff.x + Math.sin(t * 0.9 + ff.phase) * 18;
+          const fy = ff.y + Math.cos(t * 0.8 + ff.phase) * 14;
+          const alpha = 0.35 + 0.55 * Math.sin(t * 2.4 + ff.phase);
+          ctx.fillStyle = ff.pink ? `rgba(255, 158, 199, ${alpha})` : `rgba(255, 240, 170, ${alpha})`;
+          ctx.beginPath();
+          ctx.arc(fx, fy, ff.r, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        // Dynamic Particles (Fireworks, Confetti, Hearts)
+        drawParticles();
+
+        // Active Interaction Prompt Pill above nearest target
+        if (nearestTarget && gameStarted && !activeModal && !activeDialogue) {
+          const promptY = nearestTarget.y - (nearestTarget.id === 'art' || nearestTarget.id === 'cinema' ? 148 : 80);
+          drawFloatingPill(
+            nearestTarget.label,
+            nearestTarget.x,
+            promptY + Math.sin(t * 5) * 3,
+            'rgba(232, 78, 147, 0.96)',
+            '#fff4c8',
+            '#ffffff'
+          );
+        }
+
+        ctx.restore();
+
+        // Update Rave Cinema animation canvas if modal is open
+        drawCinemaScreen(t);
+      }
+
+      let lastTime = performance.now();
+      function loop(now) {
+        const dt = Math.min(0.05, (now - lastTime) / 1000);
+        lastTime = now;
+        const t = now * 0.001;
+        update(dt, t);
+        render(t);
+        requestAnimationFrame(loop);
+      }
+
+      requestAnimationFrame(loop);
+    })();
+  </script>
 </body>
 </html>
