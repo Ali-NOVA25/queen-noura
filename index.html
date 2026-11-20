@@ -1,344 +1,319 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <title>ليلة الملكة نورة 👑🎂</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&family=Tajawal:wght@500;700;800&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --bg-night: #080d1e;
-      --royal-navy: rgba(12, 18, 42, 0.92);
-      --gold: #f6d365;
-      --pink: #ff8fb8;
-      --pink-deep: #e84e93;
-      --cream: #fff7fb;
-      --font-main: 'Tajawal', 'Cairo', system-ui, -apple-system, sans-serif;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; user-select: none; -webkit-user-select: none; }
-    html, body { width: 100%; height: 100%; overflow: hidden; background: var(--bg-night); font-family: var(--font-main); color: var(--cream); touch-action: none; }
-    #game-container { position: relative; width: 100vw; height: 100vh; height: 100dvh; overflow: hidden; background: radial-gradient(circle at 50% 30%, #16234d 0%, #070b18 100%); }
-    canvas#gameCanvas { display: block; width: 100%; height: 100%; touch-action: none; }
-
-    /* Welcome Overlay */
-    #welcome-overlay {
-      position: absolute; inset: 0; z-index: 55;
-      display: flex; align-items: center; justify-content: center; padding: 20px;
-      background: radial-gradient(circle at 50% 35%, rgba(28, 22, 68, 0.88), rgba(6, 10, 26, 0.94));
-      backdrop-filter: blur(6px); transition: opacity 0.45s ease;
-    }
-    #welcome-overlay.hidden { opacity: 0; pointer-events: none; }
-    .welcome-card {
-      width: min(94%, 390px); text-align: center; padding: 26px 20px; border-radius: 28px;
-      background: linear-gradient(160deg, rgba(24, 24, 62, 0.96), rgba(10, 14, 36, 0.98));
-      border: 2px solid var(--gold); box-shadow: 0 20px 55px rgba(0,0,0,0.75), 0 0 35px rgba(255,143,184,0.3);
-    }
-    .welcome-card h1 {
-      font-family: 'Cairo', var(--font-main); font-size: 1.65rem; font-weight: 900; margin: 8px 0 6px;
-      background: linear-gradient(135deg, #fff6d1, #f6d365, #ffa3c7); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    .welcome-card p { font-size: 0.95rem; line-height: 1.65; color: #f6e7f2; margin-bottom: 18px; }
-    #start-game-btn {
-      font-family: var(--font-main); font-size: 1.08rem; font-weight: 900; color: #fff;
-      background: linear-gradient(135deg, #ff7eb3, #e84e93, #f6b93b);
-      border: 2px solid #fff3c4; border-radius: 999px; padding: 13px 28px; cursor: pointer;
-      box-shadow: 0 10px 28px rgba(255, 92, 158, 0.65); animation: pulseBtn 1.5s infinite ease-in-out;
-    }
-    @keyframes pulseBtn { 0%,100% { transform: scale(1); } 50% { transform: scale(1.06); } }
-
-    /* Top HUD */
-    #top-hud {
-      position: absolute; top: max(10px, env(safe-area-inset-top)); left: 50%; transform: translateX(-50%);
-      width: min(96%, 540px); display: flex; align-items: center; justify-content: space-between; gap: 6px;
-      padding: 7px 10px; background: var(--royal-navy); backdrop-filter: blur(12px);
-      border: 1.5px solid rgba(246, 211, 101, 0.6); border-radius: 20px;
-      box-shadow: 0 8px 26px rgba(0, 0, 0, 0.45); z-index: 20; transition: opacity 0.35s ease, transform 0.35s ease;
-    }
-    #top-hud.hidden { opacity: 0; pointer-events: none; transform: translate(-50%, -18px); }
-    .hud-badge {
-      background: linear-gradient(135deg, rgba(255,117,165,0.28), rgba(246,211,101,0.2));
-      border: 1px solid rgba(255,162,196,0.55); padding: 5px 9px; border-radius: 999px;
-      font-weight: 800; font-size: 0.78rem; white-space: nowrap; color: #ffe6f0;
-    }
-    #cat-state-btn {
-      font-family: var(--font-main); background: linear-gradient(135deg, rgba(255,143,184,0.26), rgba(140,120,255,0.26));
-      border: 1.5px solid rgba(255,186,214,0.72); color: #fff5fa; padding: 5px 10px; border-radius: 999px;
-      font-weight: 800; font-size: 0.75rem; cursor: pointer; white-space: nowrap;
-    }
-    .hud-hint { flex: 1; font-size: 0.72rem; color: #f7e9c8; text-align: center; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    #sound-btn {
-      width: 34px; height: 34px; flex-shrink: 0; border-radius: 50%;
-      border: 1.5px solid rgba(246,211,101,0.65); background: rgba(255,255,255,0.08);
-      color: var(--gold); font-size: 0.95rem; display: flex; align-items: center; justify-content: center; cursor: pointer;
-    }
-
-    /* Toast */
-    #toast-banner {
-      position: absolute; top: calc(max(10px, env(safe-area-inset-top)) + 56px); left: 50%;
-      transform: translateX(-50%) translateY(-10px);
-      background: linear-gradient(135deg, rgba(255,118,170,0.95), rgba(185,110,235,0.95));
-      color: #fff; padding: 7px 16px; border-radius: 999px; font-size: 0.84rem; font-weight: 800;
-      border: 1.5px solid #fff3c4; box-shadow: 0 8px 22px rgba(255,105,165,0.45);
-      opacity: 0; pointer-events: none; z-index: 25; white-space: nowrap; transition: opacity 0.3s ease, transform 0.3s ease;
-    }
-    #toast-banner.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-
-    /* Controls */
-    #controls-layer {
-      position: absolute; bottom: max(18px, env(safe-area-inset-bottom)); left: 0; right: 0;
-      padding: 0 18px; display: flex; justify-content: space-between; align-items: flex-end;
-      pointer-events: none; z-index: 20; direction: ltr; transition: opacity 0.25s ease;
-    }
-    #controls-layer.hidden { opacity: 0; pointer-events: none !important; }
-    #controls-layer.hidden * { pointer-events: none !important; }
-    #joystick-zone {
-      position: relative; width: 118px; height: 118px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(12,18,42,0.62) 100%);
-      border: 2px solid rgba(246,211,101,0.5); box-shadow: 0 6px 24px rgba(0,0,0,0.45);
-      backdrop-filter: blur(6px); pointer-events: auto; touch-action: none;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .joy-arrow { position: absolute; font-size: 10px; color: rgba(246,211,101,0.58); pointer-events: none; }
-    .joy-arrow.up { top: 8px; left: 50%; transform: translateX(-50%); }
-    .joy-arrow.down { bottom: 8px; left: 50%; transform: translateX(-50%); }
-    .joy-arrow.left { left: 10px; top: 50%; transform: translateY(-50%); }
-    .joy-arrow.right { right: 10px; top: 50%; transform: translateY(-50%); }
-    #joystick-knob {
-      width: 46px; height: 46px; border-radius: 50%;
-      background: linear-gradient(145deg, #ffb6d3, #ff7eb0); border: 2.5px solid #fff3c4;
-      box-shadow: 0 4px 16px rgba(255,126,176,0.65); transform: translate(0,0); pointer-events: none;
-    }
-    .right-buttons-col { display: flex; flex-direction: column; align-items: flex-end; gap: 9px; }
-    #party-actions-row { display: flex; gap: 6px; direction: rtl; flex-wrap: wrap; justify-content: flex-end; }
-    .party-mini-btn {
-      font-family: var(--font-main); font-size: 0.78rem; font-weight: 800; color: #fff8dc;
-      background: linear-gradient(135deg, rgba(135,65,185,0.92), rgba(225,78,147,0.92));
-      border: 1.5px solid var(--gold); border-radius: 999px; padding: 6px 11px; cursor: pointer;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.45); pointer-events: auto; transition: transform 0.14s ease;
-    }
-    .party-mini-btn.active-mode { background: linear-gradient(135deg, #f6c343, #ff7eb3); color: #1b0f26; box-shadow: 0 0 16px rgba(246,211,101,0.85); }
-    .party-mini-btn:active { transform: scale(0.92); }
-    #action-btn {
-      width: 82px; height: 82px; border-radius: 50%; border: 2.5px solid rgba(246,211,101,0.75);
-      background: linear-gradient(145deg, rgba(35,42,85,0.9), rgba(16,22,52,0.94));
-      color: #ffe8c2; font-family: var(--font-main); font-size: 0.82rem; font-weight: 800;
-      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.5); pointer-events: auto; cursor: pointer; direction: rtl; text-align: center;
-    }
-    #action-btn .act-icon { font-size: 1.25rem; line-height: 1; }
-    #action-btn.ready {
-      background: linear-gradient(145deg, #ff85b5, #e84e93); border-color: #fff2b2; color: #fff;
-      box-shadow: 0 0 24px rgba(255,133,181,0.9); animation: pulseBtn 1.25s infinite ease-in-out;
-    }
-
-    /* Dialogue */
-    #dialogue-overlay {
-      position: absolute; inset: 0; z-index: 35; display: flex; align-items: flex-end; justify-content: center;
-      padding: 14px 12px max(22px, env(safe-area-inset-bottom));
-      background: linear-gradient(to top, rgba(4,7,18,0.65) 0%, rgba(4,7,18,0) 48%);
-      opacity: 0; pointer-events: none; transition: opacity 0.25s ease;
-    }
-    #dialogue-overlay.active { opacity: 1; pointer-events: auto; }
-    #dialogue-box {
-      width: min(96%, 520px); background: linear-gradient(160deg, rgba(16,24,58,0.97), rgba(9,14,36,0.99));
-      border: 2px solid var(--gold); border-radius: 22px; padding: 14px 16px;
-      box-shadow: 0 14px 40px rgba(0,0,0,0.75); display: flex; align-items: center; gap: 14px; cursor: pointer;
-    }
-    #dialogue-portrait {
-      width: 68px; height: 68px; flex-shrink: 0; border-radius: 18px;
-      border: 2px solid rgba(246,211,101,0.85); background: radial-gradient(circle at 50% 35%, #2a346e, #121735);
-      display: flex; align-items: center; justify-content: center; font-size: 2.1rem;
-    }
-    .dialogue-content { flex: 1; display: flex; flex-direction: column; gap: 6px; }
-    #dialogue-name {
-      align-self: flex-start; background: linear-gradient(90deg, rgba(246,211,101,0.26), rgba(255,143,184,0.24));
-      border: 1px solid rgba(246,211,101,0.65); color: var(--gold); font-weight: 800; font-size: 0.84rem;
-      padding: 2px 12px; border-radius: 999px;
-    }
-    #dialogue-text { font-size: 0.93rem; line-height: 1.58; color: #fff7fb; font-weight: 600; min-height: 38px; }
-    #dialogue-next { align-self: flex-end; font-size: 0.78rem; color: var(--gold); font-weight: 800; }
-    #dialogue-choices { display: none; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
-    #dialogue-choices.visible { display: flex; }
-    .choice-pill {
-      font-family: var(--font-main); font-size: 0.78rem; font-weight: 800; padding: 6px 12px;
-      border-radius: 999px; border: 1.5px solid var(--gold);
-      background: linear-gradient(135deg, rgba(255,133,181,0.28), rgba(246,211,101,0.2));
-      color: #fff8dc; cursor: pointer;
-    }
-
-    /* Modals */
-    .studio-modal {
-      position: absolute; inset: 0; z-index: 42; display: flex; align-items: center; justify-content: center;
-      padding: 16px; background: rgba(4,7,20,0.78); backdrop-filter: blur(8px);
-      opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
-    }
-    .studio-modal.active { opacity: 1; pointer-events: auto; }
-    .studio-card {
-      width: min(96%, 430px); max-height: 90dvh; overflow-y: auto;
-      background: linear-gradient(165deg, rgba(22,28,66,0.98), rgba(10,14,34,0.99));
-      border: 2px solid var(--gold); border-radius: 26px; padding: 18px 16px;
-      box-shadow: 0 20px 55px rgba(0,0,0,0.8); text-align: center;
-    }
-    .studio-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-    .studio-title { font-family: 'Cairo', var(--font-main); font-size: 1.12rem; font-weight: 900; color: var(--gold); }
-    .close-modal-btn {
-      width: 34px; height: 34px; border-radius: 50%; border: 1.5px solid rgba(255,162,198,0.6);
-      background: rgba(255,255,255,0.08); color: #fff; font-size: 1rem; font-weight: 800; cursor: pointer;
-    }
-    .tab-switcher { display: flex; gap: 7px; margin-bottom: 12px; flex-wrap: wrap; justify-content: center; }
-    .tab-btn {
-      font-family: var(--font-main); font-size: 0.8rem; font-weight: 800; padding: 6px 12px;
-      border-radius: 999px; border: 1.5px solid rgba(246,211,101,0.45); background: rgba(255,255,255,0.06);
-      color: #f3e8ff; cursor: pointer;
-    }
-    .tab-btn.active { background: linear-gradient(135deg, #ff85b5, #f6c343); color: #180d24; border-color: #fff5cc; }
-    canvas#cinemaCanvas { width: 100%; height: 195px; border-radius: 18px; border: 2px solid rgba(255,143,184,0.55); background: #090e26; display: block; margin-bottom: 10px; }
-    .cinema-caption { font-size: 0.88rem; line-height: 1.55; color: #ffe8f2; background: rgba(255,255,255,0.05); border-radius: 14px; padding: 10px 12px; }
-    canvas#drawCanvas { width: 100%; height: 210px; border-radius: 18px; border: 2px solid rgba(246,211,101,0.65); background: #fff9fc; display: block; touch-action: none; margin-bottom: 10px; }
-    .draw-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
-    .color-swatches { display: flex; gap: 8px; align-items: center; }
-    .swatch-btn { width: 26px; height: 26px; border-radius: 50%; border: 2px solid #fff; cursor: pointer; }
-    .swatch-btn.active { transform: scale(1.22); box-shadow: 0 0 10px #fff; }
-    .clear-draw-btn {
-      font-family: var(--font-main); font-size: 0.8rem; font-weight: 800; padding: 6px 12px; border-radius: 999px;
-      border: 1px solid rgba(255,143,184,0.6); background: rgba(255,92,156,0.22); color: #ffd8e8; cursor: pointer;
-    }
-    .couple-sketch-frame { background: linear-gradient(145deg, #fffdf9, #fff0f6); color: #241838; border: 2px solid var(--gold); border-radius: 18px; padding: 14px; }
-    .couple-names-banner { font-family: 'Cairo', var(--font-main); font-size: 1.08rem; font-weight: 900; color: #b52b65; margin-top: 8px; }
-
-    /* Blow Candles & Keepsake */
-    #blow-overlay {
-      position: absolute; inset: 0; z-index: 40; display: flex; flex-direction: column;
-      align-items: center; justify-content: flex-end; padding-bottom: max(90px, 13vh);
-      background: radial-gradient(circle at 50% 42%, rgba(255,175,204,0.08), rgba(6,10,26,0.58));
-      opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
-    }
-    #blow-overlay.active { opacity: 1; pointer-events: auto; }
-    .wish-hint {
-      font-size: 0.96rem; font-weight: 800; color: #fff1c9; background: rgba(12,18,42,0.88);
-      padding: 8px 18px; border-radius: 999px; border: 1px solid rgba(246,211,101,0.55); margin-bottom: 14px;
-    }
-    #blow-btn {
-      font-family: var(--font-main); font-size: 1.15rem; font-weight: 900; color: #fff;
-      background: linear-gradient(135deg, #ff7eb3 0%, #ff4f93 52%, #f6b93b 100%);
-      border: 2.5px solid #fff4c2; border-radius: 999px; padding: 14px 30px; cursor: pointer;
-      box-shadow: 0 10px 34px rgba(255,92,158,0.75); animation: pulseBtn 1.4s infinite ease-in-out;
-    }
-    #finale-modal {
-      position: absolute; inset: 0; z-index: 45; display: flex; align-items: center; justify-content: center;
-      padding: 20px; background: rgba(5,8,22,0.68); backdrop-filter: blur(6px);
-      opacity: 0; pointer-events: none; transition: opacity 0.5s ease;
-    }
-    #finale-modal.active { opacity: 1; pointer-events: auto; }
-    .keepsake-card {
-      width: min(94%, 410px); background: linear-gradient(160deg, rgba(28,22,62,0.97), rgba(12,16,42,0.99));
-      border: 2.5px solid var(--gold); border-radius: 28px; padding: 22px 18px; text-align: center;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.75), 0 0 40px rgba(255,133,181,0.4);
-    }
-    .keepsake-crown { font-size: 2.3rem; margin-bottom: 4px; }
-    .keepsake-title {
-      font-family: 'Cairo', var(--font-main); font-size: 1.38rem; font-weight: 900;
-      background: linear-gradient(135deg, #fff6d1, #f6d365, #ffa3c7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 6px;
-    }
-    .keepsake-sub { font-size: 0.94rem; font-weight: 800; color: #ffd3e6; margin-bottom: 10px; }
-    .keepsake-poem {
-      font-size: 0.88rem; line-height: 1.75; color: #f6eef9; background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(246,211,101,0.35); border-radius: 16px; padding: 12px 14px; margin-bottom: 14px;
-    }
-    .keepsake-actions { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
-    .keepsake-btn {
-      font-family: var(--font-main); font-size: 0.88rem; font-weight: 800; padding: 10px 18px;
-      border-radius: 999px; border: 1.5px solid var(--gold); cursor: pointer;
-      background: linear-gradient(135deg, #ff7eb3, #e84e93); color: #fff;
-    }
-    .keepsake-btn.secondary { background: rgba(255,255,255,0.1); color: #fff4c2; }
-  </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"/>
+<title>ليلة الملكة نورة 👑🎂</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;900&family=Tajawal:wght@500;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root{--g:#f6d365;--p:#ff8fb8;--pd:#e84e93;--f:'Tajawal','Cairo',sans-serif}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+html,body{width:100%;height:100%;overflow:hidden;background:#080d1e;font-family:var(--f);color:#fff7fb;touch-action:none}
+#app{position:relative;width:100vw;height:100dvh;overflow:hidden;background:radial-gradient(circle at 50% 30%,#16234d,#070b18)}
+#gc{display:block;width:100%;height:100%;touch-action:none}
+.ov{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(5,8,22,.78);backdrop-filter:blur(7px);opacity:0;pointer-events:none;transition:opacity .3s;z-index:42}
+.ov.on{opacity:1;pointer-events:auto}
+#wO{z-index:55;background:radial-gradient(circle at 50% 35%,rgba(28,22,68,.9),rgba(6,10,26,.96))}
+.card{width:min(95%,410px);max-height:90dvh;overflow-y:auto;text-align:center;padding:20px 16px;border-radius:26px;background:linear-gradient(160deg,rgba(24,24,62,.97),rgba(10,14,36,.99));border:2px solid var(--g);box-shadow:0 20px 55px rgba(0,0,0,.78)}
+.gt{font-family:'Cairo',var(--f);font-weight:900;background:linear-gradient(135deg,#fff6d1,#f6d365,#ffa3c7);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.btn{font-family:var(--f);font-weight:900;color:#fff;background:linear-gradient(135deg,#ff7eb3,#e84e93,#f6b93b);border:2px solid #fff3c4;border-radius:999px;padding:12px 26px;font-size:1.05rem;cursor:pointer;box-shadow:0 8px 26px rgba(255,92,158,.65)}
+.pulse{animation:pl 1.4s infinite ease-in-out}@keyframes pl{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+#hud{position:absolute;top:max(10px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);width:min(96%,520px);display:flex;align-items:center;justify-content:space-between;gap:6px;padding:7px 10px;background:rgba(12,18,42,.92);border:1.5px solid rgba(246,211,101,.6);border-radius:20px;z-index:20;transition:.3s}
+#hud.off,#ctrl.off{opacity:0;pointer-events:none!important}#ctrl.off *{pointer-events:none!important}
+.pill{background:rgba(255,143,184,.24);border:1px solid rgba(255,186,214,.65);color:#fff5fa;padding:5px 9px;border-radius:999px;font-weight:800;font-size:.75rem;white-space:nowrap;font-family:var(--f);cursor:pointer}
+#hH{flex:1;font-size:.72rem;color:#f7e9c8;text-align:center;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#sndB{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--g);background:rgba(255,255,255,.08);color:var(--g);font-size:.95rem;cursor:pointer}
+#tst{position:absolute;top:calc(max(10px,env(safe-area-inset-top)) + 54px);left:50%;transform:translateX(-50%) translateY(-10px);background:linear-gradient(135deg,#ff76aa,#b96eeb);color:#fff;padding:7px 15px;border-radius:999px;font-size:.82rem;font-weight:800;border:1.5px solid #fff3c4;opacity:0;pointer-events:none;z-index:25;white-space:nowrap;transition:.3s}
+#tst.on{opacity:1;transform:translateX(-50%) translateY(0)}
+#ctrl{position:absolute;bottom:max(16px,env(safe-area-inset-bottom));left:0;right:0;padding:0 16px;display:flex;justify-content:space-between;align-items:flex-end;pointer-events:none;z-index:20;direction:ltr}
+#jZ{position:relative;width:116px;height:116px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.1),rgba(12,18,42,.65));border:2px solid rgba(246,211,101,.55);pointer-events:auto;touch-action:none;display:flex;align-items:center;justify-content:center}
+#jK{width:46px;height:46px;border-radius:50%;background:linear-gradient(145deg,#ffb6d3,#ff7eb0);border:2.5px solid #fff3c4;pointer-events:none}
+.rcol{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.prow{display:flex;gap:6px;direction:rtl;flex-wrap:wrap;justify-content:flex-end}
+.mb{font-family:var(--f);font-size:.76rem;font-weight:800;color:#fff8dc;background:linear-gradient(135deg,#8741b9,#e14e93);border:1.5px solid var(--g);border-radius:999px;padding:6px 10px;cursor:pointer;pointer-events:auto}
+.mb.on{background:linear-gradient(135deg,#f6c343,#ff7eb3);color:#1b0f26}
+#aB{width:80px;height:80px;border-radius:50%;border:2.5px solid rgba(246,211,101,.75);background:rgba(20,26,58,.94);color:#ffe8c2;font-family:var(--f);font-size:.82rem;font-weight:800;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:auto;cursor:pointer;direction:rtl}
+#aB.rdy{background:linear-gradient(145deg,#ff85b5,#e84e93);border-color:#fff2b2;color:#fff;box-shadow:0 0 22px rgba(255,133,181,.9);animation:pl 1.2s infinite}
+#dO{align-items:flex-end;padding:14px 12px max(20px,env(safe-area-inset-bottom));background:linear-gradient(to top,rgba(4,7,18,.7),transparent 50%);z-index:35}
+#dBox{width:min(96%,500px);background:rgba(13,20,48,.98);border:2px solid var(--g);border-radius:22px;padding:13px 15px;display:flex;align-items:center;gap:12px;cursor:pointer}
+#dP{width:62px;height:62px;flex-shrink:0;border-radius:16px;border:2px solid var(--g);background:#1b2350;display:flex;align-items:center;justify-content:center;font-size:2rem}
+.sh{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.xb{width:32px;height:32px;border-radius:50%;border:1.5px solid var(--p);background:rgba(255,255,255,.08);color:#fff;font-weight:800;cursor:pointer}
+.tabs{display:flex;gap:6px;margin-bottom:10px;justify-content:center;flex-wrap:wrap}
+.tb{font-family:var(--f);font-size:.78rem;font-weight:800;padding:6px 11px;border-radius:999px;border:1.5px solid rgba(246,211,101,.5);background:rgba(255,255,255,.06);color:#f3e8ff;cursor:pointer}
+.tb.on{background:linear-gradient(135deg,#ff85b5,#f6c343);color:#180d24}
+#cC{width:100%;height:185px;border-radius:16px;border:2px solid var(--p);background:#090e26;display:block;margin-bottom:9px}
+#dCv{width:100%;height:195px;border-radius:16px;border:2px solid var(--g);background:#fff9fc;display:block;touch-action:none;margin-bottom:9px}
+.sw{width:26px;height:26px;border-radius:50%;border:2px solid #fff;cursor:pointer}.sw.on{transform:scale(1.2)}
+#bO{flex-direction:column;justify-content:flex-end;padding-bottom:max(90px,13vh);background:rgba(6,10,26,.55);z-index:40}
+.poem{font-size:.88rem;line-height:1.75;background:rgba(255,255,255,.07);border:1px solid rgba(246,211,101,.4);border-radius:16px;padding:12px;margin:10px 0 14px}
+</style>
 </head>
 <body>
-  <div id="game-container">
-    <canvas id="gameCanvas"></canvas>
+<div id="app">
+<canvas id="gc"></canvas>
 
-    <!-- Welcome Overlay -->
-    <div id="welcome-overlay">
-      <div class="welcome-card">
-        <div style="font-size:2.6rem;">👑🎂✨</div>
-        <h1>ليلة الملكة نورة</h1>
-        <p>هدية خاصة بمناسبة عيد ميلادكِ السادس عشر 🌸<br/>تجولي في الحديقة الملكية، زوري السينما والمرسم، تحدثي مع علي، وانفخي الـ 16 شمعة!</p>
-        <button id="start-game-btn">✨ ابدئي الاحتفال يا ملكة 👑</button>
+<div id="wO" class="ov on">
+  <div class="card">
+    <div style="font-size:2.5rem">👑🎂✨</div>
+    <h1 class="gt" style="font-size:1.6rem;margin:6px 0">ليلة الملكة نورة</h1>
+    <p style="font-size:.93rem;line-height:1.65;color:#f6e7f2;margin-bottom:16px">هدية خاصة لعيد ميلادكِ السادس عشر 🌸<br/>تجولي بالحديقة الملكية، افتحي السينما والمرسم، تحدّثي مع علي، وانفخي الـ 16 شمعة!</p>
+    <button id="sBtn" class="btn pulse">✨ ابدئي الاحتفال يا ملكة 👑</button>
+  </div>
+</div>
+
+<div id="hud" class="off">
+  <span class="pill" id="pB">✨ 0 / 4</span>
+  <button class="pill" id="catB">🐱 القطة: تتبعني</button>
+  <span id="hH">اقتربي من الأركان</span>
+  <button id="sndB">🔊</button>
+</div>
+<div id="tst">✨ أهلاً بالملكة نورة!</div>
+
+<div id="ctrl" class="off">
+  <div id="jZ"><div id="jK"></div></div>
+  <div class="rcol">
+    <div class="prow">
+      <button class="mb" id="bDn">💃 رقص</button>
+      <button class="mb" id="bHg">🤗 عناق</button>
+      <button class="mb" id="bFw">🎆 ألعاب نارية</button>
+    </div>
+    <button id="aB"><span id="aI" style="font-size:1.2rem">✨</span><span id="aL">تفاعل</span></button>
+  </div>
+</div>
+
+<div id="dO" class="ov">
+  <div id="dBox">
+    <div id="dP">🤴</div>
+    <div style="flex:1;display:flex;flex-direction:column;gap:5px">
+      <span id="dN" style="color:var(--g);font-weight:800;font-size:.84rem">علي 👑</span>
+      <div id="dT" style="font-size:.92rem;line-height:1.55"></div>
+      <div id="dC" style="display:none;flex-wrap:wrap;gap:6px;margin-top:4px"></div>
+      <div id="dNx" style="align-self:flex-end;font-size:.76rem;color:var(--g);font-weight:800">اضغطي للمتابعة ◀</div>
+    </div>
+  </div>
+</div>
+
+<div id="cM" class="ov">
+  <div class="card">
+    <div class="sh"><span style="color:var(--g);font-weight:900">🎬 سينما الملكة نورة</span><button class="xb" id="cCl">✕</button></div>
+    <div class="tabs">
+      <button class="tb ct on" data-s="0">🌙 ليلة النجوم</button>
+      <button class="tb ct" data-s="1">🎂 الـ 16 شمعة</button>
+      <button class="tb ct" data-s="2">💖 لحظتنا</button>
+    </div>
+    <canvas id="cC" width="360" height="185"></canvas>
+    <div id="cCap" style="font-size:.86rem;line-height:1.5;background:rgba(255,255,255,.06);padding:9px;border-radius:12px">تحت سماء النجوم.. كل نجمة تتمنى لنورة عاماً سعيداً ✨</div>
+  </div>
+</div>
+
+<div id="aM" class="ov">
+  <div class="card">
+    <div class="sh"><span style="color:var(--g);font-weight:900">🎨 مرسم الذكريات</span><button class="xb" id="aCl">✕</button></div>
+    <div class="tabs">
+      <button class="tb on" id="tDr">🖌️ ارسمي أمنيتك</button>
+      <button class="tb" id="tCp">💌 لوحة علي ونورة</button>
+    </div>
+    <div id="pDr">
+      <canvas id="dCv" width="360" height="195"></canvas>
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div style="display:flex;gap:7px">
+          <button class="sw on" data-c="#e84e93" style="background:#e84e93"></button>
+          <button class="sw" data-c="#f6b93b" style="background:#f6b93b"></button>
+          <button class="sw" data-c="#6c5ce7" style="background:#6c5ce7"></button>
+          <button class="sw" data-c="#00b894" style="background:#00b894"></button>
+          <button class="sw" data-c="#222f3e" style="background:#222f3e"></button>
+        </div>
+        <button class="pill" id="clDr">مسح اللوحة</button>
       </div>
     </div>
-
-    <!-- Top HUD -->
-    <div id="top-hud" class="hidden">
-      <div class="hud-badge" id="progress-badge">✨ 0 / 4</div>
-      <button id="cat-state-btn">🐱 القطة: تتبعني</button>
-      <div class="hud-hint" id="hud-hint">تجولي واكتشفي المفاجآت</div>
-      <button id="sound-btn" aria-label="الصوت">🔊</button>
+    <div id="pCp" style="display:none;background:#fff5fa;color:#b52b65;border:2px solid var(--g);border-radius:18px;padding:12px">
+      <svg viewBox="0 0 300 165" width="100%" height="155">
+        <rect width="300" height="165" rx="14" fill="#fff5fa"/>
+        <text x="150" y="48" text-anchor="middle" font-size="28">💖</text>
+        <g transform="translate(86,48)"><rect x="8" y="46" width="28" height="42" rx="10" fill="#1e2a5e"/><circle cx="22" cy="26" r="17" fill="#ffd9c4"/><path d="M5,22 Q22,2 39,22 Q33,11 22,11 Q11,11 5,22Z" fill="#1a1d2e"/><circle cx="16" cy="26" r="2" fill="#1a1d2e"/><circle cx="28" cy="26" r="2" fill="#1a1d2e"/><path d="M17,34 Q22,38 27,34" stroke="#b5446e" stroke-width="2" fill="none"/></g>
+        <g transform="translate(170,60)"><path d="M4,22 Q22,-4 40,22 L42,50 Q22,44 2,50Z" fill="#ff8fb8"/><rect x="8" y="40" width="28" height="36" rx="12" fill="#e84e93"/><circle cx="22" cy="25" r="16" fill="#ffe0d0"/><path d="M6,21 Q22,6 38,21 Q30,13 22,14 Q14,13 6,21Z" fill="#ff73ab"/><polygon points="12,9 16,1 22,7 28,1 32,9" fill="#f6d365"/><circle cx="16" cy="26" r="2" fill="#1a1d2e"/><circle cx="28" cy="26" r="2" fill="#1a1d2e"/><path d="M17,33 Q22,37 27,33" stroke="#b5446e" stroke-width="2" fill="none"/></g>
+        <text x="150" y="152" text-anchor="middle" font-size="13" fill="#8b3a62" font-weight="bold">كل عام وأنتِ أجمل حكاية ✨</text>
+      </svg>
+      <div style="font-weight:900;font-size:1.05rem;margin-top:6px">علي ❤️ نورة — Sweet 16 👑</div>
     </div>
+  </div>
+</div>
 
-    <!-- Toast -->
-    <div id="toast-banner">✨ أهلاً بالملكة نورة!</div>
+<div id="bO" class="ov">
+  <div style="background:rgba(12,18,42,.9);border:1px solid var(--g);padding:8px 16px;border-radius:999px;font-weight:800;margin-bottom:12px;color:#fff1c9">تمنّي أمنية لعامكِ الـ 16 ثم انفخي الشموع ✨</div>
+  <button id="bBtn" class="btn pulse">🌬️ انفخي الـ 16 شمعة 🎂</button>
+</div>
 
-    <!-- Touch Controls -->
-    <div id="controls-layer" class="hidden">
-      <div id="joystick-zone">
-        <span class="joy-arrow up">▲</span>
-        <span class="joy-arrow down">▼</span>
-        <span class="joy-arrow left">◀</span>
-        <span class="joy-arrow right">▶</span>
-        <div id="joystick-knob"></div>
-      </div>
-      <div class="right-buttons-col">
-        <div id="party-actions-row">
-          <button class="party-mini-btn" id="btn-dance">💃 رقص</button>
-          <button class="party-mini-btn" id="btn-hug">🤗 عناق</button>
-          <button class="party-mini-btn" id="btn-fireworks">🎆 ألعاب نارية</button>
-        </div>
-        <button id="action-btn">
-          <span class="act-icon" id="action-icon">✨</span>
-          <span id="action-label">تفاعل</span>
-        </button>
-      </div>
+<div id="fM" class="ov" style="z-index:45">
+  <div class="card">
+    <div style="font-size:2.3rem">👑🎂💖</div>
+    <div class="gt" style="font-size:1.35rem;margin:4px 0">كل عام وأنتِ بخير يا نورة!</div>
+    <div style="color:#ffd3e6;font-weight:800;font-size:.92rem">عامكِ السادس عشر مليء بالسعادة ✨</div>
+    <div class="poem">كل عام ونويرتي أجمل ملكة في الدنيا 🌸<br/>صرتي 16 سنة، وكبرتِ وكبر معكِ كل شي حلو بحياتي.<br/>يا رب هالسنة كلها ضحك ونجاح وأيام تشبه لطافة قلبك.<br/><strong>— من علوشي، بكل حب 💛👑</strong></div>
+    <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+      <button class="btn" id="fCl" style="padding:9px 18px;font-size:.88rem">✨ كمّلي الاحتفال</button>
+      <button class="pill" id="fFw" style="padding:9px 16px;font-size:.86rem">🎆 ألعاب نارية</button>
     </div>
+  </div>
+</div>
+</div>
 
-    <!-- Dialogue Overlay -->
-    <div id="dialogue-overlay">
-      <div id="dialogue-box">
-        <div id="dialogue-portrait">👑</div>
-        <div class="dialogue-content">
-          <div id="dialogue-name">علي</div>
-          <div id="dialogue-text"></div>
-          <div id="dialogue-choices"></div>
-          <div id="dialogue-next">اضغطي للمتابعة ◀</div>
-        </div>
-      </div>
-    </div>
+<script>
+(()=>{
+const $=id=>document.getElementById(id),c=$('gc'),x=c.getContext('2d');
+let W=innerWidth,H=innerHeight,D=Math.min(devicePixelRatio||1,2);
+const rsz=()=>{W=innerWidth;H=innerHeight;c.width=W*D;c.height=H*D;x.setTransform(D,0,0,D,0,0)};
+addEventListener('resize',rsz);rsz();
 
-    <!-- Cinema Modal -->
-    <div class="studio-modal" id="cinema-modal">
-      <div class="studio-card">
-        <div class="studio-header">
-          <div class="studio-title">🎬 سينما الملكة نورة</div>
-          <button class="close-modal-btn" id="close-cinema">✕</button>
-        </div>
-        <div class="tab-switcher">
-          <button class="tab-btn cinema-tab active" data-scene="0">🌙 ليلة النجوم</button>
-          <button class="tab-btn cinema-tab" data-scene="1">🎂 الـ 16 شمعة</button>
-          <button class="tab-btn cinema-tab" data-scene="2">💖 لحظتنا</button>
-        </div>
-        <canvas id="cinemaCanvas" width="380" height="195"></canvas>
-        <div class="cinema-caption" id="cinema-caption">تحت سماء النجوم.. كل نجمة تتمنى لنورة عاماً سعيداً مليئاً بالضحك والأحلام ✨</div>
-      </div>
-    </div>
+const rr=(ctx,X,Y,w,h,r)=>{ctx.beginPath();ctx.moveTo(X+r,Y);ctx.arcTo(X+w,Y,X+w,Y+h,r);ctx.arcTo(X+w,Y+h,X,Y+h,r);ctx.arcTo(X,Y+h,X,Y,r);ctx.arcTo(X,Y,X+w,Y,r);ctx.closePath()};
 
-    <!-- Art / Sketchbook Modal -->
-    <div class="studio-modal" id="art-modal">
-      <div class="studio-card">
-        <div class="studio-header">
-          <div class="studio-title">🎨 مرسم الذكريات</div>
-          <button class="close-modal-btn" id="close-art">✕</button>
-        </div>
-        <div class="tab-switcher">
-          <button class="tab-btn active" id="ar
+let ac=null,snd=true;
+const initA=()=>{if(!ac){const A=window.AudioContext||window.webkitAudioContext;if(A)ac=new A()}if(ac&&ac.state==='suspended')ac.resume()};
+const beep=(f,d=.14,tp='sine',v=.11,dl=0)=>{if(!snd||!ac)return;const n=ac.currentTime+dl,o=ac.createOscillator(),g=ac.createGain();o.type=tp;o.frequency.setValueAtTime(f,n);g.gain.setValueAtTime(.001,n);g.gain.exponentialRampToValueAtTime(v,n+.02);g.gain.exponentialRampToValueAtTime(.001,n+d);o.connect(g);g.connect(ac.destination);o.start(n);o.stop(n+d+.02)};
+const bdaySong=()=>{if(!snd||!ac)return;let t=.05;[[262,.2],[262,.18],[294,.36],[262,.36],[349,.36],[330,.64],[262,.2],[262,.18],[294,.36],[262,.36],[392,.36],[349,.64],[262,.2],[262,.18],[523,.36],[440,.36],[349,.36],[330,.36],[294,.6],[466,.2],[466,.18],[440,.36],[349,.36],[392,.36],[349,.7]].forEach(([f,d])=>{beep(f,d*.88,'triangle',.13,t);t+=d})};
+
+const WD={w:920,h:740},pl={x:460,y:520,sp:195,wp:0,dn:false},ali={x:525,y:310,hx:525,hy:310,hg:false,ht:0},cat={x:415,y:535,fl:true};
+const vis={ali:0,cinema:0,art:0,cake:0};
+let lit=true,go=false,mod=false,near=null,tstT=null;
+const sts=[{id:'cake',x:460,y:240,r:78,ic:'🎂',lb:'الكيكة'},{id:'ali',x:525,y:310,r:66,ic:'👑',lb:'علي'},{id:'cinema',x:230,y:340,r:76,ic:'🎬',lb:'السينما'},{id:'art',x:690,y:340,r:76,ic:'🎨',lb:'المرسم'}];
+const stars=Array.from({length:70},()=>({x:Math.random()*WD.w,y:Math.random()*WD.h,r:1+Math.random()*2,tw:Math.random()*6}));
+const lants=[[190,175],[460,130],[730,175],[180,510],[740,510]],pts=[];
+
+const burst=(X,Y,n=24,cols=['#ff8fb8','#f6d365','#fff','#a29bfe'],ht=false)=>{for(let i=0;i<n;i++){const a=6.28*i/n+Math.random()*.4,s=45+Math.random()*140;pts.push({x:X,y:Y,vx:Math.cos(a)*s,vy:Math.sin(a)*s-(ht?35:20),l:1,dc:.55+Math.random()*.5,sz:ht?14:3+Math.random()*3,c:cols[i%cols.length],ht})}};
+const fw=(k=4)=>{for(let i=0;i<k;i++)setTimeout(()=>{burst(pl.x+(Math.random()-.5)*300,pl.y-60+(Math.random()-.5)*160,30,['#ff7eb3','#f6d365','#74b9ff','#55efc4','#fff']);beep(520+Math.random()*240,.15,'triangle',.08)},i*300)};
+const toast=m=>{$('tst').textContent=m;$('tst').classList.add('on');clearTimeout(tstT);tstT=setTimeout(()=>$('tst').classList.remove('on'),2500)};
+const updP=()=>{const n=Object.values(vis).filter(Boolean).length;$('pB').textContent=`✨ ${n} / 4`;$('hH').textContent=n===4?'🎉 اكتملت كل مفاجآت الليلة!':'اقتربي من الأركان المضيئة'};
+
+// Joystick + Keys
+let jA=false,jI=null,jX=0,jY=0;const keys={};
+const jZ=$('jZ'),jK=$('jK');
+const mvJ=(cx,cy)=>{const r=jZ.getBoundingClientRect(),dx=cx-r.left-r.width/2,dy=cy-r.top-r.height/2,m=36,d=Math.hypot(dx,dy),nx=d>m?dx/d*m:dx,ny=d>m?dy/d*m:dy;jK.style.transform=`translate(${nx}px,${ny}px)`;jX=nx/m;jY=ny/m};
+const rsJ=()=>{jA=false;jI=null;jX=0;jY=0;jK.style.transform='translate(0,0)'};
+jZ.onpointerdown=e=>{jA=true;jI=e.pointerId;jZ.setPointerCapture(e.pointerId);mvJ(e.clientX,e.clientY)};
+jZ.onpointermove=e=>{if(jA&&e.pointerId===jI)mvJ(e.clientX,e.clientY)};
+jZ.onpointerup=e=>{if(e.pointerId===jI)rsJ()};jZ.onpointercancel=rsJ;
+addEventListener('keydown',e=>{keys[e.key.toLowerCase()]=1;if((e.key===' '||e.key==='Enter')&&go&&!mod)act()});
+addEventListener('keyup',e=>{keys[e.key.toLowerCase()]=0});
+
+// Dialogue
+let dq=[],di=0;
+const showD=()=>{const it=dq[di];$('dN').textContent=it.n||'علي 👑';$('dP').textContent=it.p||'🤴';$('dT').textContent=it.t;const dc=$('dC');dc.innerHTML='';if(it.ch){dc.style.display='flex';$('dNx').style.display='none';it.ch.forEach(o=>{const b=document.createElement('button');b.className='pill';b.textContent=o.l;b.onclick=ev=>{ev.stopPropagation();beep(660,.1);dq=[o.r];di=0;showD()};dc.appendChild(b)})}else{dc.style.display='none';$('dNx').style.display='block'}};
+const openD=ls=>{mod=true;rsJ();dq=ls;di=0;$('dO').classList.add('on');showD()};
+$('dBox').onclick=()=>{if(dq[di]&&dq[di].ch)return;beep(540,.08);di++;if(di<dq.length)showD();else{$('dO').classList.remove('on');mod=false}};
+
+// Cinema
+let cSc=0;const ccx=$('cC').getContext('2d'),caps=['تحت سماء النجوم.. كل نجمة تتمنى لنورة عاماً سعيداً ✨','16 شمعة مضيئة.. كل شمعة تحكي عن سنة أحلى يا ملكة 🎂👑','علي ونورة.. أجمل ذكرى وأجمل عيد ميلاد 💖🌙'];
+document.querySelectorAll('.ct').forEach(b=>b.onclick=()=>{document.querySelectorAll('.ct').forEach(z=>z.classList.remove('on'));b.classList.add('on');cSc=+b.dataset.s;$('cCap').textContent=caps[cSc];beep(620,.1,'triangle',.09)});
+$('cCl').onclick=()=>{$('cM').classList.remove('on');mod=false};
+const drawCin=t=>{if(!$('cM').classList.contains('on'))return;const w=360,h=185,g=ccx.createLinearGradient(0,0,0,h);g.addColorStop(0,'#0d1538');g.addColorStop(1,'#261447');ccx.fillStyle=g;ccx.fillRect(0,0,w,h);for(let i=0;i<26;i++){ccx.fillStyle=`rgba(255,245,200,${.35+.5*Math.sin(t*2+i)})`;ccx.beginPath();ccx.arc((i*53)%w,(i*31)%(h*.7),1.6,0,6.28);ccx.fill()}ccx.textAlign='center';if(cSc===0){ccx.font='34px serif';ccx.fillText('🌙',w-55,54);ccx.font='26px serif';ccx.fillText('👑',w/2,68+Math.sin(t*2.5)*4);ccx.font='bold 19px Cairo,sans-serif';ccx.fillStyle='#f6d365';ccx.fillText('✨ سماء الملكة نورة ✨',w/2,108+Math.sin(t*2)*5)}else if(cSc===1){ccx.font='52px serif';ccx.fillText('🎂',w/2,110+Math.sin(t*3)*4);ccx.font='bold 20px Cairo,sans-serif';ccx.fillStyle='#ff9ec7';ccx.fillText('Sweet 16 — نورة 🎉',w/2,154)}else{ccx.font='38px serif';ccx.fillText('💖',w/2,88+Math.sin(t*4)*6);ccx.font='bold 20px Cairo,sans-serif';ccx.fillStyle='#fff3c4';ccx.fillText('علي ❤️ نورة',w/2,140)}};
+
+// Art Studio
+const dCv=$('dCv'),dcx=dCv.getContext('2d');let drw=false,dCol='#e84e93';dcx.lineCap='round';dcx.lineWidth=4;
+const gp=e=>{const r=dCv.getBoundingClientRect();return[(e.clientX-r.left)*(dCv.width/r.width),(e.clientY-r.top)*(dCv.height/r.height)]};
+dCv.onpointerdown=e=>{drw=true;dCv.setPointerCapture(e.pointerId);const[X,Y]=gp(e);dcx.beginPath();dcx.moveTo(X,Y)};
+dCv.onpointermove=e=>{if(!drw)return;const[X,Y]=gp(e);dcx.strokeStyle=dCol;dcx.lineTo(X,Y);dcx.stroke()};
+dCv.onpointerup=dCv.onpointercancel=()=>{drw=false};
+document.querySelectorAll('.sw').forEach(s=>s.onclick=()=>{document.querySelectorAll('.sw').forEach(z=>z.classList.remove('on'));s.classList.add('on');dCol=s.dataset.c});
+$('clDr').onclick=()=>dcx.clearRect(0,0,dCv.width,dCv.height);
+$('tDr').onclick=()=>{$('tDr').classList.add('on');$('tCp').classList.remove('on');$('pDr').style.display='block';$('pCp').style.display='none'};
+$('tCp').onclick=()=>{$('tCp').classList.add('on');$('tDr').classList.remove('on');$('pDr').style.display='none';$('pCp').style.display='block'};
+$('aCl').onclick=()=>{$('aM').classList.remove('on');mod=false};
+
+// Buttons
+$('sBtn').onclick=()=>{initA();beep(523,.13,'triangle',.12,0);beep(659,.13,'triangle',.12,.12);beep(784,.22,'triangle',.13,.24);$('wO').classList.remove('on');$('hud').classList.remove('off');$('ctrl').classList.remove('off');go=true;toast('👑 أهلاً بكِ في ليلتكِ الملكية يا نورة!');fw(2)};
+$('sndB').onclick=()=>{initA();snd=!snd;$('sndB').textContent=snd?'🔊':'🔇';toast(snd?'🔊 تم تشغيل الصوت':'🔇 تم كتم الصوت')};
+$('catB').onclick=()=>{cat.fl=!cat.fl;$('catB').textContent=cat.fl?'🐱 القطة: تتبعني':'🐱 القطة: مسترخية';burst(cat.x,cat.y-10,6,['#ff8fb8','#fff'],true);beep(cat.fl?740:480,.1)};
+$('bDn').onclick=e=>{initA();pl.dn=!pl.dn;e.currentTarget.classList.toggle('on',pl.dn);if(pl.dn){toast('💃 وقت الرقص الملكي!');beep(587,.12,'triangle',.1);beep(784,.18,'triangle',.1,.12)}};
+$('bHg').onclick=()=>{initA();ali.hg=true;ali.ht=2.5;burst((pl.x+ali.x)/2,(pl.y+ali.y)/2-18,14,['#ff7eb3','#ff4f93','#fff'],true);beep(523,.14);beep(659,.2,'sine',.1,.13);toast('🤗 أحلى عناق لعيد ميلادكِ الـ 16 💖')};
+$('bFw').onclick=()=>{initA();fw(4)};
+$('bBtn').onclick=()=>{initA();lit=false;vis.cake=1;updP();$('bO').classList.remove('on');burst(460,235,34,['#fff','#ffd3e6','#f6d365']);bdaySong();fw(6);toast('🎉 كل عام وأنتِ بألف خير يا ملكة نورة! 👑');setTimeout(()=>$('fM').classList.add('on'),1050)};
+$('fCl').onclick=()=>{$('fM').classList.remove('on');mod=false};
+$('fFw').onclick=()=>{$('fM').classList.remove('on');mod=false;fw(5);bdaySong()};
+
+const act=()=>{
+  if(!near||mod)return;initA();beep(640,.11,'triangle',.1);
+  if(near.id==='ali'){vis.ali=1;updP();openD([{n:'علي 👑',p:'🤴',t:'كل عام وأنتِ بألف خير يا نويرتي! اليوم صرتي 16 سنة وهالحديقة كلها إلك وحدك 🌸🎂'},{n:'علي 👑',p:'🤴',t:'عجبكِ الاحتفال يا ملكة؟',ch:[{l:'😍 يجنن كلش!',r:{n:'علي 👑',p:'💖',t:'تستاهلين الدنيا وما فيها يا روحي.. روحي انفخي الـ 16 شمعة وتمنّي أحلى أمنية! 🎂✨'}},{l:'🤗 أريد عناق!',r:{n:'علي 👑',p:'🤗',t:'أحلى عناق بالدنيا لنورة! اضغطي زر العناق بأي وقت 💖'}}]}])}
+  else if(near.id==='cinema'){vis.cinema=1;updP();mod=true;rsJ();$('cM').classList.add('on')}
+  else if(near.id==='art'){vis.art=1;updP();mod=true;rsJ();$('aM').classList.add('on')}
+  else if(near.id==='cake'){mod=true;rsJ();$(lit?'bO':'fM').classList.add('on')}
+};
+$('aB').onclick=act;
+
+const drawCh=(X,Y,o,t)=>{
+  const bn=o.dn?Math.abs(Math.sin(t*8))*9:Math.abs(Math.sin(o.wp))*4;
+  x.save();x.translate(X,Y-bn);
+  x.fillStyle='rgba(0,0,0,.35)';x.beginPath();x.ellipse(0,22+bn*.5,16,6,0,0,6.28);x.fill();
+  if(o.pk){x.fillStyle='#ff85b5';rr(x,-16,-24,32,34,12);x.fill()}
+  x.fillStyle=o.cl;rr(x,-12,o.tl?-6:-2,24,o.tl?28:23,9);x.fill();
+  const hy=o.tl?-18:-14;
+  x.fillStyle='#ffe0ce';x.beginPath();x.arc(0,hy,14,0,6.28);x.fill();
+  x.fillStyle=o.pk?'#ff6fa8':'#181c30';x.beginPath();x.arc(0,hy-3,14.5,Math.PI,6.28);x.fill();
+  x.fillStyle='#1a1a2e';x.beginPath();x.arc(-5,hy+1,2,0,6.28);x.arc(5,hy+1,2,0,6.28);x.fill();
+  x.strokeStyle='#b5446e';x.lineWidth=1.6;x.beginPath();x.arc(0,hy+4,4,.4,2.7);x.stroke();
+  if(o.cr){x.fillStyle='#f6d365';x.beginPath();x.moveTo(-9,hy-14);x.lineTo(-7,hy-23);x.lineTo(-2,hy-17);x.lineTo(0,hy-25);x.lineTo(2,hy-17);x.lineTo(7,hy-23);x.lineTo(9,hy-14);x.closePath();x.fill()}
+  x.font='bold 12px Tajawal,sans-serif';x.textAlign='center';x.fillStyle=o.cr?'#ffd6ea':'#ffe8a3';x.fillText(o.nm,0,hy-(o.cr?30:20));
+  x.restore();
+};
+
+const drawCat=(X,Y,t)=>{
+  const hp=cat.fl?Math.abs(Math.sin(t*7))*3:0;
+  x.save();x.translate(X,Y-hp);
+  x.fillStyle='#fff5fa';x.beginPath();x.ellipse(0,3,11,8,0,0,6.28);x.fill();x.beginPath();x.arc(0,-6,8,0,6.28);x.fill();
+  x.beginPath();x.moveTo(-7,-10);x.lineTo(-5,-18);x.lineTo(-1,-12);x.moveTo(7,-10);x.lineTo(5,-18);x.lineTo(1,-12);x.fill();
+  x.fillStyle='#222';x.beginPath();x.arc(-3,-6,1.4,0,6.28);x.arc(3,-6,1.4,0,6.28);x.fill();
+  if(!cat.fl){x.font='11px sans-serif';x.fillStyle='#ffd6ea';x.fillText('zZz',10,-14+Math.sin(t*2)*2)}
+  x.restore();
+};
+
+const drawCake=(X,Y,t)=>{
+  x.save();x.translate(X,Y);
+  const g=x.createRadialGradient(0,0,10,0,0,70);g.addColorStop(0,'rgba(246,211,101,.32)');g.addColorStop(1,'rgba(246,211,101,0)');
+  x.fillStyle=g;x.beginPath();x.arc(0,0,70,0,6.28);x.fill();
+  x.fillStyle='#232b59';x.strokeStyle='#f6d365';x.lineWidth=2;x.beginPath();x.ellipse(0,16,46,20,0,0,6.28);x.fill();x.stroke();
+  x.fillStyle='#ff9ec7';rr(x,-27,-8,54,23,8);x.fill();
+  x.fillStyle='#fff5fb';rr(x,-19,-23,38,17,7);x.fill();
+  for(let i=0;i<16;i++){const cx=-16+(i%8)*4.5,cy=i<8?-27:-14;x.fillStyle=i%2?'#ff5ea0':'#f6d365';x.fillRect(cx,cy,2.2,8);if(lit){x.fillStyle=`rgba(255,225,110,${.75+.25*Math.sin(t*14+i)})`;x.beginPath();x.arc(cx+1.1,cy-2.5,2.3,0,6.28);x.fill()}}
+  x.font='bold 12px Tajawal,sans-serif';x.textAlign='center';x.fillStyle='#fff2b2';x.fillText(lit?'🎂 كيكة الـ 16 شمعة':'✨ تحققت الأمنية ✨',0,48);
+  x.restore();
+};
+
+let lt=performance.now();
+const loop=now=>{
+  const dt=Math.min((now-lt)/1000,.05),t=now/1000;lt=now;
+  if(go&&!mod){
+    let mx=jX,my=jY;
+    if(keys.arrowleft||keys.a)mx--;if(keys.arrowright||keys.d)mx++;if(keys.arrowup||keys.w)my--;if(keys.arrowdown||keys.s)my++;
+    const mg=Math.hypot(mx,my);
+    if(mg>.08){pl.x=Math.max(85,Math.min(WD.w-85,pl.x+mx/Math.max(1,mg)*pl.sp*dt));pl.y=Math.max(115,Math.min(WD.h-85,pl.y+my/Math.max(1,mg)*pl.sp*dt));pl.wp+=dt*11}
+  }
+  if(ali.hg){ali.ht-=dt;ali.x+=(pl.x+24-ali.x)*Math.min(1,dt*6);ali.y+=(pl.y-ali.y)*Math.min(1,dt*6);if(ali.ht<=0)ali.hg=false}
+  else{ali.x+=(ali.hx-ali.x)*Math.min(1,dt*3);ali.y+=(ali.hy-ali.y)*Math.min(1,dt*3)}
+  sts[1].x=ali.x;sts[1].y=ali.y;
+  if(cat.fl){const tx=pl.x-42,ty=pl.y+18;if(Math.hypot(tx-cat.x,ty-cat.y)>8){cat.x+=(tx-cat.x)*Math.min(1,dt*4.5);cat.y+=(ty-cat.y)*Math.min(1,dt*4.5)}}
+
+  near=null;let bd=1e9;
+  sts.forEach(s=>{const d=Math.hypot(pl.x-s.x,pl.y-s.y);if(d<s.r&&d<bd){bd=d;near=s}});
+  $('aB').classList.toggle('rdy',!!near);$('aI').textContent=near?near.ic:'✨';$('aL').textContent=near?near.lb:'تفاعل';
+
+  x.fillStyle='#080d1e';x.fillRect(0,0,W,H);
+  x.save();x.translate(W/2-pl.x,H/2-pl.y);
+  const fg=x.createRadialGradient(460,350,40,460,350,460);fg.addColorStop(0,'#1c2857');fg.addColorStop(1,'#0a1026');
+  x.fillStyle=fg;rr(x,60,80,WD.w-120,WD.h-140,44);x.fill();x.strokeStyle='rgba(246,211,101,.45)';x.lineWidth=3;x.stroke();
+  x.fillStyle='rgba(232,78,147,.24)';rr(x,415,215,90,360,26);x.fill();
+  stars.forEach(s=>{x.fillStyle=`rgba(255,245,210,${.25+.55*Math.sin(t*2+s.tw)})`;x.beginPath();x.arc(s.x,s.y,s.r,0,6.28);x.fill()});
+  lants.forEach(([lx,ly])=>{const y2=ly+Math.sin(t*2+lx)*5,g=x.createRadialGradient(lx,y2,3,lx,y2,40);g.addColorStop(0,'rgba(246,211,101,.42)');g.addColorStop(1,'rgba(246,211,101,0)');x.fillStyle=g;x.beginPath();x.arc(lx,y2,40,0,6.28);x.fill();x.fillStyle='#f6d365';rr(x,lx-6,y2-9,12,18,5);x.fill()});
+
+  sts.forEach(s=>{if(s.id==='ali'||s.id==='cake')return;x.save();x.translate(s.x,s.y);const p=1+.05*Math.sin(t*3);x.fillStyle='rgba(28,34,78,.88)';x.strokeStyle='rgba(246,211,101,.75)';x.lineWidth=2;rr(x,-46*p,-32*p,92*p,64*p,18);x.fill();x.stroke();x.font='25px serif';x.textAlign='center';x.fillText(s.ic,0,4);x.font='bold 13px Tajawal,sans-serif';x.fillStyle='#fff3c4';x.fillText(s.lb,0,25);x.restore()});
+  drawCake(460,240,t);
+
+  [{y:cat.y,f:()=>drawCat(cat.x,cat.y,t)},{y:ali.y,f:()=>drawCh(ali.x,ali.y,{nm:'علي',cl:'#21326e',tl:1,pk:0,cr:0,wp:0,dn:pl.dn},t)},{y:pl.y,f:()=>drawCh(pl.x,pl.y,{nm:'الملكة نورة 👑',cl:'#e84e93',tl:0,pk:1,cr:1,wp:pl.wp,dn:pl.dn},t)}].sort((a,b)=>a.y-b.y).forEach(e=>e.f());
+
+  for(let i=pts.length-1;i>=0;i--){const p=pts[i];p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=80*dt;p.l-=p.dc*dt;if(p.l<=0){pts.splice(i,1);continue}x.globalAlpha=p.l;if(p.ht){x.font=p.sz+'px serif';x.fillText('💖',p.x,p.y)}else{x.fillStyle=p.c;x.beginPath();x.arc(p.x,p.y,p.sz,0,6.28);x.fill()}x.globalAlpha=1}
+  x.restore();drawCin(t);requestAnimationFrame(loop);
+};
+requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
